@@ -1,0 +1,17 @@
+.button {
+    -fx-background-color: blue;
+    -fx-text-fill: white;
+    -fx-cursor: hand;
+}
+
+.container {
+    -fx-background-image: url("../image/background.jpg");
+    -fx-background-size: cover;  /* Phủ toàn bộ vùng chứa */
+    -fx-background-position: center center;  /* Căn giữa ảnh */
+    -fx-background-repeat: no-repeat;
+}
+
+.label {
+    -fx-text-fill: #ccc;
+    -fx-font-weight: bold;
+}
