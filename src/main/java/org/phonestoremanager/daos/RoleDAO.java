@@ -28,4 +28,26 @@ public class RoleDAO {
         }
         return result;
     }
+
+    public static String getRoleNameByRoleID(int roleID) {
+        DatabaseConnection databaseConnection = new DatabaseConnection();
+        String roleName = "";
+        String sql = "SELECT r.RoleName\n" +
+                "FROM Account as ac\n" +
+                "JOIN Role as r ON ac.RoleID = r.RoleID\n" +
+                "WHERE ac.RoleID = ?;";
+
+        try (Connection conn = databaseConnection.connectionData()) {
+            PreparedStatement st = conn.prepareStatement(sql);
+            st.setInt(1, roleID);
+            ResultSet rs = st.executeQuery();
+            while(rs.next()) {
+                roleName = rs.getString("RoleName");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return roleName;
+    }
+
 }

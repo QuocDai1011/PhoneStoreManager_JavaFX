@@ -19,6 +19,6 @@ public class PasswordEncrypt {
     }
 
     public static void main(String[] args) {
-        System.out.println(toSHA256("123456"));
+        System.out.println(toSHA256("123dai"));
     }
 }

@@ -2,6 +2,8 @@ package org.phonestoremanager.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import org.phonestoremanager.daos.AccountDAO;
 import org.phonestoremanager.daos.EmployeeDAO;
 import org.phonestoremanager.daos.RoleDAO;
@@ -28,8 +30,6 @@ public class SignUpForEmployeeController {
 
 
     public void Submit() {
-
-
         //lay gia tri nhap vao tu view
         String firstNameValue = firstName.getText();
         String lastNameValue = lastName.getText();
@@ -47,6 +47,23 @@ public class SignUpForEmployeeController {
         RadioButton radioButton1 = (RadioButton) position.getSelectedToggle();
         String positionValue = radioButton1.getText();
 
+        //buoc nhap ho va ten
+        if(firstNameValue.isEmpty() && lastNameValue.isEmpty()) {
+            showAlert("ERROR", "Chưa nhập dữ liệu họ và tên!", Alert.AlertType.ERROR);
+            return;
+        }else if(firstNameValue.isEmpty()){
+            showAlert("ERROR", "Chưa nhập họ!", Alert.AlertType.ERROR);
+            return;
+        } else if (lastNameValue.isEmpty()) {
+            showAlert("ERROR", "Chưa nhập tên!", Alert.AlertType.ERROR);
+            return;
+        }
+
+        //kiem tra username
+        if(AccountDAO.checkUsername(usernameValue)) {
+            showAlert("ERROR", "Tên đăng nhập đã tồn tại!", Alert.AlertType.ERROR);
+            return;
+        }
 
         //check cac ngoai le kiem tra du lieu dau vao
         String message = "";
@@ -115,11 +132,17 @@ public class SignUpForEmployeeController {
         return;
     }
 
-    public static void showAlert(String title, String message, Alert.AlertType type) {
+    public void showAlert(String title, String message, Alert.AlertType type) {
         Alert alert = new Alert(type);
         alert.setTitle(title);
         alert.setHeaderText(null); // Không có tiêu đề phụ
         alert.setContentText(message);
         alert.showAndWait();
+    }
+
+    public void submitByKeyEnter(KeyEvent event) {
+        if(event.getCode() == KeyCode.ENTER) {
+            Submit();
+        }
     }
 }
