@@ -21,7 +21,7 @@ public class WelcomeView extends Application {
         Scene scene = new Scene(root);
 
         scene.getStylesheets().add(getClass().getResource("/org/phonestoremanager/assets/css/Welcome.css").toExternalForm()); // Đảm bảo đúng đường dẫn
-        primaryStage.setTitle("Welcome !");
+        primaryStage.setTitle("Welcome!");
         primaryStage.setScene(scene);
         primaryStage.show();
     }

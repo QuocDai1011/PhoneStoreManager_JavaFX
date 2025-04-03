@@ -10,9 +10,9 @@ public class StringValidation {
 
     public static void main(String[] args) {
         try {
-            validateString("HelloWorld");  // Hợp lệ
-            validateString("Hello123");    // Lỗi
-            validateString("Hello@Java");  // Lỗi
+            validateString("Đinh");
+            System.out.println("Ok");
+            return;// Lỗi
         } catch (IllegalArgumentException e) {
             System.out.println("Lỗi: " + e.getMessage());
         }
