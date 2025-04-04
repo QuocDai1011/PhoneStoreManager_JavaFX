@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<HBox fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.uiemployee.controller.MainController">
+    <children>
+        <VBox prefHeight="600.0" prefWidth="200.0">
+            <children>
+                <AnchorPane fx:id="side_ankerpane" prefHeight="600.0" prefWidth="151.0" styleClass="side_ankerpane" stylesheets="@style.css">
+                    <children>
+                        <Pane fx:id="inner_pane" layoutX="7.0" layoutY="28.0" prefHeight="68.0" prefWidth="250.0" styleClass="inner_pane">
+                            <children>
+                                <Pane fx:id="most_inner_pane" layoutX="196.0" layoutY="4.0" prefHeight="60.0" prefWidth="40.0" styleClass="most_inner_pane">
+                                    <children>
+                                        <ImageView fitHeight="50.0" fitWidth="40.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+                                            <image>
+                                                <Image url="@../../img/menu_icon.png" />
+                                            </image>
+                                        </ImageView>
+                                    </children>
+                                </Pane>
+                                <Pane layoutX="8.0" layoutY="8.0" prefHeight="52.0" prefWidth="52.0" style="-fx-cursor: hand;" styleClass="avatar" />
+                            </children>
+                        </Pane>
+                        <Button layoutX="20.0" layoutY="171.0" mnemonicParsing="false" onAction="#home" prefHeight="60.0" prefWidth="222.0" styleClass="btn_home1" text="Trang chủ" textFill="WHITE">
+                            <graphic>
+                                <ImageView fitHeight="37.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../img/home_icon.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                            <font>
+                                <Font name="Cambria Bold" size="18.0" />
+                            </font>
+                        </Button>
+                        <Button fx:id="btn_home10" layoutX="21.0" layoutY="267.0" mnemonicParsing="false" onAction="#employee" prefHeight="60.0" prefWidth="222.0" styleClass="btn_home1" text="Nhân viên" textFill="WHITE">
+                            <graphic>
+                                <ImageView fitHeight="49.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../img/user_icon.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                            <font>
+                                <Font name="Cambria Bold" size="18.0" />
+                            </font>
+                        </Button>
+                        <Button fx:id="btn_home11" layoutX="21.0" layoutY="365.0" mnemonicParsing="false" onAction="#manage" prefHeight="60.0" prefWidth="222.0" styleClass="btn_home" text="Quản lý" textFill="WHITE">
+                            <graphic>
+                                <ImageView fitHeight="51.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../img/phone_icon.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                            <font>
+                                <Font name="Cambria Bold" size="18.0" />
+                            </font>
+                        </Button>
+                        <Button fx:id="btn_home12" layoutX="20.0" layoutY="458.0" mnemonicParsing="false" onAction="#order" prefHeight="60.0" prefWidth="222.0" styleClass="btn_home1" text="Đơn hàng" textFill="WHITE">
+                            <graphic>
+                                <ImageView fitHeight="41.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../img/shoping_icon.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                            <font>
+                                <Font name="Cambria Bold" size="18.0" />
+                            </font>
+                        </Button>
+                    </children>
+                </AnchorPane>
+            </children>
+        </VBox>
+        <AnchorPane prefHeight="600.0" prefWidth="690.0">
+            <children>
+                <TextField layoutX="212.0" layoutY="24.0" prefHeight="30.0" prefWidth="222.0" promptText="Search" style="-fx-background-color: transparent; -fx-border-radius: 50px; -fx-border-color: #AEB2C3;">
+                    <font>
+                        <Font name="Calibri Bold" size="20.0" />
+                    </font>
+                </TextField>
+                <ImageView fitHeight="39.0" fitWidth="31.0" layoutX="446.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;" styleClass="avatar">
+                    <image>
+                        <Image url="@../../img/search_icon.png" />
+                    </image>
+                </ImageView>
+                <HBox alignment="CENTER" layoutX="176.0" layoutY="70.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="60.0" prefWidth="336.0">
+                    <children>
+                        <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="70.0" text="Thêm">
+                            <font>
+                                <Font name="Calibri Bold" size="18.0" />
+                            </font>
+                        </Button>
+                        <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="70.0" text="Sửa">
+                            <HBox.margin>
+                                <Insets left="50.0" right="50.0" />
+                            </HBox.margin>
+                            <font>
+                                <Font name="Calibri Bold" size="18.0" />
+                            </font>
+                        </Button>
+                        <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="70.0" text="Xóa">
+                            <font>
+                                <Font name="Calibri Bold" size="18.0" />
+                            </font>
+                        </Button>
+                    </children>
+                </HBox>
+                <HBox layoutX="9.0" layoutY="156.0" prefHeight="287.0" prefWidth="670.0">
+                    <children>
+                        <Pane prefHeight="287.0" prefWidth="216.0" style="-fx-border-color: black; -fx-border-radius: 10px;">
+                            <children>
+                                <ImageView fitHeight="152.0" fitWidth="182.0" layoutX="12.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+                                <GridPane layoutX="3.0" layoutY="183.0">
+                                    <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    </rowConstraints>
+                                    <children>
+                                        <Label text="Tên sản phẩm:">
+                                            <font>
+                                                <Font name="Calibri Bold" size="14.0" />
+                                            </font>
+                                        </Label>
+                                        <Label text="Hãng điện thoại:" GridPane.rowIndex="1">
+                                            <font>
+                                                <Font name="Calibri Bold" size="14.0" />
+                                            </font>
+                                        </Label>
+                                        <Label text="Giá sản phẩm:" GridPane.rowIndex="2">
+                                            <font>
+                                                <Font name="Calibri Bold" size="14.0" />
+                                            </font>
+                                        </Label>
+                                        <TextField GridPane.columnIndex="1" />
+                                        <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                        <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    </children>
+                                </GridPane>
+                            </children>
+                            <HBox.margin>
+                                <Insets />
+                            </HBox.margin>
+                        </Pane>
+                        <Pane layoutX="10.0" layoutY="10.0" prefHeight="287.0" prefWidth="216.0" style="-fx-border-color: black; -fx-border-radius: 10px;">
+                            <children>
+                                <ImageView fitHeight="152.0" fitWidth="182.0" layoutX="12.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+                                <GridPane layoutX="3.0" layoutY="183.0">
+                                    <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    </rowConstraints>
+                                    <children>
+                                        <Label text="Tên sản phẩm:">
+                                            <font>
+                                                <Font name="Calibri Bold" size="14.0" />
+                                            </font>
+                                        </Label>
+                                        <Label text="Hãng điện thoại:" GridPane.rowIndex="1">
+                                            <font>
+                                                <Font name="Calibri Bold" size="14.0" />
+                                            </font>
+                                        </Label>
+                                        <Label text="Giá sản phẩm:" GridPane.rowIndex="2">
+                                            <font>
+                                                <Font name="Calibri Bold" size="14.0" />
+                                            </font>
+                                        </Label>
+                                        <TextField GridPane.columnIndex="1" />
+                                        <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                        <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    </children>
+                                </GridPane>
+                            </children>
+                            <HBox.margin>
+                                <Insets left="10.0" right="10.0" />
+                            </HBox.margin>
+                        </Pane>
+                        <Pane layoutX="10.0" layoutY="10.0" prefHeight="287.0" prefWidth="216.0" style="-fx-border-color: black; -fx-border-radius: 10px;">
+                            <children>
+                                <ImageView fitHeight="152.0" fitWidth="182.0" layoutX="12.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+                                <GridPane layoutX="3.0" layoutY="183.0">
+                                    <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    </rowConstraints>
+                                    <children>
+                                        <Label text="Tên sản phẩm:">
+                                            <font>
+                                                <Font name="Calibri Bold" size="14.0" />
+                                            </font>
+                                        </Label>
+                                        <Label text="Hãng điện thoại:" GridPane.rowIndex="1">
+                                            <font>
+                                                <Font name="Calibri Bold" size="14.0" />
+                                            </font>
+                                        </Label>
+                                        <Label text="Giá sản phẩm:" GridPane.rowIndex="2">
+                                            <font>
+                                                <Font name="Calibri Bold" size="14.0" />
+                                            </font>
+                                        </Label>
+                                        <TextField GridPane.columnIndex="1" />
+                                        <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                        <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    </children>
+                                </GridPane>
+                            </children>
+                        </Pane>
+                    </children>
+                </HBox>
+            </children>
+        </AnchorPane>
+    </children>
+</HBox>
