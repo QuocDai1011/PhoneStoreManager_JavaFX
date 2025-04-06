@@ -17,6 +17,9 @@ public class HomeView extends Application {
         stage.setScene(scene);
         stage.setResizable(true);
         stage.show();
+
+
+
     }
 
     public static void main(String[] args) {
