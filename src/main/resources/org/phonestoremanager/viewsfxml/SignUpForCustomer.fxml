@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="container" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.phonestoremanager.controllers.SignUpForCustomerController">
+   <top>
+      <Label prefHeight="67.0" prefWidth="93.0" text="Đăng ký" BorderPane.alignment="CENTER">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+   </top>
+   <center>
+      <AnchorPane onKeyReleased="#submitByKeyEnter" prefHeight="333.0" prefWidth="609.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="62.0" layoutY="35.0" text="Họ:" />
+            <Label layoutX="58.0" layoutY="86.0" text="Tên: " />
+            <Label layoutX="355.0" layoutY="35.0" text="Email:" />
+            <Label layoutX="14.0" layoutY="175.0" text="Số điện thoại" />
+            <Label layoutX="37.0" layoutY="130.0" text="Địa chỉ: " />
+            <Label layoutX="303.0" layoutY="86.0" text="Tên đăng nhập:" />
+            <Label layoutX="333.0" layoutY="130.0" text="Mật khẩu:" />
+            <Label layoutX="284.0" layoutY="175.0" prefHeight="17.0" prefWidth="119.0" text="Xác nhận mật khẩu: " />
+            <TextField fx:id="firstNameText" layoutX="93.0" layoutY="31.0" promptText="Họ" />
+            <TextField fx:id="lastNameText" layoutX="93.0" layoutY="82.0" promptText="Tên" />
+            <TextField fx:id="addressText" layoutX="93.0" layoutY="126.0" promptText="Địa chỉ" />
+            <TextField fx:id="phoneNumberText" layoutX="93.0" layoutY="171.0" promptText="Số điện thoại" />
+            <TextField fx:id="emailText" layoutX="423.0" layoutY="31.0" promptText="Email" />
+            <TextField fx:id="usernameText" layoutX="423.0" layoutY="82.0" promptText="Tên đăng nhập" />
+            <Button layoutX="199.0" layoutY="241.0" mnemonicParsing="false" onAction="#submit" prefHeight="42.0" prefWidth="85.0" text="Đăng Ký">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <Button layoutX="328.0" layoutY="241.0" mnemonicParsing="false" onAction="#logInPress" prefHeight="42.0" prefWidth="97.0" text="Đăng Nhập">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <PasswordField fx:id="passwordText" layoutX="423.0" layoutY="126.0" promptText="Mật khẩu" />
+            <PasswordField fx:id="confirmPasswordText" layoutX="423.0" layoutY="171.0" promptText="Xác nhận mật khẩu" />
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>
