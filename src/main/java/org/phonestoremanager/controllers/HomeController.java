@@ -76,8 +76,8 @@ public class HomeController {
         productModels.add(new ProductModel("Nubia NEO 2", "nubia", "4,900,000 VNĐ", "/org/phonestoremanager/assets/image/iphone15.png"));
         productModels.add(new ProductModel("Nubia NEO 2", "nubia", "4,900,000 VNĐ", "/org/phonestoremanager/assets/image/iphone15.png"));
 
-        productContainer.setHgap(10);
-        productContainer.setVgap(10);
+        productContainer.setHgap(20);
+        productContainer.setVgap(30);
 
         for (ProductModel productModel : productModels) {
             productContainer.getChildren().add(ProductController.createProductPane(productModel));
@@ -93,8 +93,8 @@ public class HomeController {
         manageModels.add(new ManageModel("Nubia NEO 2", "nubia", "4,900,000 VNĐ", "/org/phonestoremanager/assets/image/iphone15.png", "50"));
         manageModels.add(new ManageModel("Nubia NEO 2", "nubia", "4,900,000 VNĐ", "/org/phonestoremanager/assets/image/iphone15.png", "60"));
 
-        manageContainer.setHgap(10);
-        manageContainer.setVgap(10);
+        manageContainer.setHgap(20);
+        manageContainer.setVgap(30);
 
         for (ManageModel manageModel : manageModels) {
             manageContainer.getChildren().add(ManageController.createManagePane(manageModel));

@@ -99,14 +99,12 @@
                         <Image url="@../../phonestoremanager/assets/image/search_icon.png" />
                     </image>
                 </ImageView>
-            <ScrollPane layoutX="7.0" layoutY="82.0" prefHeight="483.0" prefWidth="726.0">
-               <content>
-                  <FlowPane fx:id="manageContainer" prefHeight="485.0" prefWidth="710.0" />
-               </content>
-               <padding>
-                  <Insets right="30.0" />
-               </padding>
-            </ScrollPane>
+                <ScrollPane layoutX="7.0" layoutY="82.0" prefHeight="483.0" prefWidth="705.0"
+                            fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED" nodeOrientation="RIGHT_TO_LEFT">
+                    <content>
+                        <FlowPane fx:id="manageContainer" prefHeight="485.0" prefWidth="710.0" nodeOrientation="LEFT_TO_RIGHT" />
+                    </content>
+                </ScrollPane>
             <Button layoutX="598.0" layoutY="31.0" mnemonicParsing="false" text="Cập nhật" />
             <MenuButton layoutX="39.0" layoutY="31.0" mnemonicParsing="false" text="Lọc">
               <items>
