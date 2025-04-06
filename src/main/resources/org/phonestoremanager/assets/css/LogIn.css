@@ -1,0 +1,23 @@
+.button {
+    -fx-background-color: blue;
+    -fx-text-fill: white;
+    -fx-cursor: hand;
+}
+
+.container {
+    -fx-background-image: url("../image/background.jpg");
+    -fx-background-size: cover;  /* Phủ toàn bộ vùng chứa */
+    -fx-background-position: center center;  /* Căn giữa ảnh */
+    -fx-background-repeat: no-repeat;
+}
+
+.label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.7), 4, 0.3, 2, 2);
+}
+
+.radio-button {
+     -fx-text-fill: #eee;
+     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.7), 4, 0.3, 2, 2);
+ }
