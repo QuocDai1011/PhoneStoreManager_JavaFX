@@ -8,6 +8,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
@@ -77,9 +79,24 @@ public class HomeController {
     }
 
     private void addContextMenuLogOut (Pane pane) {
+        Image profileImage = new Image(getClass().getResource("/org/phonestoremanager/assets/image/user.png").toString());
+        Image logoutImage = new Image(getClass().getResource("/org/phonestoremanager/assets/image/logout_icon.png").toString());
+
+        ImageView proifileIcon = new ImageView(profileImage);
+        proifileIcon.setFitHeight(16);
+        proifileIcon.setFitWidth(16);
+
+        ImageView logoutIcon = new ImageView(logoutImage);
+        logoutIcon.setFitWidth(16);
+        logoutIcon.setFitHeight(16);
+
+
         ContextMenu menu = new ContextMenu();
-        MenuItem Profile = new MenuItem("Profile");
-        MenuItem LogOut = new MenuItem("Log out");
+        menu.getStyleClass().add("context-menu");
+        MenuItem Profile = new MenuItem("Profile", proifileIcon);
+        MenuItem LogOut = new MenuItem("Log out", logoutIcon);
+        Profile.getStyleClass().add("profile-item");
+        LogOut.getStyleClass().add("logout-item");
 
         menu.getItems().addAll(Profile, LogOut);
 
