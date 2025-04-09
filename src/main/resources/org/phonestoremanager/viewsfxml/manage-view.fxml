@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
@@ -32,7 +31,14 @@
                                         </ImageView>
                                     </children>
                                 </Pane>
-                                <Pane layoutX="8.0" layoutY="8.0" prefHeight="52.0" prefWidth="52.0" style="-fx-cursor: hand;" styleClass="avatar" />
+                                <Pane layoutX="8.0" layoutY="8.0" prefHeight="52.0" prefWidth="52.0" style="-fx-cursor: hand;" styleClass="avatar">
+                           <children>
+                              <ImageView fitHeight="52.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/image/user_icon.png" />
+                                 </image>
+                              </ImageView>
+                           </children></Pane>
                             </children>
                         </Pane>
                         <Button layoutX="20.0" layoutY="171.0" mnemonicParsing="false" onAction="#home" prefHeight="60.0" prefWidth="222.0" styleClass="btn_home1" text="Trang chủ" textFill="WHITE">
@@ -99,10 +105,10 @@
                         <Image url="@../../phonestoremanager/assets/image/search_icon.png" />
                     </image>
                 </ImageView>
-                <ScrollPane layoutX="7.0" layoutY="82.0" prefHeight="483.0" prefWidth="705.0"
-                            fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED" nodeOrientation="RIGHT_TO_LEFT">
+                <ScrollPane fitToWidth="true" hbarPolicy="NEVER" layoutX="7.0" layoutY="82.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="483.0" prefWidth="705.0" vbarPolicy="AS_NEEDED">
                     <content>
-                        <FlowPane fx:id="manageContainer" prefHeight="485.0" prefWidth="710.0" nodeOrientation="LEFT_TO_RIGHT" />
+                        <FlowPane fx:id="manageContainer" nodeOrientation="LEFT_TO_RIGHT" prefHeight="485.0" prefWidth="710.0" />
+
                     </content>
                 </ScrollPane>
             <Button layoutX="598.0" layoutY="31.0" mnemonicParsing="false" text="Cập nhật" />
