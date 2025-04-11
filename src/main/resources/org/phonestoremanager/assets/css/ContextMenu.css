@@ -18,6 +18,7 @@
 .profile-item {
     -fx-text-fill: #e74c3c;
     -fx-font-weight: bold;
+    -fx-cursor: hand;
 }
 
 .profile-item:hover {
@@ -29,6 +30,7 @@
 .logout-item {
     -fx-text-fill: #e74c3c;
     -fx-font-weight: bold;
+    -fx-cursor: hand;
 }
 
 .logout-item:hover {

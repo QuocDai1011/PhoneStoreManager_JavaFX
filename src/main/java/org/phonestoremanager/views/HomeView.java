@@ -16,7 +16,7 @@ public class HomeView extends Application {
 
         scene.getStylesheets().add(getClass().getResource("/org/phonestoremanager/assets/css/ContextMenu.css").toExternalForm());
 
-        stage.setTitle("Employee");
+        stage.setTitle("Manager");
         stage.setScene(scene);
         stage.setResizable(true);
         stage.show();
