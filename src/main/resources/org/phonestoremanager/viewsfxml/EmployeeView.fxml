@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="739.0" prefWidth="1049.0" styleClass="container" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.phonestoremanager.controllers.EmployeeController">
+    <!-- Bảng danh sách nhân viên -->
+    <TableView fx:id="tableView" layoutX="11.2" layoutY="14.0" prefHeight="334.0" prefWidth="1027.0" AnchorPane.bottomAnchor="391.0" AnchorPane.leftAnchor="11.0" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="14.0">
+        <columns>
+            <TableColumn fx:id="colSTT" prefWidth="52.00002610683441" text="STT" />
+            <TableColumn fx:id="colMaNV" prefWidth="108.00003433227539" text="Mã Nhân Viên" />
+         <TableColumn prefWidth="73.60000610351562" text="Họ" />
+            <TableColumn fx:id="colTenNV" prefWidth="70.39997863769531" text="Tên" />
+            <TableColumn fx:id="colNgaySinh" prefWidth="107.20001220703125" text="Ngày Sinh" />
+            <TableColumn fx:id="colNgayVL" prefWidth="115.20001220703125" text="Ngày Vào Làm" />
+            <TableColumn fx:id="colChucVu" prefWidth="88.800048828125" text="Chức Vụ" />
+            <TableColumn fx:id="colDiaChi" prefWidth="108.0" text="Địa Chỉ" />
+            <TableColumn fx:id="colGioiTinh" prefWidth="75.20001220703125" text="Giới Tính" />
+            <TableColumn fx:id="colSoDT" prefWidth="123.199951171875" text="Số Điện Thoại" />
+            <TableColumn fx:id="colGhiChu" prefWidth="109.60009765625" text="Ghi Chú" />
+        </columns>
+    </TableView>
+
+    <Label fx:id="lbMaNV" layoutX="20.0" layoutY="424.0" text="Tên:" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="424.0" />
+    <TextField fx:id="txtTenNV" layoutX="120.0" layoutY="420.0" prefHeight="26.0" prefWidth="175.0" AnchorPane.leftAnchor="163.0" AnchorPane.topAnchor="420.0" />
+
+    <Label fx:id="lbNgaySinh" layoutX="68.0" layoutY="483.4" text="Ngày Sinh:" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="483.4" />
+    <DatePicker fx:id="dpNgaySinh" layoutX="120.0" layoutY="478.0" prefHeight="26.0" prefWidth="175.0" AnchorPane.leftAnchor="163.0" AnchorPane.topAnchor="478.0" />
+
+    <Label fx:id="lbGioiTinh" layoutX="23.0" layoutY="537.0" text="Giới Tính:" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="537.0" />
+
+    <RadioButton fx:id="rbNam" layoutX="163.0" layoutY="537.0" text="Nam" AnchorPane.leftAnchor="163.0">
+      <toggleGroup>
+         <ToggleGroup fx:id="genderGroup" />
+      </toggleGroup></RadioButton>
+    <RadioButton fx:id="rbNu" layoutX="220.0" layoutY="537.0" text="Nữ" toggleGroup="$genderGroup" AnchorPane.leftAnchor="220.0" />
+
+    <Label fx:id="lbNgayVL" layoutX="371.0" layoutY="369.0" text="Ngày Vào Làm:" AnchorPane.leftAnchor="430.0" AnchorPane.topAnchor="369.0" />
+    <DatePicker fx:id="dpNgayVaoLam" layoutX="477.8" layoutY="360.0" prefHeight="26.0" prefWidth="175.0" AnchorPane.leftAnchor="536.0" AnchorPane.topAnchor="360.0" />
+
+    <Label fx:id="lbChucVu" layoutX="369.0" layoutY="425.0" text="Chức Vụ:" AnchorPane.leftAnchor="430.0" AnchorPane.topAnchor="425.0" />
+    <ComboBox fx:id="cbChucVu" layoutX="474.4" layoutY="418.8" prefHeight="26.0" prefWidth="175.0" AnchorPane.leftAnchor="536.0" AnchorPane.topAnchor="418.8" />
+
+    <Label fx:id="lbSoDT" layoutX="373.0" layoutY="482.0" text="Số Điện Thoại:" AnchorPane.leftAnchor="430.0" />
+    <TextField fx:id="txtSoDT" layoutX="474.0" layoutY="478.0" prefHeight="26.0" prefWidth="175.0" AnchorPane.leftAnchor="536.0" />
+
+    <Label fx:id="lbDiaChi" layoutX="430.0" layoutY="536.0" text="Địa Chỉ:" AnchorPane.leftAnchor="430.0" AnchorPane.topAnchor="536.0" />
+    <TextField fx:id="txtDiaChi" layoutX="536.0" layoutY="531.0" prefHeight="26.0" prefWidth="175.0" AnchorPane.leftAnchor="536.0" AnchorPane.topAnchor="531.0" />
+
+    <Label fx:id="lbGhiChu" layoutX="372.0" layoutY="537.0" text="Ghi Chú:" AnchorPane.leftAnchor="430.0" AnchorPane.topAnchor="588.8" />
+    <TextArea fx:id="txtGhiChu" layoutX="536.0" layoutY="596.0" prefHeight="103.0" prefWidth="175.0" AnchorPane.leftAnchor="536.0" />
+
+    <!-- Các nút chức năng -->
+    <Button fx:id="btnThem" layoutX="825.0" layoutY="378.0" onAction="#handleThem" prefHeight="26.0" prefWidth="80.0" text="Thêm" AnchorPane.bottomAnchor="335.0" AnchorPane.leftAnchor="825.0" AnchorPane.rightAnchor="144.0" />
+    <Button fx:id="btnSua" layoutX="824.8" layoutY="480.0" onAction="#handleXoa" prefHeight="26.0" prefWidth="70.0" text="Sửa" AnchorPane.leftAnchor="824.8" />
+    <Button fx:id="btnXoa" layoutX="825.0" layoutY="428.0" onAction="#handleSua" prefHeight="26.0" prefWidth="70.0" text="Xóa" AnchorPane.leftAnchor="825.0" />
+    <Button fx:id="btnXoaTrang" layoutX="825.0" layoutY="532.0" onAction="#handleXoaTrang" prefHeight="26.0" prefWidth="70.0" text="Reset" />
+   <Button fx:id="btnQL" layoutX="825.0" layoutY="598.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="70.0" text="Quay Lại" />
+   <Label fx:id="lbHoNV" layoutX="68.0" layoutY="370.0" text="Họ: " AnchorPane.leftAnchor="60.0" />
+   <TextField fx:id="textHoNV" layoutX="119.0" layoutY="365.0" prefHeight="26.0" prefWidth="175.0" AnchorPane.leftAnchor="163.0" />
+   <Label fx:id="lbTenDN" layoutX="68.6" layoutY="588.0" text="Tên Đăng Nhập:" AnchorPane.leftAnchor="60.0" />
+   <Label fx:id="lbMK" layoutX="82.0" layoutY="648.0" text="Mật Khẩu" AnchorPane.leftAnchor="60.0" />
+   <TextField fx:id="txtTenDN" layoutX="165.0" layoutY="584.0" prefHeight="26.0" prefWidth="175.0" />
+   <TextField fx:id="txtMK" layoutX="165.0" layoutY="644.0" prefHeight="26.0" prefWidth="175.0" />
+
+</AnchorPane>
