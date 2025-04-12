@@ -39,10 +39,10 @@ public class AccountService {
     public boolean checkAccountWhenLogIn(String userName, String password) throws SQLException {
         ArrayList <String> result = AccountDAO.getUserNameAndPasswordByUserName(userName);
 
-        if(result.get(0).equals(userName) && result.get(1).equals(PasswordEncrypt.toSHA256(password))) {
+        if (result.isEmpty()) return false;
+
+        if(result.get(0).equals(userName) && password.equals(PasswordEncrypt.decryptAES(result.get(1)))) {
             return true;
-        }else if(result.isEmpty()) {
-            return false;
         }
 
         return false;
