@@ -27,7 +27,7 @@ public class LogInController {
     @FXML
     private PasswordField passwordTextField;
 
-    public void checkAccount() throws SQLException {
+    public void checkAccount(ActionEvent event) throws SQLException, IOException {
         String userName = userNameTextField.getText();
         String password = passwordTextField.getText();
 
@@ -46,9 +46,14 @@ public class LogInController {
         AccountService accountService = new AccountService();
         boolean result = accountService.checkAccountWhenLogIn(userName, password);
         if(result) {
-            int roleId = AccountDAO.getRoleIDByUsername(userName);
-            String role = RoleDAO.getRoleNameByRoleID(roleId);
-            showAlert("INFORMATION", "Đăng nhập thành công! " + role, Alert.AlertType.INFORMATION);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/phonestoremanager/viewsfxml/home-view.fxml"));
+            Parent root = loader.load();
+
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setTitle("Trang chủ");
+            stage.show();
         }
         else {
             showAlert("ERROR", "Tên đăng nhập hoặc mật khẩu không đúng!", Alert.AlertType.ERROR);
@@ -65,7 +70,7 @@ public class LogInController {
     }
 
     @FXML
-    public void checkAccountOnEnter(KeyEvent event) throws SQLException {
+    public void checkAccountOnEnter(KeyEvent event) throws SQLException, IOException {
         if(event.getCode() == KeyCode.ENTER) {
             String userName = userNameTextField.getText();
             String password = passwordTextField.getText();
@@ -85,9 +90,15 @@ public class LogInController {
             AccountService accountService = new AccountService();
             boolean result = accountService.checkAccountWhenLogIn(userName, password);
             if(result) {
-                int roleId = AccountDAO.getRoleIDByUsername(userName);
-                String role = RoleDAO.getRoleNameByRoleID(roleId);
-                showAlert("INFORMATION", "Đăng nhập thành công! " + role, Alert.AlertType.INFORMATION);
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/phonestoremanager/viewsfxml/home-view.fxml"));
+                Parent root = loader.load();
+
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+                stage.setTitle("Trang chủ");
+                stage.centerOnScreen();
+                stage.show();
             }
             else {
                 showAlert("ERROR", "Tên đăng nhập hoặc mật khẩu không đúng!", Alert.AlertType.ERROR);
@@ -96,18 +107,16 @@ public class LogInController {
     }
 
     public void signUpPress (ActionEvent event) throws IOException {
+        Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/phonestoremanager/viewsfxml/SignUpForCustomer.fxml"));
         Parent root = loader.load();
 
-        Stage signUpStage = new Stage();
         Scene scene = new Scene(root);
         scene.getStylesheets().add(getClass().getResource("/org/phonestoremanager/assets/css/SignUpForCustomer.css").toExternalForm());
-        signUpStage.setScene(scene);
-        signUpStage.setTitle("Sign Up");
-        signUpStage.show();
 
-        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        currentStage.close();
+        stage.setScene(scene);
+        stage.setTitle("Đăng ký!");
+        stage.show();
     }
 
 

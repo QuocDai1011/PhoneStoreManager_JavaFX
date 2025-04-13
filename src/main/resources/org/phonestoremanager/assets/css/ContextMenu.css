@@ -1,0 +1,39 @@
+.context-menu {
+    -fx-background-color: white;
+    -fx-border-color: #cccccc;
+    -fx-border-width: 1;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-padding: 5;
+}
+
+.menu-item {
+    -fx-padding: 8 16;
+    -fx-font-size: 13px;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+}
+
+/* Profile */
+.profile-item {
+    -fx-text-fill: #e74c3c;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+
+.profile-item:hover {
+    -fx-text-fill: black;
+    -fx-background-radius: 8;
+}
+
+/* Logout */
+.logout-item {
+    -fx-text-fill: #e74c3c;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+
+.logout-item:hover {
+    -fx-text-fill: black;
+    -fx-background-radius: 8;
+}

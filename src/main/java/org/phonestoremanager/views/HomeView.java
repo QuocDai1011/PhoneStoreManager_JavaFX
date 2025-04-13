@@ -13,7 +13,10 @@ public class HomeView extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/org/phonestoremanager/viewsfxml/home-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         scene.getStylesheets().add(getClass().getResource("/org/phonestoremanager/assets/css/Home.css").toExternalForm());
-        stage.setTitle("Employee");
+
+        scene.getStylesheets().add(getClass().getResource("/org/phonestoremanager/assets/css/ContextMenu.css").toExternalForm());
+
+        stage.setTitle("Manager");
         stage.setScene(scene);
         stage.setResizable(true);
         stage.show();
