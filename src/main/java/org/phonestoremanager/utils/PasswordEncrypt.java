@@ -64,7 +64,7 @@ public class PasswordEncrypt {
 
     // Demo
     public static void main(String[] args) {
-        String original = "123dai";
+        String original = "123dung";
 
         String encrypted = encryptAES(original);
         String decrypted = decryptAES(encrypted);
