@@ -97,6 +97,8 @@ public class LogInController {
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
                 stage.setTitle("Trang chủ");
+                scene.getStylesheets().add(getClass().getResource("/org/phonestoremanager/assets/css/Home.css").toExternalForm());
+                scene.getStylesheets().add(getClass().getResource("/org/phonestoremanager/assets/css/ContextMenu.css").toExternalForm());
                 stage.centerOnScreen();
                 stage.show();
             }
