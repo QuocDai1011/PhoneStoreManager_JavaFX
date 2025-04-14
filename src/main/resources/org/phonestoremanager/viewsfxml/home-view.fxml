@@ -16,7 +16,7 @@
 
 <HBox fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.phonestoremanager.controllers.HomeController">
    <children>
-      <VBox prefHeight="600.0" prefWidth="200.0">
+      <VBox fx:id="contenVBox" prefHeight="600.0" prefWidth="200.0">
          <children>
             <AnchorPane fx:id="side_ankerpane" prefHeight="600.0" prefWidth="151.0" styleClass="side_ankerpane" stylesheets="@../assets/css/Home.css">
                <children>

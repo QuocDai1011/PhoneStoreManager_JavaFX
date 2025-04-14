@@ -13,6 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.phonestoremanager.models.ManageModel;
 import org.phonestoremanager.models.ProductModel;
@@ -26,37 +27,28 @@ public class HomeController {
     private Scene scene;
     private Stage stage;
 
+
+    @FXML
+    private VBox contenVBox;
     // Chuyển đổi giữa các cửa số menu
     public void home (ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("/org/phonestoremanager/viewsfxml/home-view.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        Parent homeView = FXMLLoader.load(getClass().getResource("/org/phonestoremanager/viewsfxml/home-view.fxml"));
+        contenVBox.getChildren().setAll(homeView);
     }
 
     public void employee (ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("/org/phonestoremanager/viewsfxml/employee-view.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        Parent employeeView = FXMLLoader.load(getClass().getResource("/org/phonestoremanager/viewsfxml/employee-view.fxml"));
+        contenVBox.getChildren().setAll(employeeView);
     }
 
     public void manage (ActionEvent event) throws IOException{
-        root = FXMLLoader.load(getClass().getResource("/org/phonestoremanager/viewsfxml/manage-view.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        Parent manageView = FXMLLoader.load(getClass().getResource("/org/phonestoremanager/viewsfxml/manage-view.fxml"));
+        contenVBox.getChildren().setAll(manageView);
     }
 
     public void order (ActionEvent event) throws IOException{
-        root = FXMLLoader.load(getClass().getResource("/org/phonestoremanager/viewsfxml/order-view.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        Parent orderView = FXMLLoader.load(getClass().getResource("/org/phonestoremanager/viewsfxml/order-view.fxml"));
+        contenVBox.getChildren().setAll(orderView);
     }
 
     @FXML
