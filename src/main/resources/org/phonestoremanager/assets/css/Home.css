@@ -48,3 +48,8 @@
     -fx-border-radius: 100px;
     -fx-border-color: #141313;
 }
+
+.button-selected {
+    -fx-background-color: #141313; /* Màu nền cho nút được chọn */
+    -fx-text-fill: white;          /* Màu chữ trắng */
+}

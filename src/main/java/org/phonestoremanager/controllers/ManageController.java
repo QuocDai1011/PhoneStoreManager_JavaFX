@@ -8,7 +8,7 @@ import javafx.scene.layout.Pane;
 import org.phonestoremanager.models.ManageModel;
 
 public class ManageController {
-    public static Pane createManagePane (ManageModel manageModel) {
+        public static Pane createManagePane (ManageModel manageModel) {
         Pane pane = new Pane();
         pane.setPrefSize(216, 300);
         pane.setStyle("-fx-border-color: black; -fx-border-radius: 10px;");
