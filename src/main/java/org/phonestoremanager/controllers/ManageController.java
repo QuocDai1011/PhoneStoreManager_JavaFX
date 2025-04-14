@@ -1,17 +1,30 @@
 package org.phonestoremanager.controllers;
 
 import javafx.scene.control.Label;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import org.phonestoremanager.models.ManageModel;
 
 public class ManageController {
         public static Pane createManagePane (ManageModel manageModel) {
         Pane pane = new Pane();
         pane.setPrefSize(216, 300);
-        pane.setStyle("-fx-border-color: black; -fx-border-radius: 10px;");
+        pane.setStyle("-fx-background-color: white; " +
+                "-fx-border-color: white; " +
+                "-fx-border-radius: 10px; " +
+                "-fx-background-radius: 10px;");
+
+        DropShadow shadow = new DropShadow();
+        shadow.setRadius(10);
+        shadow.setOffsetX(3);
+        shadow.setOffsetY(3);
+        shadow.setColor(Color.rgb(0, 0, 0, 0.2)); // màu đen nhạt, độ mờ 20%
+
+        pane.setEffect(shadow);
 
         ImageView imageView = new ImageView();
         imageView.setFitWidth(200);
