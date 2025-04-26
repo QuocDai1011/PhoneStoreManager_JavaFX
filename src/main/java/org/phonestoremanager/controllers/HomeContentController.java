@@ -3,7 +3,6 @@ package org.phonestoremanager.controllers;
 import javafx.fxml.FXML;
 import javafx.scene.layout.FlowPane;
 import org.phonestoremanager.models.ProductModel;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,5 +32,4 @@ public class HomeContentController {
         for (ProductModel productModel : productModelList)
             productContainer.getChildren().add(ProductController.createProductPane(productModel));
     }
-
 }
