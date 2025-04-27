@@ -14,6 +14,7 @@ public class HomeView extends Application {
         Scene scene = new Scene(fxmlLoader.load());
         scene.getStylesheets().add(getClass().getResource("/org/phonestoremanager/assets/css/Home.css").toExternalForm());
         scene.getStylesheets().add(getClass().getResource("/org/phonestoremanager/assets/css/ContextMenu.css").toExternalForm());
+        scene.getStylesheets().add(getClass().getResource("/org/phonestoremanager/assets/css/menu-button.css").toExternalForm());
 
         stage.setTitle("Manager");
         stage.setScene(scene);

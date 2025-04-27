@@ -1,0 +1,37 @@
+.menu-button {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #AEB2C3;
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;
+    -fx-font-size: 16px;
+    -fx-text-fill: #333333;
+    -fx-padding: 5px 15px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 1);
+}
+
+.menu-button:hover {
+    -fx-background-color: #f5f5f5;
+    -fx-border-color: #888;
+}
+
+.menu-button:showing {
+    -fx-background-color: #e0e0e0;
+}
+
+.menu-button .menu-item {
+    -fx-background-color: white;
+    -fx-text-fill: #333333;
+    -fx-font-size: 16px;
+    -fx-padding: 8px 20px;
+}
+
+/* Hover */
+.menu-button .menu-item:hover,
+.menu-button .menu-item:focused,
+.menu-button .menu-item:armed {
+    -fx-background-color: #ffcc80; /* cam sáng hơn */
+    -fx-text-fill: #e65100; /* cam đậm */
+}
+
+

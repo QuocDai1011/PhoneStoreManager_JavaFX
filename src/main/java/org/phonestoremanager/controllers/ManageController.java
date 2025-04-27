@@ -16,7 +16,8 @@ public class ManageController {
         pane.setStyle("-fx-background-color: white; " +
                 "-fx-border-color: white; " +
                 "-fx-border-radius: 10px; " +
-                "-fx-background-radius: 10px;");
+                "-fx-background-radius: 10px;" +
+                "-fx-cursor: hand;");
 
         DropShadow shadow = new DropShadow();
         shadow.setRadius(10);
