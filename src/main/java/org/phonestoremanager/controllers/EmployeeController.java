@@ -68,12 +68,9 @@ public class EmployeeController {
     private void handleXoaTrang() {
         // Handle the "Xóa Trắng" button action
     }
-<<<<<<< Updated upstream
-=======
     @FXML
     private void handleQuayLai() {
         // Handle the "Quay Lại" button action
     }
->>>>>>> Stashed changes
 
 }

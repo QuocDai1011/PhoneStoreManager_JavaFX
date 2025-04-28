@@ -21,10 +21,7 @@ public class EmployeeView extends Application {
         Scene scene = new Scene(root);
 
         scene.getStylesheets().add(getClass().getResource("/org/phonestoremanager/assets/css/style.css").toExternalForm()); // Đảm bảo đúng đường dẫn
-<<<<<<< Updated upstream
-        primaryStage.setTitle("SignUp for Employee");
-=======
->>>>>>> Stashed changes
+
         primaryStage.setScene(scene);
         primaryStage.show();
     }
