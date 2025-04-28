@@ -24,7 +24,11 @@ public class ProductView extends Application {
             Scene scene = new Scene(root);
 
             scene.getStylesheets().add(getClass().getResource("/org/phonestoremanager/assets/css/style.css").toExternalForm()); // Ensure correct path
+<<<<<<< Updated upstream
             primaryStage.setTitle("SignUp for Employee");
+=======
+
+>>>>>>> Stashed changes
             primaryStage.setScene(scene);
             primaryStage.show();
         } catch (IOException e) {

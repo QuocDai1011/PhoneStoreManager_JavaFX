@@ -1,5 +1,6 @@
 package org.phonestoremanager.controllers;
 
+<<<<<<< Updated upstream
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.*;
@@ -10,6 +11,21 @@ import java.nio.file.Files;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import java.io.IOException;
+=======
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+>>>>>>> Stashed changes
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
@@ -75,6 +91,13 @@ public class ProductController {
     private void handleXoaTrang() {
         // Handle the "Xóa Trắng" button action
     }
+<<<<<<< Updated upstream
+=======
+    @FXML
+    private void handleQuayLai() {
+        // Handle the "Quay Lại" button action
+    }
+>>>>>>> Stashed changes
 
     @FXML
     private void handleChonHinh(ActionEvent event) {

@@ -1,4 +1,5 @@
 package org.phonestoremanager.views;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -7,7 +8,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class EmployeeView extends Application {
+public class CustomerView extends Application {
 
     public static void main(String[] args) {
         launch(args);
@@ -15,16 +16,12 @@ public class EmployeeView extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/phonestoremanager/viewsfxml/EmployeeView.fxml")); // Đảm bảo đúng đường dẫn
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/phonestoremanager/viewsfxml/Customer.fxml")); // Đảm bảo đúng đường dẫn
         Parent root = loader.load(); // Load đúng cách
 
         Scene scene = new Scene(root);
 
         scene.getStylesheets().add(getClass().getResource("/org/phonestoremanager/assets/css/style.css").toExternalForm()); // Đảm bảo đúng đường dẫn
-<<<<<<< Updated upstream
-        primaryStage.setTitle("SignUp for Employee");
-=======
->>>>>>> Stashed changes
         primaryStage.setScene(scene);
         primaryStage.show();
     }
