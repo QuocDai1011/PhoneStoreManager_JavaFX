@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="503.0" prefWidth="832.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.phonestoremanager.viewsfxml.DeTail">
+   <children>
+      <Label layoutX="120.0" layoutY="80.0" text="Label" />
+      <Label layoutX="120.0" layoutY="153.0" text="Label" />
+      <Label layoutX="120.0" layoutY="235.0" text="Label" />
+      <Label layoutX="120.0" layoutY="302.0" text="Label" />
+      <Label layoutX="120.0" layoutY="377.0" text="Label" />
+   </children>
+</AnchorPane>

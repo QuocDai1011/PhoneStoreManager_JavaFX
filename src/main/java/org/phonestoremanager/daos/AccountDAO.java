@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+
 public class AccountDAO {
     public static int insert(AccountModel accountModel) {
         DatabaseConnection databaseConnection = new DatabaseConnection();
@@ -26,7 +27,9 @@ public class AccountDAO {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setInt(1, accountModel.getRoleID());
             st.setString(2, accountModel.getUserName());
+
             st.setString(3, PasswordEncrypt.encryptAES(accountModel.getPassword()));
+
             row = st.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -54,7 +57,6 @@ public class AccountDAO {
         }
         return accountID;
     }
-
     public static ArrayList<String> getUserNameAndPasswordByUserName(String userName) {
         DatabaseConnection databaseConnection = new DatabaseConnection();
         ArrayList<String> result = new ArrayList<>();

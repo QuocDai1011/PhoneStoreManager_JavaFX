@@ -6,7 +6,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import org.phonestoremanager.daos.AccountDAO;
 import org.phonestoremanager.daos.EmployeeDAO;
-import org.phonestoremanager.daos.RoleDAO;
 import org.phonestoremanager.exeptions.PasswordValidation;
 import org.phonestoremanager.exeptions.PhoneNumberValidation;
 import org.phonestoremanager.exeptions.StringValidation;
@@ -30,6 +29,7 @@ public class SignUpForEmployeeController {
 
 
     public void Submit() {
+
         //lay gia tri nhap vao tu view
         String firstNameValue = firstName.getText();
         String lastNameValue = lastName.getText();
@@ -64,7 +64,6 @@ public class SignUpForEmployeeController {
             showAlert("ERROR", "Tên đăng nhập đã tồn tại!", Alert.AlertType.ERROR);
             return;
         }
-
         //check cac ngoai le kiem tra du lieu dau vao
         String message = "";
         //kiem tra ho va ten phai la chu cai
@@ -132,7 +131,8 @@ public class SignUpForEmployeeController {
         return;
     }
 
-    public void showAlert(String title, String message, Alert.AlertType type) {
+    public static void showAlert(String title, String message, Alert.AlertType type) {
+
         Alert alert = new Alert(type);
         alert.setTitle(title);
         alert.setHeaderText(null); // Không có tiêu đề phụ
@@ -145,4 +145,5 @@ public class SignUpForEmployeeController {
             Submit();
         }
     }
+
 }

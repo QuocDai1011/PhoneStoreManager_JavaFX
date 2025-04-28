@@ -2,11 +2,8 @@ package org.phonestoremanager.services;
 
 import org.phonestoremanager.daos.AccountDAO;
 import org.phonestoremanager.daos.RoleDAO;
-import org.phonestoremanager.exeptions.PasswordValidation;
 import org.phonestoremanager.models.AccountModel;
 import org.phonestoremanager.utils.PasswordEncrypt;
-
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
