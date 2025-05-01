@@ -114,17 +114,15 @@ public class SignUpForCustomerController {
     }
 
     public void logInPress(ActionEvent event) throws IOException {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/phonestoremanager/viewsfxml/LogIn.fxml"));
         Parent root = loader.load();
 
-        Stage signUpStage = new Stage();
         Scene scene = new Scene(root);
         scene.getStylesheets().add(getClass().getResource("/org/phonestoremanager/assets/css/LogIn.css").toExternalForm());
-        signUpStage.setScene(scene);
-        signUpStage.setTitle("Sign Up");
-        signUpStage.show();
 
-        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        currentStage.close();
+        stage.setScene(scene);
+        stage.setTitle("Đăng nhập!");
+        stage.show();
     }
 }

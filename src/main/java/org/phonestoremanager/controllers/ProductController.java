@@ -1,17 +1,34 @@
 package org.phonestoremanager.controllers;
 
 import javafx.scene.control.Label;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import org.phonestoremanager.models.ProductModel;
+import javafx.scene.paint.Color;
+import org.phonestoremanager.models.ProductViewModel;
+
+import java.text.NumberFormat;
+import java.util.Locale;
 
 public class ProductController {
-    public static Pane createProductPane (ProductModel productModel) {
+    public static Pane createProductPane (ProductViewModel productViewModel) {
         Pane pane = new Pane();
-        pane.setPrefSize(216, 287);
-        pane.setStyle("-fx-border-color: black; -fx-border-radius: 10px;");
+        pane.setPrefSize(230, 310);
+        pane.setStyle("-fx-background-color: white; " +
+                "-fx-border-color: white; " +
+                "-fx-border-radius: 10px; " +
+                "-fx-background-radius: 10px;" +
+                "-fx-cursor: hand;");
+
+        DropShadow shadow = new DropShadow();
+        shadow.setRadius(10);
+        shadow.setOffsetX(3);
+        shadow.setOffsetY(3);
+        shadow.setColor(Color.rgb(0, 0, 0, 0.2));
+
+        pane.setEffect(shadow);
 
         ImageView imageView = new ImageView();
         imageView.setFitWidth(200);
@@ -20,10 +37,11 @@ public class ProductController {
         imageView.setLayoutY(14);
 
         try {
-            if (productModel.getImageUrl() != null) {
-                Image image = new Image(ProductController.class.getResourceAsStream(productModel.getImageUrl()));
+            if (productViewModel.getImage() != null) {
+                String imagePath = "/org/phonestoremanager/assets/image/" + productViewModel.getImage();
+                Image image = new Image(ProductController.class.getResourceAsStream(imagePath));
                 if (image.isError()) {
-                    throw new Exception("Lỗi tải ảnh: " + productModel.getImageUrl());
+                    throw new Exception("Lỗi tải ảnh: " + productViewModel.getImage());
                 }
                 imageView.setImage(image);
             }
@@ -38,15 +56,22 @@ public class ProductController {
         gridPane.setVgap(5);
 
         Label nameLabel = new Label("Tên sản phẩm:");
-        Label brandLabel = new Label("Hãng điện thoại:");
+        nameLabel.setStyle("-fx-font-size: 13px; -fx-text-fill: #555; -fx-font-weight: bold;");
+
         Label priceLabel = new Label("Giá sản phẩm:");
-        Label nameValue = new Label(productModel.getName());
-        Label brandValue = new Label(productModel.getBrand());
-        Label priceValue = new Label(productModel.getPrice());
+        priceLabel.setStyle("-fx-font-size: 13px; -fx-text-fill: #555; -fx-font-weight: bold;");
+
+        Label nameValue = new Label(productViewModel.getName());
+        nameValue.setStyle("-fx-font-size: 14px; -fx-text-fill: #222;");
+        nameValue.setWrapText(true);
+        nameValue.setMaxWidth(120);
+
+        NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
+        Label priceValue = new Label(currencyFormat.format(productViewModel.getPrice()));
+        priceValue.setStyle("-fx-font-size: 14px; -fx-text-fill: #e53935; -fx-font-weight: bold;");
 
         gridPane.addRow(0, nameLabel, nameValue);
-        gridPane.addRow(1, brandLabel, brandValue);
-        gridPane.addRow(2, priceLabel, priceValue);
+        gridPane.addRow(1, priceLabel, priceValue);
 
         pane.getChildren().addAll(imageView, gridPane);
 

@@ -1,5 +1,5 @@
 .side_ankerpane {
-    -fx-background-color: #353A56;
+    -fx-background-color: #FF5722; /* Cam đậm */
     -fx-border-width: 2px;
     -fx-border-radius: 20px;
     -fx-background-radius: 20px;
@@ -7,44 +7,49 @@
 }
 
 .inner_pane {
-    -fx-background-color: #748CF1;
+    -fx-background-color: #FF7043; /* Cam sáng hơn */
     -fx-border-width: 2px;
     -fx-border-radius: 20px;
     -fx-background-radius: 20px;
     -fx-border-style: solid;
-    -fx-border-color: #748CF1;
+    -fx-border-color: #FF7043;
 }
 
 .most_inner_pane {
-    -fx-background-color: #6780E2;
+    -fx-background-color: #FF8A65; /* Cam nhạt */
     -fx-border-width: 2px;
     -fx-border-radius: 20px;
     -fx-background-radius: 20px;
     -fx-border-style: solid;
-    -fx-border-color: #748CF1;
+    -fx-border-color: #FF7043;
 }
 
 .btn_home {
-    -fx-background-color: #141313;
+    -fx-background-color: #FF5722; /* Cam đậm */
     -fx-border-width: 2px;
     -fx-border-radius: 50px;
     -fx-background-radius: 50px;
     -fx-border-style: solid;
-    -fx-border-color: #141313;
+    -fx-border-color: #FF5722;
     -fx-cursor: hand;
 }
 
 .btn_home1 {
-    -fx-background-color: #353A56;
+    -fx-background-color: #FF7043; /* Cam sáng hơn */
     -fx-border-width: 2px;
     -fx-border-radius: 50px;
     -fx-background-radius: 50px;
     -fx-border-style: solid;
-    -fx-border-color: #141313;
+    -fx-border-color: #FF5722;
     -fx-cursor: hand;
 }
 
 .avatar {
     -fx-border-radius: 100px;
-    -fx-border-color: #141313;
+    -fx-border-color: #FF5722; /* Cam đậm */
+}
+
+.button-selected {
+    -fx-background-color: #FF5722; /* Màu nền cho nút được chọn */
+    -fx-text-fill: white;          /* Màu chữ trắng */
 }

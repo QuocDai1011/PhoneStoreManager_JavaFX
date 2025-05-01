@@ -26,7 +26,7 @@ public class AccountDAO {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setInt(1, accountModel.getRoleID());
             st.setString(2, accountModel.getUserName());
-            st.setString(3, PasswordEncrypt.toSHA256(accountModel.getPassword()));
+            st.setString(3, PasswordEncrypt.encryptAES(accountModel.getPassword()));
             row = st.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
