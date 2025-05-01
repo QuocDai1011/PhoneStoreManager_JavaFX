@@ -1,4 +1,4 @@
 package org.phonestoremanager.controllers;
 
-public class ProductDetailsController {
+public class OrderContentController {
 }

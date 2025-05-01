@@ -1,18 +1,18 @@
 package org.phonestoremanager.models;
 
-public class ProductViewModel {
+public class ProductViewModel extends ProductModel {
     private String image;
-    private String name;
     private double price;
 
     public ProductViewModel() {
     }
 
-    public ProductViewModel(String image, String name, double price) {
+    public ProductViewModel(int productID, String image, String name, double price) {
+        super(productID, 0, 0, name, null); // Giá trị mặc định
         this.image = image;
-        this.name = name;
         this.price = price;
     }
+
 
     public String getImage() {
         return image;
@@ -20,14 +20,6 @@ public class ProductViewModel {
 
     public void setImage(String image) {
         this.image = image;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public double getPrice() {

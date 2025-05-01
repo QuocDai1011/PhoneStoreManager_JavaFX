@@ -43,29 +43,34 @@ public class MenuController {
     }
 
     // Cập nhật các hàm xử lý sự kiện menu
-    public void home (ActionEvent event) throws IOException {
+    public void home(ActionEvent event) throws IOException {
         setSelectedButton(home);
-        Parent homeView = FXMLLoader.load(getClass().getResource("/org/phonestoremanager/viewsfxml/home-view.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/phonestoremanager/viewsfxml/home-view.fxml"));
+        Parent homeView = loader.load(); // <-- load() trả về Parent và controller đã được gán
         contenVBox.getChildren().setAll(homeView);
     }
 
-    public void employee (ActionEvent event) throws IOException {
+    public void employee(ActionEvent event) throws IOException {
         setSelectedButton(btn_home10);
-        Parent employeeView = FXMLLoader.load(getClass().getResource("/org/phonestoremanager/viewsfxml/employee-view.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/phonestoremanager/viewsfxml/employee-view.fxml"));
+        Parent employeeView = loader.load();
         contenVBox.getChildren().setAll(employeeView);
     }
 
-    public void manage (ActionEvent event) throws IOException {
+    public void manage(ActionEvent event) throws IOException {
         setSelectedButton(btn_home11);
-        Parent manageView = FXMLLoader.load(getClass().getResource("/org/phonestoremanager/viewsfxml/manage-view.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/phonestoremanager/viewsfxml/manage-view.fxml"));
+        Parent manageView = loader.load();
         contenVBox.getChildren().setAll(manageView);
     }
 
-    public void order (ActionEvent event) throws IOException {
+    public void order(ActionEvent event) throws IOException {
         setSelectedButton(btn_home12);
-        Parent orderView = FXMLLoader.load(getClass().getResource("/org/phonestoremanager/viewsfxml/order-view.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/phonestoremanager/viewsfxml/order-view.fxml"));
+        Parent orderView = loader.load();
         contenVBox.getChildren().setAll(orderView);
     }
+
 
 
     @FXML

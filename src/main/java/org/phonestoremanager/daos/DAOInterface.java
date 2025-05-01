@@ -4,4 +4,6 @@ import java.util.ArrayList;
 
 public interface DAOInterface<T> {
     public ArrayList<T> selectAll();
+
+    public ArrayList<T> selectDetailById();
 }
