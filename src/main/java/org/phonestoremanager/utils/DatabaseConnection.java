@@ -20,9 +20,11 @@ public class DatabaseConnection {
             String url = properties.getProperty("db.url");
             String user = properties.getProperty("db.user");
             String password = properties.getProperty("db.password");
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+
 
             // Kết nối database
-//            System.out.println("ket noi thanh cong");
+           System.out.println("ket noi thanh cong");
             return DriverManager.getConnection(url, user, password);
         } catch (Exception e) {
             e.printStackTrace();
@@ -34,4 +36,5 @@ public class DatabaseConnection {
         DatabaseConnection con = new DatabaseConnection();
         con.connectionData();
     }
+
 }

@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="737.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="org.phonestoremanager.controllers.HomeContentController">
+<AnchorPane prefHeight="600.0" prefWidth="737.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="org.phonestoremanager.controllers.OrderContentController">
     <children>
         <TextField layoutX="344.0" layoutY="24.0" prefHeight="30.0" prefWidth="222.0" promptText="Search" style="-fx-background-color: transparent; -fx-border-radius: 50px; -fx-border-color: #AEB2C3;">
             <font>

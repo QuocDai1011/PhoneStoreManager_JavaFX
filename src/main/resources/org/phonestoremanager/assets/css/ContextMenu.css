@@ -1,6 +1,6 @@
 .context-menu {
-    -fx-background-color: white;
-    -fx-border-color: #cccccc;
+    -fx-background-color: #fff3e0; /* Màu nền cam nhạt */
+    -fx-border-color: #FF7043;      /* Màu viền cam đậm */
     -fx-border-width: 1;
     -fx-border-radius: 8;
     -fx-background-radius: 8;
@@ -12,28 +12,32 @@
     -fx-font-size: 13px;
     -fx-background-radius: 8;
     -fx-border-radius: 8;
+    -fx-text-fill: #FF7043; /* Màu chữ cam */
+    -fx-cursor: hand;
 }
 
 /* Profile */
 .profile-item {
-    -fx-text-fill: #e74c3c;
     -fx-font-weight: bold;
-    -fx-cursor: hand;
 }
 
+.profile-item:focused,
+.profile-item:armed,
 .profile-item:hover {
-    -fx-text-fill: black;
+    -fx-text-fill: #FF5722;         /* Màu chữ cam đậm khi hover */
+    -fx-background-color: #FFE0B2;  /* Nền cam nhạt khi hover */
     -fx-background-radius: 8;
 }
 
 /* Logout */
 .logout-item {
-    -fx-text-fill: #e74c3c;
     -fx-font-weight: bold;
-    -fx-cursor: hand;
 }
 
+.logout-item:focused,
+.logout-item:armed,
 .logout-item:hover {
-    -fx-text-fill: black;
+    -fx-text-fill: #FF5722;         /* Màu chữ cam đậm khi hover */
+    -fx-background-color: #FFE0B2;  /* Nền cam nhạt khi hover */
     -fx-background-radius: 8;
 }

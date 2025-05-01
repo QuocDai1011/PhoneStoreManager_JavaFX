@@ -1,31 +1,60 @@
 package org.phonestoremanager.models;
 
 public class ProductModel {
-    private final String name;
-    private final String brand;
-    private final String price;
-    private final String imageUrl;
+    private int productID;
+    private int categoryID;
+    private int brandID;
+    private String name;
+    private String description;
 
-    public ProductModel(String name, String brand, String price, String imageUrl) {
+    public ProductModel() {
+    }
+
+    public ProductModel(int productID, int categoryID, int brandID, String name, String description) {
+        this.productID = productID;
+        this.categoryID = categoryID;
+        this.brandID = brandID;
         this.name = name;
-        this.brand = brand;
-        this.price = price;
-        this.imageUrl = imageUrl;
+        this.description = description;
+    }
+
+    public int getProductID() {
+        return productID;
+    }
+
+    public void setProductID(int productID) {
+        this.productID = productID;
+    }
+
+    public int getCategoryID() {
+        return categoryID;
+    }
+
+    public void setCategoryID(int categoryID) {
+        this.categoryID = categoryID;
+    }
+
+    public int getBrandID() {
+        return brandID;
+    }
+
+    public void setBrandID(int brandID) {
+        this.brandID = brandID;
     }
 
     public String getName() {
         return name;
     }
 
-    public String getBrand() {
-        return brand;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getPrice() {
-        return price;
+    public String getDescription() {
+        return description;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
