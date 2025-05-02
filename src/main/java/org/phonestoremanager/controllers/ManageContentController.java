@@ -1,8 +1,12 @@
 package org.phonestoremanager.controllers;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.FlowPane;
 import org.phonestoremanager.models.ManageModel;
+import org.phonestoremanager.repositories.ManageRepository;
+import org.phonestoremanager.repositories.ProductViewRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,25 +17,51 @@ public class ManageContentController {
     private FlowPane manageContainer;
 
     @FXML
+    private ScrollPane scrollPane;
+
+    @FXML
+    private TextField searchField;
+
+
+    @FXML
     public void initialize() {
         if (manageContainer != null)
             loadManeger();
+
+        if (searchField != null) {
+            searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+                performSearch(newValue.trim());
+            });
+        } else {
+            System.err.println("Error: searchField is null");
+        }
+    }
+
+    private void performSearch(String value) {
+        manageContainer.getChildren().clear();
+
+        List<ManageModel> manageModels;
+        if (value.isEmpty()) {
+            manageModels = ManageRepository.getInstance().selectAll();
+        } else {
+            manageModels = ManageRepository.getInstance().searchByName(value);
+        }
+
+        for (ManageModel manageModel : manageModels) {
+            var productPane = ManageController.createManagerPane(manageModel);
+
+            manageContainer.getChildren().add(productPane);
+        }
     }
 
     private void loadManeger () {
-        List<ManageModel> manageModels = new ArrayList<>();
-        manageModels.add(new ManageModel("iPhone 15", "Apple", "30,000,000 VNĐ", "/org/phonestoremanager/assets/image/iphone15.png", "10"));
-        manageModels.add(new ManageModel("Samsung S23", "Samsung", "22,000,000 VNĐ", "/org/phonestoremanager/assets/image/iphone15.png", "20"));
-        manageModels.add(new ManageModel("Xiaomi 13", "Xiaomi", "12,000,000 VNĐ", "/org/phonestoremanager/assets/image/iphone15.png", "30"));
-        manageModels.add(new ManageModel("Nubia NEO 2", "nubia", "4,900,000 VNĐ", "/org/phonestoremanager/assets/image/iphone15.png", "40"));
-        manageModels.add(new ManageModel("Nubia NEO 2", "nubia", "4,900,000 VNĐ", "/org/phonestoremanager/assets/image/iphone15.png", "50"));
-        manageModels.add(new ManageModel("Nubia NEO 2", "nubia", "4,900,000 VNĐ", "/org/phonestoremanager/assets/image/iphone15.png", "60"));
+        List<ManageModel> manageModels = ManageRepository.getInstance().selectAll();
 
-        manageContainer.setHgap(20);
         manageContainer.setVgap(30);
+        manageContainer.setHgap(20);
 
         for (ManageModel manageModel : manageModels) {
-            manageContainer.getChildren().add(ManageController.createManagePane(manageModel));
+            manageContainer.getChildren().add(ManageController.createManagerPane(manageModel));
         }
     }
 }

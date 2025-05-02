@@ -2,14 +2,12 @@ package org.phonestoremanager.models;
 
 public class ManageModel {
     private final String name;
-    private final String brand;
-    private final String price;
+    private final double price;
     private final String imageUrl;
-    private final String inventory;
+    private final int inventory;
 
-    public ManageModel(String name, String brand, String price, String imageUrl, String iventory) {
+    public ManageModel(String name, double price, String imageUrl, int iventory) {
         this.name = name;
-        this.brand = brand;
         this.price = price;
         this.imageUrl = imageUrl;
         this.inventory = iventory;
@@ -19,11 +17,7 @@ public class ManageModel {
         return name;
     }
 
-    public String getBrand() {
-        return brand;
-    }
-
-    public String getPrice() {
+    public double getPrice() {
         return price;
     }
 
@@ -31,7 +25,7 @@ public class ManageModel {
         return imageUrl;
     }
 
-    public String getInventory() {
+    public int getInventory() {
         return inventory;
     }
 }

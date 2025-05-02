@@ -13,17 +13,20 @@ public class ProductDetailRepository {
         return new ProductDetailRepository();
     }
 
-    public ProductSpecificationModel getDetailByProductID(int productID) {
+    public ProductSpecificationModel getDetailByProductIDAndROM(int productID, int ROM) {
         ProductSpecificationModel spec = null;
 
         DatabaseConnection databaseConnection = new DatabaseConnection();
-        String sql = "SELECT Ram, Rom, Chip, ScreenSize, ScanFrequency, CameraFront, CameraRear, BatteryCapacity, Price FROM ProductDetail\n" +
-                "WHERE ProductID = ?";
+        String sql = "SELECT * FROM Product p\n" +
+                "JOIN Brand b ON b.BrandID = p.BrandID\n" +
+                "JOIN ProductDetail pd ON pd.ProductID = p.ProductID\n" +
+                "WHERE p.ProductID = ? AND pd.ROM = ?";
 
         try (Connection conn = databaseConnection.connectionData();
              PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
 
             preparedStatement.setInt(1, productID);
+            preparedStatement.setInt(2, ROM);;
             ResultSet resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {

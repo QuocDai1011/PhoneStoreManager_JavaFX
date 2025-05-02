@@ -98,9 +98,12 @@ public class ProductDetailsContentController {
             colorButtons.add(colorButton);
         }
 
-        // Thiết lập FlowPane để các button có thể tự động xuống dòng và căn đều
         colorFlowPane.setHgap(40);  // Khoảng cách ngang giữa các button
         colorFlowPane.setVgap(20);  // Khoảng cách dọc giữa các button
+
+        if (!colorButtons.isEmpty()) {
+            colorButtons.get(0).fire();  // Gọi sự kiện click cho nút đầu tiên
+        }
     }
 
     public void setROMProduct(ProductViewModel product) {
@@ -131,7 +134,10 @@ public class ProductDetailsContentController {
                 romButton.getStyleClass().add("selected-button");
 
                 updateImageDisplay();
+
+                displayProductOverview(product, Integer.parseInt(selectedROM));
             });
+
 
 
             romFlowPane.getChildren().add(romButton);
@@ -140,6 +146,10 @@ public class ProductDetailsContentController {
 
         romFlowPane.setHgap(40);  // Khoảng cách ngang giữa các button
         romFlowPane.setVgap(20);  // Khoảng cách dọc giữa các button
+
+        if (!romButtons.isEmpty()) {
+            romButtons.get(0).fire();  // Gọi sự kiện click cho nút đầu tiên
+        }
     }
 
     private void updateImageDisplay() {
@@ -169,8 +179,8 @@ public class ProductDetailsContentController {
         }
     }
 
-    public void displayProductOverview(ProductViewModel product) {
-        ProductSpecificationModel spec = ProductDetailRepository.getInstance().getDetailByProductID(product.getProductID());
+    public void displayProductOverview(ProductViewModel product, int selectedRom) {
+        ProductSpecificationModel spec = ProductDetailRepository.getInstance().getDetailByProductIDAndROM(product.getProductID(), Integer.parseInt(selectedROM));
 
         Label nameChip = new Label("Tên chíp:");
         Label nameROMRAM = new Label("RAM + ROM:");
@@ -234,10 +244,10 @@ public class ProductDetailsContentController {
         grid.add(namePrice, 0, 5);
         grid.add(valuePrice, 1, 5);
 
-        GridPane.setColumnSpan(btnBuy, 2);
-        GridPane.setHalignment(btnBuy, HPos.CENTER);
-        grid.add(btnBuy, 0, 6);
-        btnBuy.getStyleClass().add("buy-button");
+//        GridPane.setColumnSpan(btnBuy, 2);
+//        GridPane.setHalignment(btnBuy, HPos.CENTER);
+//        grid.add(btnBuy, 0, 6);
+//        btnBuy.getStyleClass().add("buy-button");
 
         detailVBox.getChildren().clear();
         detailVBox.getChildren().add(grid);
@@ -253,6 +263,6 @@ public class ProductDetailsContentController {
         setColorProduct(product);
         setROMProduct(product);
         updateImageDisplay();
-        displayProductOverview(product);
+        displayProductOverview(product, Integer.parseInt(selectedROM));
     }
 }
