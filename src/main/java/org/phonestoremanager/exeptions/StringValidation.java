@@ -2,15 +2,16 @@ package org.phonestoremanager.exeptions;
 
 public class StringValidation {
     public static String validateString(String input) {
-        if (input.matches(".*[0-9\\W].*")) { // \W đại diện cho ký tự không phải chữ cái
-            throw new IllegalArgumentException("Dữ liệu không được chứa số hoặc ký tự đặc biệt!");
+        if (!input.matches("^[\\p{L}\\s]+$")) {
+            throw new IllegalArgumentException("Dữ liệu chỉ được chứa chữ cái và khoảng trắng!");
         }
         return "success";
     }
 
+
     public static void main(String[] args) {
         try {
-            validateString("Đinh");
+            validateString("Dinh");
             System.out.println("Ok");
             return;// Lỗi
         } catch (IllegalArgumentException e) {

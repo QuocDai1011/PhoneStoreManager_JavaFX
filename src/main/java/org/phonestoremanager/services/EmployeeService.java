@@ -7,8 +7,10 @@ import java.sql.SQLException;
 
 public class EmployeeService {
 
-    public String createNewEmployee(String firstNameValue, String lastNameValue, String emailValue, String phoneNumberValue,
-                                           String addressValue, String positionValue, String genderValue, String salaryValue_raw, EmployeeModel newEmployee) {
+    public String createNewEmployee(String firstNameValue, String lastNameValue, String emailValue,
+                                    String phoneNumberValue,
+                                           String addressValue, String positionValue,
+                                    String genderValue, String salaryValue_raw, EmployeeModel newEmployee) {
 
 
         if(firstNameValue == null || firstNameValue.equals("")) {
