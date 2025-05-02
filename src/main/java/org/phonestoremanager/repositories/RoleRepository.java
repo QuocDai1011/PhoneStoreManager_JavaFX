@@ -1,4 +1,4 @@
-package org.phonestoremanager.daos;
+package org.phonestoremanager.repositories;
 
 import org.phonestoremanager.utils.DatabaseConnection;
 
@@ -7,7 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class RoleDAO {
+public class RoleRepository {
     public static int getRoleIDByRoleName(String name) {
         DatabaseConnection databaseConnection = new DatabaseConnection();
         int result = 0;

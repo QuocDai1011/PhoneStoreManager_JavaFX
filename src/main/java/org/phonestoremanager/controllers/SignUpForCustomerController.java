@@ -11,15 +11,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
-import org.phonestoremanager.daos.AccountDAO;
-import org.phonestoremanager.daos.CustomerDAO;
+import org.phonestoremanager.repositories.AccountRepository;
+import org.phonestoremanager.repositories.CustomerRepository;
 import org.phonestoremanager.models.AccountModel;
 import org.phonestoremanager.models.CustomerModel;
 import org.phonestoremanager.services.AccountService;
 import org.phonestoremanager.services.CustomerService;
 
 import java.io.IOException;
-import java.sql.SQLException;
 
 public class SignUpForCustomerController {
 
@@ -40,7 +39,7 @@ public class SignUpForCustomerController {
         String confirmPasswordValue = confirmPasswordText.getText();
 
         //kiem tra username da ton tai hay chưa
-        if(AccountDAO.checkUsername(usernameValue)) {
+        if(AccountRepository.checkUsername(usernameValue)) {
             showAlert("ERROR", "Tên đăng nhập đã tồn tại!", Alert.AlertType.ERROR);
             return;
         }
@@ -85,8 +84,8 @@ public class SignUpForCustomerController {
 
         int rowAccount = 0, rowCustomer = 0;
         try {
-            rowAccount = AccountDAO.insert(newAccount);
-            rowCustomer = CustomerDAO.insert(newCustomer, usernameValue);
+            rowAccount = AccountRepository.insert(newAccount);
+            rowCustomer = CustomerRepository.insert(newCustomer, usernameValue);
             if(rowAccount > 0 && rowCustomer > 0) {
                 showAlert("INFORMATION", "Tạo tài khoản thành công!\n Thêm dữ liệu khách hàng thành công!", Alert.AlertType.INFORMATION);
             }else {

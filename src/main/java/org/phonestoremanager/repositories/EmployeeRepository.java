@@ -1,6 +1,5 @@
-package org.phonestoremanager.daos;
+package org.phonestoremanager.repositories;
 
-import org.phonestoremanager.models.AccountModel;
 import org.phonestoremanager.models.EmployeeModel;
 import org.phonestoremanager.services.EmployeeService;
 import org.phonestoremanager.utils.DatabaseConnection;
@@ -9,7 +8,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EmployeeDAO {
+public class EmployeeRepository {
 
     public static int insert(EmployeeModel employeeModel, String userName) {
         DatabaseConnection databaseConnection = new DatabaseConnection();
@@ -30,7 +29,7 @@ public class EmployeeDAO {
         int row = 0;
         try (Connection conn = databaseConnection.connectionData()) {
             PreparedStatement st = conn.prepareStatement(sql);
-            st.setInt(1, AccountDAO.getAccountIdByUserName(userName));
+            st.setInt(1, AccountRepository.getAccountIdByUserName(userName));
             st.setString(2, employeeModel.getFirstName());
             st.setString(3, employeeModel.getLastName());
             st.setInt(4, employeeModel.getGender());

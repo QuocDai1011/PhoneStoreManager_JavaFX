@@ -1,8 +1,8 @@
-package org.phonestoremanager.daos;
+package org.phonestoremanager.repositories;
 
 import java.util.ArrayList;
 
-public interface DAOInterface<T> {
+public interface IRepository<T> {
     public ArrayList<T> selectAll();
 
     public ArrayList<T> selectDetailById();

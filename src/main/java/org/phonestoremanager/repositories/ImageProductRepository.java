@@ -1,4 +1,4 @@
-package org.phonestoremanager.daos;
+package org.phonestoremanager.repositories;
 
 import org.phonestoremanager.utils.DatabaseConnection;
 
@@ -9,9 +9,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ImageProductDAO {
-    public static ImageProductDAO getInstance() {
-        return new ImageProductDAO();
+public class ImageProductRepository {
+    public static ImageProductRepository getInstance() {
+        return new ImageProductRepository();
     }
 
     public List<String> getImageByProductID(int productID) {

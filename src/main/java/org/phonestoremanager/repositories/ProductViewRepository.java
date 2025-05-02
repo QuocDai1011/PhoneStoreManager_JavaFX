@@ -1,4 +1,4 @@
-package org.phonestoremanager.daos;
+package org.phonestoremanager.repositories;
 
 import org.phonestoremanager.models.ProductViewModel;
 import org.phonestoremanager.utils.DatabaseConnection;
@@ -8,9 +8,9 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-public class ProductViewDAO implements DAOInterface<ProductViewModel> {
-    public static ProductViewDAO getInstance() {
-        return new ProductViewDAO();
+public class ProductViewRepository implements IRepository<ProductViewModel> {
+    public static ProductViewRepository getInstance() {
+        return new ProductViewRepository();
     }
 
     public ArrayList<ProductViewModel> selectByBrand(String brand) {

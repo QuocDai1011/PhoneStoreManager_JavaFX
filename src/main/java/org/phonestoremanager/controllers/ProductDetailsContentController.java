@@ -10,7 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import org.phonestoremanager.daos.*;
+import org.phonestoremanager.repositories.*;
 import org.phonestoremanager.models.ProductSpecificationModel;
 import org.phonestoremanager.models.ProductViewModel;
 
@@ -60,7 +60,7 @@ public class ProductDetailsContentController {
     }
 
     public void setColorProduct(ProductViewModel product) {
-        List<String> colors = ProductColorDAO.getInstance().getColorByProductID(product.getProductID());
+        List<String> colors = ProductColorRepository.getInstance().getColorByProductID(product.getProductID());
 
         colorFlowPane.getChildren().clear();
         colorButtons.clear();
@@ -104,7 +104,7 @@ public class ProductDetailsContentController {
     }
 
     public void setROMProduct(ProductViewModel product) {
-        List<String> roms = ProductROMDAO.getInstance().getROMByProductID(product.getProductID());
+        List<String> roms = ProductROMRepository.getInstance().getROMByProductID(product.getProductID());
 
         romFlowPane.getChildren().clear();
         romButtons.clear();
@@ -144,7 +144,7 @@ public class ProductDetailsContentController {
 
     private void updateImageDisplay() {
         if (selectedColor != null && selectedROM != null) {
-            List<String> imageList = ImageProductDAO.getInstance()
+            List<String> imageList = ImageProductRepository.getInstance()
                     .getImageByProductIDColorAndROM(product.getProductID(), selectedColor, selectedROM);
 
             imageVBox.getChildren().clear();
@@ -170,7 +170,7 @@ public class ProductDetailsContentController {
     }
 
     public void displayProductOverview(ProductViewModel product) {
-        ProductSpecificationModel spec = ProductDetailDAO.getInstance().getDetailByProductID(product.getProductID());
+        ProductSpecificationModel spec = ProductDetailRepository.getInstance().getDetailByProductID(product.getProductID());
 
         Label nameChip = new Label("Tên chíp:");
         Label nameROMRAM = new Label("RAM + ROM:");

@@ -56,8 +56,8 @@ public class DatabaseConnection {
         }
     }
 
-    public static void main(String[] args) {
-       DatabaseConnection.createConnection();
-    }
+//    public static void main(String[] args) {
+//       DatabaseConnection.createConnection();
+//    }
 
 }

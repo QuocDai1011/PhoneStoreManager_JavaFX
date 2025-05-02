@@ -1,4 +1,4 @@
-package org.phonestoremanager.daos;
+package org.phonestoremanager.repositories;
 
 import org.phonestoremanager.utils.DatabaseConnection;
 
@@ -9,9 +9,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductColorDAO {
-    public static ProductColorDAO getInstance() {
-        return new ProductColorDAO();
+public class ProductColorRepository {
+    public static ProductColorRepository getInstance() {
+        return new ProductColorRepository();
     }
 
     public List<String> getColorByProductID(int productID) {

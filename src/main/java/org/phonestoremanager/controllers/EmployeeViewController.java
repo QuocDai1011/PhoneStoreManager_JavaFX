@@ -7,7 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import org.phonestoremanager.daos.EmployeeDAO;
+import org.phonestoremanager.repositories.EmployeeRepository;
 import org.phonestoremanager.models.EmployeeModel;
 
 import java.net.URL;
@@ -57,7 +57,7 @@ public class EmployeeViewController implements Initializable {
         columnPosition.setCellValueFactory(new PropertyValueFactory<>("position"));
         columnSalary.setCellValueFactory(new PropertyValueFactory<>("salary"));
 
-        render(EmployeeDAO.getAll());
+        render(EmployeeRepository.getAll());
     }
 
     public void render(List<EmployeeModel> list) {

@@ -7,7 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.FlowPane;
-import org.phonestoremanager.daos.ProductViewDAO;
+import org.phonestoremanager.repositories.ProductViewRepository;
 import org.phonestoremanager.models.ProductViewModel;
 
 import java.io.IOException;
@@ -50,7 +50,7 @@ public class ProductContentController {
         productContainer.getChildren().clear();
 
         // Lấy danh sách sản phẩm theo nhãn hàng
-        List<ProductViewModel> productViewModels = ProductViewDAO.getInstance().selectByBrand(brand);
+        List<ProductViewModel> productViewModels = ProductViewRepository.getInstance().selectByBrand(brand);
 
         // Hiển thị sản phẩm đã lọc
         for (ProductViewModel productViewModel : productViewModels) {
@@ -73,9 +73,9 @@ public class ProductContentController {
         List<ProductViewModel> productViewModels;
 
         if (keyword.isEmpty()) {
-            productViewModels = ProductViewDAO.getInstance().selectAll();
+            productViewModels = ProductViewRepository.getInstance().selectAll();
         } else {
-            productViewModels = ProductViewDAO.getInstance().searchByName(keyword);
+            productViewModels = ProductViewRepository.getInstance().searchByName(keyword);
         }
 
         for (ProductViewModel productViewModel : productViewModels) {
@@ -116,7 +116,7 @@ public class ProductContentController {
     }
 
     public void loadHomeView() {
-        List<ProductViewModel> productViewModels = ProductViewDAO.getInstance().selectAll();
+        List<ProductViewModel> productViewModels = ProductViewRepository.getInstance().selectAll();
 
         productContainer.setVgap(30);
         productContainer.setHgap(20);

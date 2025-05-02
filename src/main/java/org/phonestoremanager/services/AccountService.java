@@ -1,7 +1,7 @@
 package org.phonestoremanager.services;
 
-import org.phonestoremanager.daos.AccountDAO;
-import org.phonestoremanager.daos.RoleDAO;
+import org.phonestoremanager.repositories.AccountRepository;
+import org.phonestoremanager.repositories.RoleRepository;
 import org.phonestoremanager.models.AccountModel;
 import org.phonestoremanager.utils.PasswordEncrypt;
 import java.sql.SQLException;
@@ -25,7 +25,7 @@ public class AccountService {
             roleName = "KH";
         }
 
-        accountModel.setRoleID(RoleDAO.getRoleIDByRoleName(roleName));
+        accountModel.setRoleID(RoleRepository.getRoleIDByRoleName(roleName));
         accountModel.setUserName(userName);
         accountModel.setPassword(password);
 
@@ -34,7 +34,7 @@ public class AccountService {
     }
 
     public boolean checkAccountWhenLogIn(String userName, String password) throws SQLException {
-        ArrayList <String> result = AccountDAO.getUserNameAndPasswordByUserName(userName);
+        ArrayList <String> result = AccountRepository.getUserNameAndPasswordByUserName(userName);
 
         if (result.isEmpty()) return false;
 

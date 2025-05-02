@@ -1,4 +1,4 @@
-package org.phonestoremanager.daos;
+package org.phonestoremanager.repositories;
 
 import org.phonestoremanager.models.ProductSpecificationModel;
 import org.phonestoremanager.utils.DatabaseConnection;
@@ -8,9 +8,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class ProductDetailDAO {
-    public static ProductDetailDAO getInstance() {
-        return new ProductDetailDAO();
+public class ProductDetailRepository {
+    public static ProductDetailRepository getInstance() {
+        return new ProductDetailRepository();
     }
 
     public ProductSpecificationModel getDetailByProductID(int productID) {

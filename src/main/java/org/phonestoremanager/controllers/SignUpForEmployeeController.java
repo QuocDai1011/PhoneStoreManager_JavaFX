@@ -4,8 +4,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import org.phonestoremanager.daos.AccountDAO;
-import org.phonestoremanager.daos.EmployeeDAO;
+import org.phonestoremanager.repositories.AccountRepository;
+import org.phonestoremanager.repositories.EmployeeRepository;
 import org.phonestoremanager.exeptions.PasswordValidation;
 import org.phonestoremanager.exeptions.PhoneNumberValidation;
 import org.phonestoremanager.exeptions.StringValidation;
@@ -60,7 +60,7 @@ public class SignUpForEmployeeController {
         }
 
         //kiem tra username
-        if(AccountDAO.checkUsername(usernameValue)) {
+        if(AccountRepository.checkUsername(usernameValue)) {
             showAlert("ERROR", "Tên đăng nhập đã tồn tại!", Alert.AlertType.ERROR);
             return;
         }
@@ -119,8 +119,8 @@ public class SignUpForEmployeeController {
             message = messageAccount;
             showAlert("ERROR", message, Alert.AlertType.ERROR);
         }else {
-            int rowAccount = AccountDAO.insert(newAccount);
-            int rowEmployee = EmployeeDAO.insert(newEmployee, usernameValue);
+            int rowAccount = AccountRepository.insert(newAccount);
+            int rowEmployee = EmployeeRepository.insert(newEmployee, usernameValue);
             if(rowAccount > 0 && rowEmployee > 0) {
                 message = "Tạo tài khoản thành công!\n" + "Thêm dữ liệu nhân viên thành công!";
             }else {

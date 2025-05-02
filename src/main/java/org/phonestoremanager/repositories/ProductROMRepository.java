@@ -1,4 +1,4 @@
-package org.phonestoremanager.daos;
+package org.phonestoremanager.repositories;
 
 import org.phonestoremanager.utils.DatabaseConnection;
 
@@ -9,9 +9,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductROMDAO {
-    public static ProductROMDAO getInstance() {
-        return new ProductROMDAO();
+public class ProductROMRepository {
+    public static ProductROMRepository getInstance() {
+        return new ProductROMRepository();
     }
 
     public List<String> getROMByProductID(int productID) {

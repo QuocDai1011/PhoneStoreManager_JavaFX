@@ -12,11 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
-import org.phonestoremanager.daos.AccountDAO;
-import org.phonestoremanager.daos.RoleDAO;
 import org.phonestoremanager.services.AccountService;
-import org.phonestoremanager.utils.PasswordEncrypt;
-import org.phonestoremanager.views.SignUpForCustomerView;
 
 import java.io.IOException;
 import java.sql.SQLException;

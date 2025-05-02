@@ -1,4 +1,4 @@
-package org.phonestoremanager.daos;
+package org.phonestoremanager.repositories;
 
 import org.phonestoremanager.models.AccountModel;
 import org.phonestoremanager.utils.DatabaseConnection;
@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 
-public class AccountDAO {
+public class AccountRepository {
     public static int insert(AccountModel accountModel) {
         DatabaseConnection databaseConnection = new DatabaseConnection();
         int row = 0;
@@ -57,6 +57,7 @@ public class AccountDAO {
         }
         return accountID;
     }
+
     public static ArrayList<String> getUserNameAndPasswordByUserName(String userName) {
         DatabaseConnection databaseConnection = new DatabaseConnection();
         ArrayList<String> result = new ArrayList<>();
