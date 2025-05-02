@@ -7,6 +7,7 @@ module org.phonestoremanager {
     requires net.synedra.validatorfx;
     requires org.kordamp.ikonli.javafx;
     requires java.sql;
+    requires java.desktop;
 
     opens org.phonestoremanager to javafx.fxml;
     exports org.phonestoremanager;
