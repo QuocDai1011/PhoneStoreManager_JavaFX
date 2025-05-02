@@ -47,12 +47,15 @@ public class LogInController {
         boolean result = accountService.checkAccountWhenLogIn(userName, password);
         if(result) {
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/phonestoremanager/viewsfxml/home-view.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/phonestoremanager/viewsfxml/main-view.fxml"));
             Parent root = loader.load();
 
             Scene scene = new Scene(root);
+            scene.getStylesheets().add(getClass().getResource("/org/phonestoremanager/assets/css/Home.css").toExternalForm());
+            scene.getStylesheets().add(getClass().getResource("/org/phonestoremanager/assets/css/ContextMenu.css").toExternalForm());
             stage.setScene(scene);
             stage.setTitle("Trang chủ");
+            stage.centerOnScreen();
             stage.show();
         }
         else {
@@ -91,7 +94,7 @@ public class LogInController {
             boolean result = accountService.checkAccountWhenLogIn(userName, password);
             if(result) {
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/phonestoremanager/viewsfxml/home-view.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/phonestoremanager/viewsfxml/main-view.fxml"));
                 Parent root = loader.load();
 
                 Scene scene = new Scene(root);
@@ -99,6 +102,7 @@ public class LogInController {
                 stage.setTitle("Trang chủ");
                 scene.getStylesheets().add(getClass().getResource("/org/phonestoremanager/assets/css/Home.css").toExternalForm());
                 scene.getStylesheets().add(getClass().getResource("/org/phonestoremanager/assets/css/ContextMenu.css").toExternalForm());
+                stage.centerOnScreen();
                 stage.centerOnScreen();
                 stage.show();
             }

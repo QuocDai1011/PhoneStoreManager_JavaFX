@@ -3,7 +3,11 @@ package org.phonestoremanager.controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
@@ -11,8 +15,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Optional;
 
 public class MenuController {
 
@@ -104,6 +110,32 @@ public class MenuController {
         pane.setOnMouseClicked(e -> {
             if (e.getButton() == MouseButton.PRIMARY) {
                 menu.show(pane, e.getScreenX(), e.getScreenY());
+            }
+        });
+
+        LogOut.setOnAction(event -> {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Xác nhận đăng xuất");
+            alert.setHeaderText("Bạn có chắc chắn muốn đăng xuất?");
+            alert.setContentText("Hành động này sẽ đưa bạn về màn hình đăng nhập.");
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                // TODO: Chuyển về màn hình đăng nhập hoặc thoát ứng dụng
+                System.out.println("Đăng xuất thành công");
+
+                // Ví dụ: load lại giao diện đăng nhập
+                try {
+                    Parent root = FXMLLoader.load(getClass().getResource("/org/phonestoremanager/viewsfxml/Welcome.fxml"));
+                    Stage stage = (Stage) pane.getScene().getWindow();
+                    Scene scene = new Scene(root);
+                    scene.getStylesheets().add(getClass().getResource("/org/phonestoremanager/assets/css/Welcome.css").toExternalForm());
+                    stage.setScene(scene);
+                    stage.centerOnScreen();
+                    stage.show();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
