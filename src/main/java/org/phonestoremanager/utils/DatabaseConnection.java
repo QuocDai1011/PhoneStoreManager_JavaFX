@@ -32,9 +32,32 @@ public class DatabaseConnection {
         }
     }
 
+    public static Connection createConnection() {
+        Properties properties = new Properties();
+        try (InputStream input = DatabaseConnection.class.getClassLoader().getResourceAsStream("db.properties")) {
+            if (input == null) {
+                throw new RuntimeException("Không tìm thấy file db.properties");
+            }
+
+            // Load thông tin từ file db.properties
+            properties.load(input);
+            String url = properties.getProperty("db.url");
+            String user = properties.getProperty("db.user");
+            String password = properties.getProperty("db.password");
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+
+
+            // Kết nối database
+            System.out.println("ket noi thanh cong");
+            return DriverManager.getConnection(url, user, password);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     public static void main(String[] args) {
-        DatabaseConnection con = new DatabaseConnection();
-        con.connectionData();
+       DatabaseConnection.createConnection();
     }
 
 }

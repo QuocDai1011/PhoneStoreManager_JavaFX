@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -10,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="737.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="org.phonestoremanager.controllers.EmloyeeContentController">
+<AnchorPane prefHeight="600.0" prefWidth="813.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.phonestoremanager.controllers.EmployeeViewController">
     <children>
         <TextField layoutX="344.0" layoutY="24.0" prefHeight="30.0" prefWidth="222.0" promptText="Search" style="-fx-background-color: transparent; -fx-border-radius: 50px; -fx-border-color: #AEB2C3;">
             <font>
@@ -22,23 +21,24 @@
                 <Image url="@../../phonestoremanager/assets/image/search_icon.png" />
             </image>
         </ImageView>
-        <MenuButton layoutX="127.0" layoutY="24.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="83.0" text="Lọc">
-            <items>
-                <MenuItem mnemonicParsing="false" text="Iphone" />
-                <MenuItem mnemonicParsing="false" text="Samsung" />
-                <MenuItem mnemonicParsing="false" text="Oppo" />
-                <MenuItem mnemonicParsing="false" text="Realme" />
-            </items>
-            <font>
-                <Font name="Calibri Bold" size="18.0" />
-            </font>
-        </MenuButton>
-      <TableView layoutX="16.0" layoutY="92.0" prefHeight="459.0" prefWidth="706.0">
+      <TableView fx:id="tableView" layoutX="16.0" layoutY="92.0" prefHeight="459.0" prefWidth="787.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
+          <TableColumn fx:id="columnID" prefWidth="45.714324951171875" text="ID" />
+          <TableColumn fx:id="columnFirstname" prefWidth="110.28570556640625" text="Họ và tên đệm" />
+            <TableColumn fx:id="columnLastname" prefWidth="68.57147216796875" text="Tên" />
+            <TableColumn fx:id="columnGender" prefWidth="72.57147216796875" text="Giới tính" />
+            <TableColumn fx:id="columnEmail" prefWidth="109.14288330078125" text="Email" />
+            <TableColumn fx:id="columnPhonenumber" prefWidth="89.7142333984375" text="Số điện thoại" />
+            <TableColumn fx:id="columnAddress" prefWidth="140.57147216796875" text="Địa chỉ" />
+            <TableColumn fx:id="columnPosition" prefWidth="74.85711669921875" text="Vị trí" />
+            <TableColumn fx:id="columnSalary" prefWidth="72.0" text="Lương" />
         </columns>
       </TableView>
+      <Button layoutX="82.0" layoutY="30.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="96.0" text="Cập Nhật" textAlignment="CENTER">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
 
     </children>
 </AnchorPane>

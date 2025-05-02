@@ -2,9 +2,12 @@ package org.phonestoremanager.daos;
 
 import org.phonestoremanager.models.AccountModel;
 import org.phonestoremanager.models.EmployeeModel;
+import org.phonestoremanager.services.EmployeeService;
 import org.phonestoremanager.utils.DatabaseConnection;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class EmployeeDAO {
 
@@ -42,5 +45,24 @@ public class EmployeeDAO {
         }
         return row;
     }
+
+    public static List<EmployeeModel> getAll() {
+        List<EmployeeModel> list = new ArrayList<>();
+        String sql = "SELECT * FROM EmployeeProfile;";
+
+        try(Connection con = DatabaseConnection.createConnection()) {
+            PreparedStatement st = con.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            while(rs.next()) {
+                EmployeeModel employeeModel = EmployeeService.createByResultSet(rs);
+                list.add(employeeModel);
+            }
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println(list.size());
+        return list;
+    }
+
 
 }

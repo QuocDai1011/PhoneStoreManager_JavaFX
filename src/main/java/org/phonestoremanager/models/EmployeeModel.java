@@ -6,6 +6,7 @@ public class EmployeeModel {
     private String firstName;
     private String lastName;
     private int gender;
+    private String genderText;
     private String email;
     private String phoneNumber;
     private String address;
@@ -38,6 +39,28 @@ public class EmployeeModel {
         this.position = position;
         this.salary = salary;
         this.employeeID = employeeID;
+    }
+
+    public EmployeeModel(int employeeID, int accountID, String firstName, String lastName, int gender, String genderText, String email, String phoneNumber, String address, String position, double salary) {
+        this.employeeID = employeeID;
+        this.accountID = accountID;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.gender = gender;
+        this.genderText = genderText;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
+        this.position = position;
+        this.salary = salary;
+    }
+
+    public String getGenderText() {
+        return genderText;
+    }
+
+    public void setGenderText(String genderText) {
+        this.genderText = genderText;
     }
 
     public int getEmployeeID() {

@@ -13,4 +13,5 @@ module org.phonestoremanager {
 
     opens org.phonestoremanager.views to javafx.graphics;
     opens org.phonestoremanager.controllers to javafx.fxml;
+    opens org.phonestoremanager.models to javafx.base;
 }

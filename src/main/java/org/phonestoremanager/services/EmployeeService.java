@@ -2,6 +2,9 @@ package org.phonestoremanager.services;
 
 import org.phonestoremanager.models.EmployeeModel;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 public class EmployeeService {
 
     public String createNewEmployee(String firstNameValue, String lastNameValue, String emailValue, String phoneNumberValue,
@@ -43,5 +46,23 @@ public class EmployeeService {
 
         return "success";
 
+    }
+
+    public static EmployeeModel createByResultSet(ResultSet rs) throws SQLException {
+        EmployeeModel employeeModel = new EmployeeModel();
+        employeeModel.setEmployeeID(rs.getInt("EmployeeID"));
+        employeeModel.setFirstName(rs.getString("FirstName"));
+        employeeModel.setLastName(rs.getString("LastName"));
+        if(rs.getInt("Gender") == 0) {
+            employeeModel.setGenderText("Nữ");
+        }else {
+            employeeModel.setGenderText("Nam");
+        }
+        employeeModel.setEmail(rs.getString("Email"));
+        employeeModel.setPhoneNumber(rs.getString("PhoneNumber"));
+        employeeModel.setAddress(rs.getString("Address"));
+        employeeModel.setPosition(rs.getString("Position"));
+        employeeModel.setSalary(rs.getDouble("Salary"));
+        return employeeModel;
     }
 }
