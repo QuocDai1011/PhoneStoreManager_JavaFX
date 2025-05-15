@@ -2,6 +2,8 @@ package org.phonestoremanager.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
 public class AddEmployeeController {
@@ -19,6 +21,8 @@ public class AddEmployeeController {
     @FXML private PasswordField txtPassword;
     @FXML private Button btnTogglePassword;
     @FXML private Button btnSave, btnReset, btnCancel;
+    @FXML private TextField txtPasswordVisible;             // icon con mắt để đổi giữa ẩn/hiện
+
 
     private boolean passwordVisible = false;
 
@@ -33,13 +37,30 @@ public class AddEmployeeController {
         btnCancel.setOnAction(e -> btnCancel.getScene().getWindow().hide());
     }
 
+    @FXML
     private void togglePasswordVisibility() {
-        // Placeholder: Có thể triển khai hiển thị mật khẩu bằng cách thay đổi PasswordField thành TextField
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Chức năng ẩn/hiện mật khẩu");
-        alert.setHeaderText(null);
-        alert.setContentText("Chức năng đang được phát triển. Bạn có thể dùng icon để chuyển TextField <-> PasswordField.");
-        alert.showAndWait();
+        if (passwordVisible) {
+            // Ẩn mật khẩu
+            txtPassword.setText(txtPasswordVisible.getText());
+            txtPassword.setVisible(true);
+            txtPassword.setManaged(true);
+
+            txtPasswordVisible.setVisible(false);
+            txtPasswordVisible.setManaged(false);
+
+            btnTogglePassword.setText("👁"); // Biểu tượng hiện mật khẩu
+        } else {
+            // Hiện mật khẩu
+            txtPasswordVisible.setText(txtPassword.getText());
+            txtPasswordVisible.setVisible(true);
+            txtPasswordVisible.setManaged(true);
+
+            txtPassword.setVisible(false);
+            txtPassword.setManaged(false);
+
+            btnTogglePassword.setText("🙈"); // Biểu tượng ẩn mật khẩu
+        }
+        passwordVisible = !passwordVisible;
     }
 
     private void handleSave() {
