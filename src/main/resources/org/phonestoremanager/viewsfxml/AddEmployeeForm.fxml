@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="org.phonestoremanager.controllers.AddEmployeeController">
+<!--            stylesheets="@/org/phonestoremanager/assets/css/add_employee_style.css">-->
+
+    <center>
+        <VBox alignment="TOP_CENTER" spacing="10">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+
+            <Label text="Thêm / Sửa Nhân Viên" styleClass="form-title"/>
+
+            <GridPane hgap="15" vgap="12">
+                <columnConstraints>
+                    <ColumnConstraints percentWidth="30"/>
+                    <ColumnConstraints percentWidth="70"/>
+                </columnConstraints>
+
+                <!-- Họ -->
+                <Label text="Họ và tên đệm:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                <TextField fx:id="txtLastName" promptText="VD: Nguyen Van" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                <!-- Tên -->
+                <Label text="Tên:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                <TextField fx:id="txtFirstName" promptText="VD: An" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                <!-- Giới tính -->
+                <Label text="Giới tính:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                <ComboBox fx:id="cbGender" GridPane.rowIndex="2" GridPane.columnIndex="1">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="Nam"/>
+                            <String fx:value="Nữ"/>
+                        </FXCollections>
+                    </items>
+                </ComboBox>
+
+                <!-- Email -->
+                <Label text="Email:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                <TextField fx:id="txtEmail" promptText="example@email.com" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+                <!-- SĐT -->
+                <Label text="Số điện thoại:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                <TextField fx:id="txtPhone" promptText="Số bắt đầu bằng 0" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+
+                <!-- Địa chỉ -->
+                <Label text="Địa chỉ:" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+                <TextField fx:id="txtAddress" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+
+                <!-- Vị trí -->
+                <Label text="Vị trí:" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+                <ComboBox fx:id="cbPosition" GridPane.rowIndex="6" GridPane.columnIndex="1">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="Nhân viên"/>
+                            <String fx:value="Admin"/>
+                        </FXCollections>
+                    </items>
+                </ComboBox>
+
+                <!-- Lương -->
+                <Label text="Lương:" GridPane.rowIndex="7" GridPane.columnIndex="0"/>
+                <TextField fx:id="txtSalary" promptText="Chỉ nhập số" GridPane.rowIndex="7" GridPane.columnIndex="1"/>
+
+                <!-- Role -->
+                <Label text="Role:" GridPane.rowIndex="8" GridPane.columnIndex="0"/>
+                <ComboBox fx:id="cbRole" GridPane.rowIndex="8" GridPane.columnIndex="1">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="Nhân viên"/>
+                            <String fx:value="Admin"/>
+                        </FXCollections>
+                    </items>
+                </ComboBox>
+
+                <!-- Username -->
+                <Label text="Username:" GridPane.rowIndex="9" GridPane.columnIndex="0"/>
+                <TextField fx:id="txtUsername" GridPane.rowIndex="9" GridPane.columnIndex="1"/>
+
+                <!-- Password -->
+                <Label text="Password:" GridPane.rowIndex="10" GridPane.columnIndex="0"/>
+                <HBox spacing="5" GridPane.rowIndex="10" GridPane.columnIndex="1">
+                    <PasswordField fx:id="txtPassword" promptText="Tối thiểu 8 ký tự" HBox.hgrow="ALWAYS"/>
+                    <Button fx:id="btnTogglePassword" text="👁"/>
+                </HBox>
+            </GridPane>
+
+            <HBox spacing="15" alignment="CENTER">
+                <Button fx:id="btnSave" text="Lưu" styleClass="action-button"/>
+                <Button fx:id="btnReset" text="Reset"/>
+                <Button fx:id="btnCancel" text="Hủy"/>
+            </HBox>
+        </VBox>
+    </center>
+</BorderPane>

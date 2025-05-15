@@ -1,0 +1,34 @@
+
+.root {
+    -fx-font-family: "Segoe UI", sans-serif;
+    -fx-font-size: 14px;
+    -fx-background-color: #f9f9f9;
+}
+
+.label {
+    -fx-font-weight: bold;
+}
+
+.form-title {
+    -fx-font-size: 22px;
+    -fx-text-fill: #2c3e50;
+    -fx-padding: 0 0 10 0;
+}
+
+.text-field, .password-field, .combo-box {
+    -fx-pref-width: 250px;
+}
+
+.button {
+    -fx-cursor: hand;
+}
+
+.action-button {
+    -fx-background-color: #3498db;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.action-button:hover {
+    -fx-background-color: #2980b9;
+}
