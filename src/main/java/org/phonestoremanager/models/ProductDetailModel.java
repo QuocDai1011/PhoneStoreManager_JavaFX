@@ -9,7 +9,7 @@ public class ProductDetailModel {
     private float screenSize;
     private String screenParameters;
     private float batteryCapacity;
-    private String color;
+    private int colorID;
     private String image;
     private String description;
     private double price;
@@ -22,7 +22,7 @@ public class ProductDetailModel {
     public ProductDetailModel() {
     }
 
-    public ProductDetailModel(int productDetailID, int productID, int ram, int rom, String chip, float screenSize, String screenParameters, float batteryCapacity, String color, String image, String description, double price, int stockQuantity, String cameraFront, String cameraRear, String screenTechnology, String scanFrequency) {
+    public ProductDetailModel(int productDetailID, int productID, int ram, int rom, String chip, float screenSize, String screenParameters, float batteryCapacity, int colorID, String image, String description, double price, int stockQuantity, String cameraFront, String cameraRear, String screenTechnology, String scanFrequency) {
         this.productDetailID = productDetailID;
         this.productID = productID;
         this.ram = ram;
@@ -31,7 +31,7 @@ public class ProductDetailModel {
         this.screenSize = screenSize;
         this.screenParameters = screenParameters;
         this.batteryCapacity = batteryCapacity;
-        this.color = color;
+        this.colorID = colorID;
         this.image = image;
         this.description = description;
         this.price = price;
@@ -106,12 +106,12 @@ public class ProductDetailModel {
         this.batteryCapacity = batteryCapacity;
     }
 
-    public String getColor() {
-        return color;
+    public int getColor() {
+        return colorID;
     }
 
-    public void setColor(String color) {
-        this.color = color;
+    public void setColor(int colorID) {
+        this.colorID = colorID;
     }
 
     public String getImage() {

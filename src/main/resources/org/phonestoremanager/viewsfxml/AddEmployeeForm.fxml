@@ -16,20 +16,19 @@
 <?import javafx.scene.layout.VBox?>
 
 <BorderPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.phonestoremanager.controllers.AddEmployeeController">
-<!--            stylesheets="@/org/phonestoremanager/assets/css/add_employee_style.css">-->
 
     <center>
-        <VBox alignment="TOP_CENTER" prefHeight="573.0" prefWidth="501.0" spacing="10">
+        <VBox alignment="TOP_CENTER" spacing="10">
             <padding>
-                <Insets bottom="20" left="20" right="20" top="20" />
+                <Insets bottom="30" left="20" right="20" top="30" />
             </padding>
 
             <Label styleClass="form-title" text="Thêm / Sửa Nhân Viên" />
 
             <GridPane hgap="15" vgap="12">
                 <columnConstraints>
-                    <ColumnConstraints percentWidth="30" />
-                    <ColumnConstraints percentWidth="70" />
+                    <ColumnConstraints percentWidth="35" />
+                    <ColumnConstraints percentWidth="65" />
                 </columnConstraints>
 
                 <!-- Họ -->
@@ -42,14 +41,16 @@
 
                 <!-- Giới tính -->
                 <Label text="Giới tính:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-                <ComboBox fx:id="cbGender" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                    <items>
-                        <FXCollections fx:factory="observableArrayList">
-                            <String fx:value="Nam" />
-                            <String fx:value="Nữ" />
-                        </FXCollections>
-                    </items>
-                </ComboBox>
+                <HBox alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                    <ComboBox fx:id="cbGender" maxWidth="100" styleClass="combo-box">
+                        <items>
+                            <FXCollections fx:factory="observableArrayList">
+                                <String fx:value="Nam" />
+                                <String fx:value="Nữ" />
+                            </FXCollections>
+                        </items>
+                    </ComboBox>
+                </HBox>
 
                 <!-- Email -->
                 <Label text="Email:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
@@ -65,43 +66,33 @@
 
                 <!-- Vị trí -->
                 <Label text="Vị trí:" GridPane.columnIndex="0" GridPane.rowIndex="6" />
-                <ComboBox fx:id="cbPosition" GridPane.columnIndex="1" GridPane.rowIndex="6">
-                    <items>
-                        <FXCollections fx:factory="observableArrayList">
-                            <String fx:value="Nhân viên" />
-                            <String fx:value="Admin" />
-                        </FXCollections>
-                    </items>
-                </ComboBox>
+                <HBox alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                    <ComboBox fx:id="cbPosition" maxWidth="130">
+                        <items>
+                            <FXCollections fx:factory="observableArrayList">
+                                <String fx:value="Nhân viên" />
+                                <String fx:value="Admin" />
+                            </FXCollections>
+                        </items>
+                    </ComboBox>
+                </HBox>
 
                 <!-- Lương -->
                 <Label text="Lương:" GridPane.columnIndex="0" GridPane.rowIndex="7" />
                 <TextField fx:id="txtSalary" promptText="Chỉ nhập số" GridPane.columnIndex="1" GridPane.rowIndex="7" />
 
-                <!-- Role -->
-                <Label text="Role:" GridPane.columnIndex="0" GridPane.rowIndex="8" />
-                <ComboBox fx:id="cbRole" GridPane.columnIndex="1" GridPane.rowIndex="8">
-                    <items>
-                        <FXCollections fx:factory="observableArrayList">
-                            <String fx:value="Nhân viên" />
-                            <String fx:value="Admin" />
-                        </FXCollections>
-                    </items>
-                </ComboBox>
-
                 <!-- Username -->
-                <Label text="Username:" GridPane.columnIndex="0" GridPane.rowIndex="9" />
-                <TextField fx:id="txtUsername" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                <Label text="Username:" GridPane.columnIndex="0" GridPane.rowIndex="8" />
+                <TextField fx:id="txtUsername" GridPane.columnIndex="1" GridPane.rowIndex="8" />
 
                 <!-- Password -->
-                <Label text="Password:" GridPane.columnIndex="0" GridPane.rowIndex="10" />
-                <HBox spacing="5" GridPane.columnIndex="1" GridPane.rowIndex="10">
+                <Label text="Password:" GridPane.columnIndex="0" GridPane.rowIndex="9" />
+                <HBox spacing="5" GridPane.columnIndex="1" GridPane.rowIndex="9">
                     <PasswordField fx:id="txtPassword" promptText="Tối thiểu 8 ký tự" HBox.hgrow="ALWAYS" />
-                    <TextField fx:id="txtPasswordVisible" managed="false" promptText="Tối thiểu 8 ký tự" visible="false" />
-                    <Button fx:id="btnTogglePassword" prefHeight="25.0" prefWidth="42.0" text="👁" />
+                    <TextField fx:id="txtPasswordVisible" managed="false" visible="false" promptText="Mật khẩu" HBox.hgrow="ALWAYS"/>
+                    <Button fx:id="btnTogglePassword" text="👁" />
                 </HBox>
             <rowConstraints>
-               <RowConstraints />
                <RowConstraints />
                <RowConstraints />
                <RowConstraints />
@@ -117,8 +108,8 @@
 
             <HBox alignment="CENTER" spacing="15">
                 <Button fx:id="btnSave" styleClass="action-button" text="Lưu" />
-                <Button fx:id="btnReset" text="Reset" />
-                <Button fx:id="btnCancel" text="Hủy" />
+                <Button fx:id="btnReset" styleClass="secondary-button" text="Reset" />
+                <Button fx:id="btnCancel" styleClass="secondary-button" text="Hủy" />
             </HBox>
         </VBox>
     </center>

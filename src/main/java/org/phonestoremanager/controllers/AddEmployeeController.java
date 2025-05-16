@@ -2,8 +2,6 @@ package org.phonestoremanager.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
 public class AddEmployeeController {
@@ -29,8 +27,6 @@ public class AddEmployeeController {
     public void initialize() {
         cbGender.getSelectionModel().selectFirst();
         cbPosition.getSelectionModel().select("Nhân viên");
-        cbRole.getSelectionModel().select("Nhân viên");
-
         btnTogglePassword.setOnAction(e -> togglePasswordVisibility());
         btnSave.setOnAction(e -> handleSave());
         btnReset.setOnAction(e -> resetForm());

@@ -36,30 +36,27 @@ public class ImageProductRepository {
         return imageList;
     }
 
-    public List<String> getImageByProductIDColorAndROM(int productID, String color, String rom) {
+    public List<String> getImageByProductIDColorIDAndROM(int productID, int colorID, String rom) {
         DatabaseConnection databaseConnection = new DatabaseConnection();
         List<String> imageList = new ArrayList<>();
-        String query = "SELECT Image FROM ProductDetail\n" +
-                "WHERE ProductID = ? AND Color = ? AND Rom = ?;";
+        String query = "SELECT Image FROM ProductDetail pd\n" +
+                "JOIN ColorOfProduct cp ON cp.ColorOfProductID = pd.ColorID\n" +
+                "WHERE pd.ProductID = ? AND pd.Rom = ? AND cp.ColorOfProductID = ?;";
 
         try (Connection conn = databaseConnection.connectionData();
              PreparedStatement stmt = conn.prepareStatement(query)) {
 
             stmt.setInt(1, productID);
-            stmt.setString(2, color);  // Không cần dấu nháy đơn quanh "color"
-            stmt.setString(3, rom);
+            stmt.setString(2, rom);
+            stmt.setInt(3, colorID);  // Không cần dấu nháy đơn quanh "color"
 
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 imageList.add(rs.getString("Image"));
             }
-
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        };
-
+        }
         return imageList;
     }
-
-
 }
