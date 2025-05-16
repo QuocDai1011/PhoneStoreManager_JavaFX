@@ -2,7 +2,6 @@ package org.phonestoremanager.controllers;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.HPos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -37,7 +36,8 @@ public class ProductDetailsContentController {
 
     private ProductViewModel product;
 
-    private String selectedColor = null;
+    private int selectedColorID;
+    private String selectedNameColor = null;
     private String selectedROM = null;
 
     private List<Button> colorButtons = new ArrayList<>();
@@ -52,38 +52,38 @@ public class ProductDetailsContentController {
             MenuController menuController = loader.getController();
             menuController.home(null);
 
-            Scene scene = btn_back.getScene();;
+            Scene scene = btn_back.getScene();
             scene.setRoot(parent);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public void setColorProduct(ProductViewModel product) {
-        List<String> colors = ProductColorRepository.getInstance().getColorByProductID(product.getProductID());
+    public void setNameColorProduct(ProductViewModel product) {
+        List<String> nameColors = ProductColorRepository.getInstance().getNameColorByProductID(product.getProductID());
 
         colorFlowPane.getChildren().clear();
         colorButtons.clear();
 
         // Sử dụng Set để lưu trữ tên màu đã gặp
-        Set<String> uniqueColors = new HashSet<>();
+        Set<String> uniqueNameColors = new HashSet<>();
 
-        for (String color : colors) {
+        for (String nameColor : nameColors) {
             // Kiểm tra xem màu này đã tồn tại trong Set chưa
-            if (uniqueColors.contains(color)) {
+            if (uniqueNameColors.contains(nameColor)) {
                 continue;  // Nếu đã có, bỏ qua màu này
             }
 
             // Nếu chưa có, thêm màu vào Set và tạo button
-            uniqueColors.add(color);
+            uniqueNameColors.add(nameColor);
 
-            Button colorButton = new Button(color);  // Gán tên màu vào text của button
+            Button colorButton = new Button(nameColor);  // Gán tên màu vào text của button
             colorButton.setPrefSize(80, 30);  // Cài đặt kích thước của nút
 
             colorButton.getStyleClass().add("color-button");
 
             colorButton.setOnAction(e -> {
-                selectedColor = color;
+                selectedNameColor = nameColor;
 
                 for(Button b : colorButtons) {
                     b.getStyleClass().remove("selected-button");
@@ -153,14 +153,24 @@ public class ProductDetailsContentController {
     }
 
     private void updateImageDisplay() {
-        if (selectedColor != null && selectedROM != null) {
+        // Truy xuất ColorID từ NameColor để hiển thị hình ảnh
+        selectedColorID = ProductColorRepository.getInstance().getColorIDByProductIDAndNameColor(product.getProductID(), selectedNameColor);
+        if (selectedNameColor != null && selectedROM != null) {
             List<String> imageList = ImageProductRepository.getInstance()
-                    .getImageByProductIDColorAndROM(product.getProductID(), selectedColor, selectedROM);
+                    .getImageByProductIDColorIDAndROM(product.getProductID(), selectedColorID, selectedROM);
 
             imageVBox.getChildren().clear();
 
+//            System.out.println("ProductID: " + product.getProductID());
+//            System.out.println("ColorID: " + selectedColorID);
+//            System.out.println("ROM: " + selectedROM);
+//            System.out.println("Số ảnh tìm được: " + imageList.size());
+
             for (String imagePath : imageList) {
                 URL imageUrl = getClass().getResource("/org/phonestoremanager/assets/image/" + imagePath);
+
+//                System.out.println("selectedNameColor = " + selectedNameColor + ", selectedROM = " + selectedROM);
+
                 if (imageUrl != null) {
                     Image image = new Image(imageUrl.toExternalForm());
                     ImageView imageView = new ImageView(image);
@@ -172,6 +182,8 @@ public class ProductDetailsContentController {
                     stackPane.getStyleClass().add("image-wrapper");
 
                     imageVBox.getChildren().add(stackPane);
+
+                    System.out.println(imageUrl);
                 } else {
                     System.err.println("Không tìm thấy ảnh: " + imagePath);
                 }
@@ -260,9 +272,9 @@ public class ProductDetailsContentController {
 
     private void showProductDetails() {
         // Hiển thị dữ liệu product vào các label/textfield
-        setColorProduct(product);
-        setROMProduct(product);
         updateImageDisplay();
+        setNameColorProduct(product);
+        setROMProduct(product);
         displayProductOverview(product, Integer.parseInt(selectedROM));
     }
 }

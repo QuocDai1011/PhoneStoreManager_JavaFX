@@ -14,10 +14,34 @@ public class ProductColorRepository {
         return new ProductColorRepository();
     }
 
-    public List<String> getColorByProductID(int productID) {
+    public int getColorIDByProductIDAndNameColor (int productID, String nameColor) {
+        List<Integer> colorIDs = new ArrayList<>();
+        String sql = "SELECT ColorOfProductID FROM ColorOfProduct cp\n" +
+                "JOIN ProductDetail pd ON pd.ColorID = cp.ColorOfProductID\n" +
+                "WHERE pd.ProductID = ? AND cp.NameColor = ?;";
+        try(Connection connection = DatabaseConnection.createConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+
+            preparedStatement.setInt(1, productID);
+            preparedStatement.setNString(2, nameColor);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                return resultSet.getInt("ColorOfProductID");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return 0;
+    }
+
+    public List<String> getNameColorByProductID(int productID) {
         DatabaseConnection databaseConnection = new DatabaseConnection();
-        List<String> colors = new ArrayList<>();
-        String sql = "SELECT Color FROM ProductDetail\n" +
+        List<String> nameColors = new ArrayList<>();
+        String sql = "SELECT NameColor FROM ColorOfProduct cp\n" +
+                "JOIN ProductDetail pd ON pd.ColorID = cp.ColorOfProductID\n" +
                 "WHERE ProductID = ?";
 
         try(Connection connection = databaseConnection.connectionData();
@@ -27,12 +51,12 @@ public class ProductColorRepository {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
-                colors.add(resultSet.getString("color"));
+                nameColors.add(resultSet.getString("NameColor"));
             }
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return colors;
+        return nameColors;
     }
 }

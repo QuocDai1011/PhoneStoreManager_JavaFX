@@ -1,0 +1,132 @@
+.root {
+    -fx-font-family: "Segoe UI", sans-serif;
+    -fx-font-size: 14px;
+    -fx-background-color: #fffaf4; /* màu nền nhẹ tông cam */
+}
+
+.label {
+    -fx-font-weight: bold;
+    -fx-text-fill: #333;
+}
+
+.form-title {
+    -fx-font-size: 24px;
+    -fx-text-fill: #e67e22; /* cam đậm */
+    -fx-padding: 0 0 20 0;
+    -fx-font-weight: bold;
+}
+
+.text-field, .password-field, .combo-box {
+    -fx-pref-width: 300px;
+    -fx-padding: 8px;
+    -fx-background-color: white;
+    -fx-border-color: #e67e22;
+    -fx-border-radius: 4px;
+    -fx-background-radius: 4px;
+    -fx-border-width: 1px;
+}
+
+.text-field:focused, .password-field:focused, .combo-box:focused {
+    -fx-border-color: #d35400;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 2);
+}
+
+.button {
+    -fx-cursor: hand;
+    -fx-padding: 10px 16px;
+    -fx-font-size: 14px;
+    -fx-border-radius: 6px;
+    -fx-background-radius: 6px;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 2, 0, 0, 1);
+}
+
+.action-button {
+    -fx-background-color: #e67e22;
+    -fx-text-fill: white;
+}
+
+.action-button:hover {
+    -fx-background-color: #d35400;
+}
+
+.secondary-button {
+    -fx-background-color: transparent;
+    -fx-border-color: #e67e22;
+    -fx-text-fill: #e67e22;
+    -fx-border-width: 1px;
+}
+
+.secondary-button:hover {
+    -fx-background-color: #fdebd0;
+}
+
+.card {
+    -fx-background-color: white;
+    -fx-padding: 16px;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-border-color: #f0f0f0;
+    -fx-border-width: 1px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 5, 0, 0, 2);
+}
+
+.combo-box {
+    -fx-background-color: white;
+    -fx-border-color: #e67e22;
+    -fx-border-radius: 5;
+    -fx-padding: 4 6;
+}
+
+.combo-box .list-cell {
+    -fx-text-fill: #2c3e50;
+}
+
+/* Định dạng cho ComboBox */
+.combo-box {
+    -fx-background-color: #fff7e6;  /* Màu nền nhẹ nhàng, giống màu cam nhạt */
+    -fx-text-fill: #333333;          /* Màu chữ */
+    -fx-border-radius: 5;           /* Bo tròn góc */
+    -fx-padding: 5px;                /* Khoảng cách giữa văn bản và viền */
+    -fx-font-size: 14px;             /* Kích thước chữ */
+    -fx-border-color: #ff6a00;      /* Màu viền cam Shopee */
+    -fx-border-width: 2px;          /* Độ dày của viền */
+}
+
+/* Hiệu ứng khi di chuột qua ComboBox */
+.combo-box:hover {
+    -fx-background-color: #ffe0b3;  /* Màu nền khi di chuột qua (cam nhạt hơn) */
+    -fx-border-color: #ff6a00;      /* Màu viền vẫn là cam Shopee */
+}
+
+/* Định dạng cho ComboBox khi đang chọn */
+.combo-box:focused {
+    -fx-background-color: #ffffff;  /* Màu nền trắng khi ComboBox được chọn */
+    -fx-border-color: #ff6a00;      /* Màu viền cam Shopee khi chọn */
+}
+
+/* Định dạng cho các item trong ComboBox */
+.combo-box .list-cell {
+    -fx-background-color: transparent;  /* Màu nền trong khi chưa chọn */
+    -fx-text-fill: #333333;             /* Màu chữ */
+}
+
+/* Hiệu ứng khi di chuột qua các item trong ComboBox */
+.combo-box .list-cell:hover {
+    -fx-background-color: #ffebcc;     /* Màu nền của item khi di chuột qua (cam sáng) */
+    -fx-text-fill: #ff6a00;             /* Màu chữ khi di chuột qua item */
+}
+
+/* Định dạng cho ComboBox khi không có item được chọn */
+.combo-box .empty-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: #cccccc;            /* Màu chữ cho item trống */
+}
+
+/* Hiệu ứng khi ComboBox đang mở */
+.combo-box .arrow {
+    -fx-background-color: transparent;
+    -fx-background-image: url('arrow-icon.png');  /* Bạn có thể thay đổi với hình ảnh mũi tên */
+}
+
+
