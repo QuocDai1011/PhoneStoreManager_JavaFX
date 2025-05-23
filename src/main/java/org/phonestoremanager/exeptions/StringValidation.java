@@ -11,7 +11,7 @@ public class StringValidation {
 
     public static void main(String[] args) {
         try {
-            validateString("Dinh");
+            validateString("Đinh");
             System.out.println("Ok");
             return;// Lỗi
         } catch (IllegalArgumentException e) {

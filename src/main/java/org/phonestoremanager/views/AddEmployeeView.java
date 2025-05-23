@@ -15,7 +15,6 @@ public class AddEmployeeView extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        //FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/org/phonestoremanager/viewsfxml/Welcome.fxml"));
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/org/phonestoremanager/viewsfxml/AddEmployeeForm.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         scene.getStylesheets().add(getClass().getResource("/org/phonestoremanager/assets/css/add_employee_style.css").toExternalForm());

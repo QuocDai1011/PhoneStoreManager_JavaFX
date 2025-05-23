@@ -2,6 +2,7 @@ package org.phonestoremanager.repositories;
 
 import org.phonestoremanager.models.AccountModel;
 import org.phonestoremanager.utils.DatabaseConnection;
+import org.phonestoremanager.utils.DateUtil;
 import org.phonestoremanager.utils.PasswordEncrypt;
 
 import java.sql.Connection;
@@ -119,4 +120,46 @@ public class AccountRepository {
         }
         return false;
     }
+
+    public static int update(AccountModel accountModel) {
+        String sql = "UPDATE [dbo].[Account]\n" +
+                "   SET [RoleID] = ?\n" +
+                "      ,[Password] = ?\n" +
+                "      ,[UpdateAt] = ?\n" +
+                " WHERE AccountID = ?;";
+
+        int accountID = AccountRepository.getAccountIdByUserName(accountModel.getUserName());
+
+        try (Connection conn = DatabaseConnection.createConnection()) {
+            assert conn != null;
+            PreparedStatement st = conn.prepareStatement(sql);
+            st.setInt(1, accountModel.getRoleID());
+            st.setString(2, PasswordEncrypt.encryptAES(accountModel.getPassword()));
+            st.setString(3, DateUtil.getCurrentDate());
+            st.setInt(4, accountID);
+            return st.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return 0;
+    }
+
+    public static int delete(String username) {
+        String sql = "DELETE FROM [dbo].[Account]\n" +
+                "      WHERE AccountID = ?;";
+
+        int accountID = AccountRepository.getAccountIdByUserName(username);
+
+        try (Connection conn = DatabaseConnection.createConnection()) {
+            assert conn != null;
+            PreparedStatement st = conn.prepareStatement(sql);
+            st.setInt(1, accountID);
+            return st.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
 }
