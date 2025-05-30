@@ -1,0 +1,96 @@
+/* Font mặc định */
+.root {
+    -fx-font-family: "Calibri";
+}
+
+/* AnchorPane tổng thể */
+.anchor-pane {
+    -fx-background-color: #FFF8F5; /* nền nhẹ để nổi bật tone cam */
+}
+
+/* ====================== TEXTFIELD ====================== */
+
+/* TextField Search */
+.text-field {
+    -fx-border-color: #FF5722;
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
+    -fx-padding: 5 10 5 10;
+    -fx-text-fill: #333;
+    -fx-prompt-text-fill: #999;
+    -fx-background-color: transparent;
+    -fx-border-width: 2px;
+    -fx-cursor: text;
+    -fx-font-size: 16px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 5, 0, 0, 1);
+}
+
+.text-field:hover {
+    -fx-border-color: #e64a19;
+}
+
+/* ====================== BUTTON ====================== */
+
+.button, .button:focused {
+    -fx-background-color: #FF5722;
+    -fx-text-fill: white;
+    -fx-background-radius: 20;
+    -fx-cursor: hand;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 1);
+}
+
+.button:hover {
+    -fx-background-color: #e64a19;
+}
+
+/* ====================== IMAGEVIEW ====================== */
+
+.image-view:hover {
+    -fx-opacity: 0.7;
+}
+
+/* ====================== TABLEVIEW ====================== */
+
+.table-view {
+    -fx-border-color: #FF5722;
+    -fx-border-width: 2;
+    -fx-background-color: white;
+    -fx-table-cell-border-color: #f3f3f3;
+    -fx-padding: 5;
+}
+
+/* Header background */
+.table-view .column-header-background {
+    -fx-background-color: #FF5722;
+}
+
+/* Header text */
+.table-view .label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+/* Kích thước header */
+.table-view .column-header,
+.table-view .filler {
+    -fx-size: 30px;
+    -fx-background-color: transparent;
+}
+
+/* Hover row */
+.table-row-cell:hover {
+    -fx-background-color: #FFF3EE;
+}
+
+/* Row selected */
+.table-row-cell:filled:selected,
+.table-row-cell:filled:selected:hover {
+    -fx-background-color: #FFE2D6;
+}
+
+/* Row selected - chữ */
+.table-row-cell:filled:selected .text {
+    -fx-fill: black;
+}
