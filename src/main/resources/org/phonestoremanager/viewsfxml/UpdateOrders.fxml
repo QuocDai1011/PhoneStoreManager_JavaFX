@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="406.0" prefWidth="970.0" stylesheets="@../assets/css/UpdateOrders.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.phonestoremanager.controllers.UpdateOrdersController">
+
+    <VBox layoutX="52.0" layoutY="31.0" prefHeight="644.0" prefWidth="943.0" spacing="20" AnchorPane.leftAnchor="52.0" AnchorPane.rightAnchor="14.85714285714289" AnchorPane.topAnchor="31.0">
+
+        <Label styleClass="title-label" text="TẠO ĐƠN HÀNG MỚI" />
+
+        <!-- Thông tin khách hàng -->
+        <VBox spacing="10">
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <Label prefHeight="18.0" prefWidth="151.0" styleClass="field-label" text="Khách hàng:" />
+                <StackPane fx:id="searchFieldWrapper" alignment="CENTER_RIGHT" maxWidth="287" prefWidth="287">
+                    <TextField fx:id="inputInfoCustomer" prefWidth="287" promptText="Nhập ID hoặc tên của khách hàng" />
+                    <ProgressIndicator fx:id="loadingIndicator" maxHeight="20" maxWidth="20" style="-fx-progress-color: #3498db;" visible="false" />
+                </StackPane>
+            </HBox>
+
+            <!-- Chi tiết khách hàng -->
+            <GridPane hgap="15" prefHeight="227.0" prefWidth="787.0" vgap="10">
+                <columnConstraints>
+                    <ColumnConstraints minWidth="100.0" />
+                    <ColumnConstraints maxWidth="327.4285888671875" minWidth="286.28570556640625" prefWidth="286.28570556640625" />
+               <ColumnConstraints maxWidth="313.71429443359375" minWidth="272.5714111328125" prefWidth="313.71429443359375" />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints maxHeight="47.42856788635254" minHeight="0.0" prefHeight="42.857142857142854" />
+                    <RowConstraints maxHeight="46.85714728491647" minHeight="0.0" prefHeight="0.0" />
+                    <RowConstraints maxHeight="29.142857142857146" minHeight="0.0" prefHeight="0.0" />
+               <RowConstraints maxHeight="29.142857142857146" minHeight="0.0" prefHeight="0.0" />
+               <RowConstraints maxHeight="26.85714285714287" minHeight="0.0" prefHeight="5.142857142857139" />
+               <RowConstraints maxHeight="26.85714285714287" minHeight="0.0" prefHeight="0.0" />
+               <RowConstraints maxHeight="31.428571428571438" minHeight="0.0" prefHeight="0.0" />
+               <RowConstraints maxHeight="31.428571428571438" minHeight="0.0" prefHeight="0.0" />
+               <RowConstraints maxHeight="25.142842973981587" minHeight="0.0" prefHeight="5.142857142857139" />
+                </rowConstraints>
+
+                <Label styleClass="field-label" text="Email:" GridPane.rowIndex="1" />
+                <Label styleClass="field-label" text="Số điện thoại:" GridPane.rowIndex="4" />
+                <Label styleClass="field-label" text="Địa chỉ:" GridPane.rowIndex="8" />
+
+                <TextField prefHeight="8.0" prefWidth="300.0" promptText="Email của khách hàng" GridPane.columnIndex="1" />
+                <TextField fx:id="phoneNumber" prefHeight="51.0" prefWidth="300.0" promptText="Số điện thoại của khách hàng" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                <TextField fx:id="address" prefHeight="23.0" prefWidth="300.0" promptText="Địa chỉ của khách hàng" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+            <TextField fx:id="fullName" promptText="Họ và tên khách hàng" GridPane.columnIndex="1" />
+            <TextField fx:id="email" prefHeight="20.0" prefWidth="300.0" promptText="Email của khách hàng" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label fx:id="label" styleClass="field-label" text="Họ và tên khách hàng:" />
+            </GridPane>
+        </VBox>
+
+        <!-- Ngày đặt hàng -->
+        <HBox alignment="CENTER_LEFT" prefHeight="12.0" prefWidth="787.0" spacing="15">
+            <Label prefHeight="18.0" prefWidth="146.0" styleClass="field-label" text="Ngày đặt:" />
+            <DatePicker fx:id="orderDatePicker" prefHeight="43.0" prefWidth="176.0" promptText="Ngày đặt hàng" />
+        </HBox>
+
+        <!-- Thêm sản phẩm với RAM, ROM, Màu -->
+        <VBox prefHeight="79.0" prefWidth="779.0" spacing="10">
+            <HBox alignment="CENTER_LEFT" spacing="15">
+                <Label styleClass="field-label" text="Sản phẩm:" />
+                <ComboBox fx:id="productComboBox" prefWidth="200" promptText="Chọn sản phẩm" />
+
+                <Label styleClass="field-label" text="RAM:" />
+                <ComboBox fx:id="ramComboBox" prefWidth="100" promptText="RAM" />
+
+                <Label styleClass="field-label" text="ROM:" />
+                <ComboBox fx:id="romComboBox" prefWidth="100" promptText="ROM" />
+            </HBox>
+
+            <HBox alignment="CENTER_LEFT" spacing="15">
+
+                <Label styleClass="field-label" text="Màu:" />
+                <ComboBox fx:id="colorComboBox" prefHeight="37.0" prefWidth="237.0" promptText="Màu" />
+                <Label prefHeight="18.0" prefWidth="69.0" styleClass="field-label" text="Số lượng:" />
+                <TextField fx:id="quantityField" prefHeight="29.0" prefWidth="234.0" promptText="Nhập số lượng" />
+                <Button fx:id="addProductButton" styleClass="add-button" text="Thêm vào đơn" />
+            </HBox>
+        </VBox>
+
+        <!-- Bảng sản phẩm đã chọn -->
+        <TableView fx:id="productTable" prefHeight="239.0" prefWidth="863.0">
+            <columns>
+                <TableColumn fx:id="nameProduct_cl" prefWidth="250" text="Tên sản phẩm" />
+                <TableColumn fx:id="ramProduct_cl" prefWidth="100" text="RAM" />
+                <TableColumn fx:id="romProduct_cl" prefWidth="100" text="ROM" />
+                <TableColumn fx:id="colorProduct_cl" prefWidth="100" text="Màu sắc" />
+                <TableColumn fx:id="quantityProduct_cl" prefWidth="138.28570556640625" text="Số lượng" />
+                <TableColumn fx:id="unitPriceProduct_cl" prefWidth="169.142822265625" text="Đơn giá" />
+            </columns>
+        </TableView>
+
+        <!-- Tổng tiền và trạng thái -->
+        <HBox alignment="CENTER_RIGHT" spacing="20">
+            <Label styleClass="field-label" text="TỔNG TIỀN:">
+            <font>
+               <Font size="48.0" />
+            </font></Label>
+            <Label fx:id="totalAmountLabel" prefHeight="29.0" prefWidth="127.0" styleClass="total-label" text="0 VND" />
+            <Label styleClass="field-label" text="Trạng thái:" />
+            <ComboBox fx:id="statusComboBox" prefWidth="150">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="Chưa thanh toán" />
+                        <String fx:value="Đã thanh toán" />
+                    </FXCollections>
+                </items>
+            </ComboBox>
+        </HBox>
+
+        <!-- Nút thao tác -->
+        <HBox alignment="CENTER" prefHeight="0.0" prefWidth="755.0" spacing="20">
+            <Button fx:id="createOrder_btn" styleClass="submit-button" text="Tạo đơn hàng" />
+            <Button fx:id="cancel_btn" styleClass="cancel-button" text="Hủy" />
+        </HBox>
+    </VBox>
+</AnchorPane>

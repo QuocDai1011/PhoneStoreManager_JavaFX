@@ -5,6 +5,7 @@ import org.phonestoremanager.utils.DatabaseConnection;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class CustomerRepository {
@@ -33,5 +34,79 @@ public class CustomerRepository {
             e.printStackTrace();
         }
         return row;
+    }
+
+    public static String getNameByCustomerID(int id) {
+        String name = "";
+        String sql = "SELECT CONCAT(LastName, ' ', FirstName) as FullName\n" +
+                "  FROM CustomerProfile\n" +
+                "  WHERE CustomerID = ?;";
+
+        try(Connection conn = DatabaseConnection.createConnection()) {
+            assert conn != null;
+            PreparedStatement st = conn.prepareStatement(sql);
+            st.setInt(1, id);
+            ResultSet rs = st.executeQuery();
+            while(rs.next()) {
+                name = rs.getString("FullName");
+                break;
+            }
+        } catch (Exception e) {
+            return null;
+        }
+
+        return name;
+    }
+
+    public static CustomerModel getAllByID(int id) {
+        String sql = "SELECT *\n" +
+                "FROM CustomerProfile\n" +
+                "WHERE CustomerID = ?;";
+
+        CustomerModel customerModel = new CustomerModel();
+
+        try(Connection conn = DatabaseConnection.createConnection()) {
+            assert conn != null;
+            PreparedStatement st = conn.prepareStatement(sql);
+            st.setInt(1, id);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                customerModel.setCustomerID(id);
+                customerModel.setFirstName(rs.getString("FirstName"));
+                customerModel.setLastName(rs.getString("LastName"));
+                customerModel.setEmail(rs.getString("Email"));
+                customerModel.setPhoneNumber(rs.getString("PhoneNumber"));
+                customerModel.setAddress(rs.getString("Address"));
+            }
+        }catch (Exception e) {
+            System.out.println();
+        }
+        return customerModel;
+    }
+
+    public static CustomerModel getAllByIEmail(String email) {
+        String sql = "SELECT *\n" +
+                "FROM CustomerProfile\n" +
+                "WHERE Email = ?;";
+
+        CustomerModel customerModel = new CustomerModel();
+
+        try(Connection conn = DatabaseConnection.createConnection()) {
+            assert conn != null;
+            PreparedStatement st = conn.prepareStatement(sql);
+            st.setString(1, email);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                customerModel.setCustomerID(rs.getInt("CustomerID"));
+                customerModel.setFirstName(rs.getString("FirstName"));
+                customerModel.setLastName(rs.getString("LastName"));
+                customerModel.setEmail(rs.getString("Email"));
+                customerModel.setPhoneNumber(rs.getString("PhoneNumber"));
+                customerModel.setAddress(rs.getString("Address"));
+            }
+        }catch (Exception e) {
+            System.out.println();
+        }
+        return customerModel;
     }
 }

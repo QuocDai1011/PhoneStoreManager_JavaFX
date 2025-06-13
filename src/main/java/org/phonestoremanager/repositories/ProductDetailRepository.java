@@ -46,4 +46,11 @@ public class ProductDetailRepository {
         }
         return spec;
     }
+
+    //TODO
+    public int getProductDetailIDByInfomation() {
+        int id = 0;
+
+        return id;
+    }
 }
