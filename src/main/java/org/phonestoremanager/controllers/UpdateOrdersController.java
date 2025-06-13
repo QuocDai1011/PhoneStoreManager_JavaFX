@@ -170,6 +170,7 @@ public class UpdateOrdersController implements Initializable {
         //render dữ liệu vào table view
         List<OrderUpdateModel> list = new ArrayList<>();
         addProductButton.setOnAction(event -> {
+            if(getValueModel() == null) return;
             list.add(getValueModel());
             renderTableView(list);
             updateTotalAmout(list);
@@ -296,9 +297,7 @@ public class UpdateOrdersController implements Initializable {
 
     private OrderUpdateModel getValueModel() {
         // check thông tin sản phẩm khác null
-        if(checkOrder()) {
-            System.out.println("full order");
-        }else {
+        if(!checkOrder()) {
             return null;
         }
 
@@ -344,8 +343,8 @@ public class UpdateOrdersController implements Initializable {
     private boolean checkOrder() {
         LocalDate localDate = null;
         localDate = orderDatePicker.getValue();
-        if(localDate == null || productComboBox.getValue().isEmpty() || ramComboBox.getValue() == null
-            || romComboBox.getValue() == null || colorComboBox.getValue().isEmpty()
+        if(localDate == null || productComboBox.getValue() == null || ramComboBox.getValue() == null
+            || romComboBox.getValue() == null || colorComboBox.getValue() == null
                 || quantityField.getText().isEmpty() || orderDatePicker.getValue() == null) {
             alertError("Dữ liệu sản phẩm không được để trống!");
             return false;

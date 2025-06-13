@@ -99,12 +99,12 @@
         <!-- Bảng sản phẩm đã chọn -->
         <TableView fx:id="productTable" prefHeight="239.0" prefWidth="863.0">
             <columns>
-                <TableColumn fx:id="nameProduct_cl" prefWidth="250" text="Tên sản phẩm" />
-                <TableColumn fx:id="ramProduct_cl" prefWidth="100" text="RAM" />
-                <TableColumn fx:id="romProduct_cl" prefWidth="100" text="ROM" />
-                <TableColumn fx:id="colorProduct_cl" prefWidth="100" text="Màu sắc" />
-                <TableColumn fx:id="quantityProduct_cl" prefWidth="138.28570556640625" text="Số lượng" />
-                <TableColumn fx:id="unitPriceProduct_cl" prefWidth="169.142822265625" text="Đơn giá" />
+                <TableColumn fx:id="nameProduct_cl" maxWidth="250.0" minWidth="250.0" prefWidth="250" text="Tên sản phẩm" />
+                <TableColumn fx:id="ramProduct_cl" maxWidth="100.0" minWidth="100.0" prefWidth="100" text="RAM" />
+                <TableColumn fx:id="romProduct_cl" maxWidth="100.0" minWidth="100.0" prefWidth="100" text="ROM" />
+                <TableColumn fx:id="colorProduct_cl" maxWidth="100.0" minWidth="100.0" prefWidth="100" text="Màu sắc" />
+                <TableColumn fx:id="quantityProduct_cl" maxWidth="138.28570556640625" minWidth="138.28570556640625" prefWidth="138.28570556640625" text="Số lượng" />
+                <TableColumn fx:id="unitPriceProduct_cl" maxWidth="169.142822265625" minWidth="169.142822265625" prefWidth="169.142822265625" text="Đơn giá" />
             </columns>
         </TableView>
 
