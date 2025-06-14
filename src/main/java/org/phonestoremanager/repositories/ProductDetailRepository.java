@@ -1,5 +1,6 @@
 package org.phonestoremanager.repositories;
 
+import org.phonestoremanager.models.OrderUpdateModel;
 import org.phonestoremanager.models.ProductSpecificationModel;
 import org.phonestoremanager.utils.DatabaseConnection;
 
@@ -48,8 +49,28 @@ public class ProductDetailRepository {
     }
 
     //TODO
-    public int getProductDetailIDByInfomation() {
-        int id = 0;
+    public int getProductDetailIDByInfomation(OrderUpdateModel orderUpdateModel) {
+        int id = -1;
+        String sql = "SELECT pd.ProductDetailID\n" +
+                "FROM Product p\n" +
+                "JOIN ProductDetail pd ON p.ProductID = pd.ProductID\n" +
+                "JOIN ColorOfProduct c ON pd.ColorID = c.ColorOfProductID\n" +
+                "WHERE p.Name = ? AND pd.Ram = ? AND pd.Rom = ? AND c.NameColor = ?;";
+
+        try(Connection con = DatabaseConnection.createConnection()) {
+            assert con != null;
+            PreparedStatement st = con.prepareStatement(sql);
+            st.setString(1, orderUpdateModel.getProductName());
+            st.setInt(2, orderUpdateModel.getRam());
+            st.setInt(3, orderUpdateModel.getRom());
+            st.setString(4, orderUpdateModel.getColor());
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                id = rs.getInt("ProductDetailID");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         return id;
     }

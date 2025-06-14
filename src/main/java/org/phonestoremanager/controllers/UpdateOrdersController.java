@@ -12,11 +12,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.phonestoremanager.models.*;
-import org.phonestoremanager.repositories.CustomerRepository;
+import org.phonestoremanager.repositories.*;
 
 import javafx.event.ActionEvent;
-import org.phonestoremanager.repositories.OrdersRepository;
-import org.phonestoremanager.repositories.ProductViewRepository;
+import org.phonestoremanager.utils.ParseVietNamCurrencyToDouble;
 
 import java.net.URL;
 import java.text.NumberFormat;
@@ -189,9 +188,11 @@ public class UpdateOrdersController implements Initializable {
             return;
         }
 
-        // insert dữ liệu vào bảng Order
+        System.out.println(totalAmountLabel.getText());
+
+        //insert dữ liệu vào bảng Order
         int rowOrder  = OrdersRepository.insert(customerModel, getDateSelected(),
-                statusComboBox.getValue(), Double.parseDouble(totalAmountLabel.getText()));
+                statusComboBox.getValue(), ParseVietNamCurrencyToDouble.parseVietnamCurrency(totalAmountLabel.getText()));
 
         if(rowOrder == 0) {
             alertError("Thêm dữ liệu vào bảng Orders bị lỗi!");
@@ -199,11 +200,22 @@ public class UpdateOrdersController implements Initializable {
         }
 
         // TODO: insert dữ liệu vào bảng OrderDetail
+        int rowOrderDetail = OrderDetailRepository.insert(
+                OrdersRepository.getOrderIDByInfomation(customerModel.getCustomerID(), getDateSelected(),
+                        ParseVietNamCurrencyToDouble.parseVietnamCurrency(totalAmountLabel.getText())),
+                ProductDetailRepository.getInstance().getProductDetailIDByInfomation(orderUpdateModel),
+                Integer.parseInt(quantityField.getText()),
+                orderUpdateModel.getUnitPriceNumber()
+        );
 
+        if(rowOrderDetail == 0) {
+            alertError("Thêm dữ liệu vào bảng Orders bị lỗi!");
+            return;
+        }
 
         // Alert thông báo thêm đơn hàng thành công
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle(orderUpdateModel.getProductName());
+        alert.setHeaderText("Thêm đơn hàng thành công!");
         alert.showAndWait();
 
         //tắt màn hình khi tạo đơn hàng thành coong
