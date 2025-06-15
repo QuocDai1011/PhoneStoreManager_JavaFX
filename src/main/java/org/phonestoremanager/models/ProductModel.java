@@ -2,7 +2,6 @@ package org.phonestoremanager.models;
 
 public class ProductModel {
     private int productID;
-    private int categoryID;
     private int brandID;
     private String name;
     private String description;
@@ -10,9 +9,8 @@ public class ProductModel {
     public ProductModel() {
     }
 
-    public ProductModel(int productID, int categoryID, int brandID, String name, String description) {
+    public ProductModel(int productID, int brandID, String name, String description) {
         this.productID = productID;
-        this.categoryID = categoryID;
         this.brandID = brandID;
         this.name = name;
         this.description = description;
@@ -24,14 +22,6 @@ public class ProductModel {
 
     public void setProductID(int productID) {
         this.productID = productID;
-    }
-
-    public int getCategoryID() {
-        return categoryID;
-    }
-
-    public void setCategoryID(int categoryID) {
-        this.categoryID = categoryID;
     }
 
     public int getBrandID() {

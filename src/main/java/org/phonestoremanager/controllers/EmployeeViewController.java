@@ -17,7 +17,9 @@ import org.phonestoremanager.models.EmployeeModel;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class EmployeeViewController implements Initializable {
@@ -51,8 +53,37 @@ public class EmployeeViewController implements Initializable {
     @FXML
     TableColumn<EmployeeModel, Double> columnSalary;
 
+    @FXML
+    private Button fixedButton;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        if (fixedButton != null) {
+            fixedButton.toFront(); // Đưa nút lên trên cùng giao diện
+            fixedButton.setOnAction(event -> {
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/phonestoremanager/viewsfxml/AddEmployeeForm.fxml"));
+                    Parent root = loader.load();
+
+                    // Tạo một Stage mới hoặc sử dụng Stage hiện tại
+                    Stage stage = new Stage();
+                    stage.setTitle("Thêm Dòng Sản Phẩm Mới");
+                    stage.setScene(new Scene(root));
+                    stage.show();
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    // Bạn có thể dùng Alert để thông báo lỗi
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setHeaderText("Không thể mở giao diện Thêm Sản Phẩm");
+                    alert.setContentText(e.getMessage());
+                    alert.showAndWait();
+                }
+            });
+        } else {
+            System.err.println("Nút này nó bị null");
+        }
+
         columnID.setCellValueFactory(new PropertyValueFactory<>("employeeID"));
         columnFirstname.setCellValueFactory(new PropertyValueFactory<>("lastName"));
         columnLastname.setCellValueFactory(new PropertyValueFactory<>("firstName"));
@@ -61,7 +92,22 @@ public class EmployeeViewController implements Initializable {
         columnPhonenumber.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
         columnAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
         columnPosition.setCellValueFactory(new PropertyValueFactory<>("position"));
-        columnSalary.setCellValueFactory(new PropertyValueFactory<>("salary"));
+        columnSalary.setCellValueFactory(new PropertyValueFactory<>("salary")); // Lấy dữ liệu salary
+
+        columnSalary.setCellFactory(column -> new TableCell<EmployeeModel, Double>() {
+            private final NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
+
+            @Override
+            protected void updateItem(Double item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                } else {
+                    setText(currencyFormat.format(item)); // Ví dụ: 15.000.000 ₫
+                }
+            }
+        });
+
 
         render(EmployeeRepository.getAll());
 

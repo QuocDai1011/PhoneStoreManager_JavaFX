@@ -1,24 +1,17 @@
 .root {
     -fx-font-family: "Segoe UI", sans-serif;
-    -fx-background-color: #fffdf8;
-}
-
-/* ===== Title ===== */
-.form-title {
-    -fx-font-size: 20px;
-    -fx-text-fill: #ff6600;
-    -fx-font-weight: bold;
+    -fx-background-color: #fffdf8; /* nền sáng nhẹ */
 }
 
 /* ===== Label ===== */
 .label {
-    -fx-font-size: 14px;
     -fx-text-fill: #333;
+    -fx-font-size: 14px;
 }
 
-/* ===== TextField, PasswordField, ComboBox ===== */
+/* ===== TextField, TextArea, ComboBox ===== */
 .text-field,
-.password-field,
+.text-area,
 .combo-box {
     -fx-background-color: white;
     -fx-border-color: #ff6600;
@@ -28,52 +21,42 @@
     -fx-font-size: 13px;
 }
 
-/* Focus effect */
+/* Focus highlight */
 .text-field:focused,
-.password-field:focused,
+.text-area:focused,
 .combo-box:focused {
     -fx-border-color: #ff5722;
     -fx-effect: dropshadow(gaussian, rgba(255,87,34,0.3), 4, 0.3, 0, 0);
 }
 
-/* ===== Buttons ===== */
-.action-button {
+/* ===== Button ===== */
+.button {
     -fx-background-color: linear-gradient(to right, #ff6600, #ff3300);
     -fx-text-fill: white;
     -fx-font-weight: bold;
     -fx-background-radius: 6px;
     -fx-padding: 8px 16px;
     -fx-font-size: 14px;
-}
-
-.secondary-button {
-    -fx-background-color: #f2f2f2;
-    -fx-text-fill: #333;
-    -fx-border-color: #ccc;
-    -fx-border-radius: 6px;
-    -fx-background-radius: 6px;
-    -fx-padding: 8px 16px;
-    -fx-font-size: 14px;
-}
-
-/* Hover effects */
-.action-button:hover {
-    -fx-background-color: linear-gradient(to right, #ff8533, #ff471a);
-}
-
-.secondary-button:hover {
-    -fx-background-color: #e0e0e0;
-}
-
-/* Button 👁 icon */
-.button {
     -fx-cursor: hand;
 }
 
-/* ComboBox Arrow */
-.combo-box .arrow {
-    -fx-background-color: #ff6600;
+.button:hover {
+    -fx-background-color: linear-gradient(to right, #ff8533, #ff471a);
 }
+
+.button:pressed {
+    -fx-background-color: #e64a19;
+}
+
+/* ===== Scrollbar for TextArea (optional) ===== */
+.text-area .scroll-bar:vertical {
+    -fx-background-color: transparent;
+}
+
+/* ComboBox arrow */
 .combo-box .arrow-button {
     -fx-background-color: transparent;
+}
+.combo-box .arrow {
+    -fx-background-color: #ff6600;
 }

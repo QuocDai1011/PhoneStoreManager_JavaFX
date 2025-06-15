@@ -4,9 +4,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
+import javafx.stage.Stage;
 import org.phonestoremanager.repositories.ProductViewRepository;
 import org.phonestoremanager.models.ProductViewModel;
 
@@ -22,6 +26,12 @@ public class ProductContentController {
 
     @FXML
     private javafx.scene.control.TextField searchField;
+
+    @FXML
+    private AnchorPane rootPane;
+
+    @FXML
+    private Button fixedButton;
 
 
     @FXML
@@ -43,6 +53,33 @@ public class ProductContentController {
         for (MenuItem menuItem : filterMenuButton.getItems()) {
             menuItem.setOnAction(event -> filterByBrand(menuItem.getText()));
         }
+
+        if (fixedButton != null) {
+            fixedButton.toFront(); // Đưa nút lên trên cùng giao diện
+            fixedButton.setOnAction(event -> {
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/phonestoremanager/viewsfxml/add-product-view.fxml"));
+                    Parent root = loader.load();
+
+                    // Tạo một Stage mới hoặc sử dụng Stage hiện tại
+                    Stage stage = new Stage();
+                    stage.setTitle("Thêm Dòng Sản Phẩm Mới");
+                    stage.setScene(new Scene(root));
+                    stage.show();
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    // Bạn có thể dùng Alert để thông báo lỗi
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setHeaderText("Không thể mở giao diện Thêm Sản Phẩm");
+                    alert.setContentText(e.getMessage());
+                    alert.showAndWait();
+                }
+            });
+        } else {
+            System.err.println("Nút này nó bị null");
+        }
+
     }
 
     private void filterByBrand(String brand) {

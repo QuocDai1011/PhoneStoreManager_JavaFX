@@ -1,23 +1,24 @@
 package org.phonestoremanager.models;
 
-public class ProductDetailModel {
-    private int productDetailID;
-    private int productID;
-    private int ram;
-    private int rom;
-    private String chip;
-    private float screenSize;
-    private String screenParameters;
-    private float batteryCapacity;
-    private int colorID;
-    private String image;
-    private String description;
-    private double price;
-    private int stockQuantity;
-    private String cameraFront;
-    private String cameraRear;
-    private String screenTechnology;
-    private String scanFrequency;
+public class ProductDetailModel extends ProductViewModel{
+        private int productDetailID;
+        private int productID;
+        private int ram;
+        private int rom;
+        private String chip;
+        private float screenSize;
+        private String screenParameters;
+        private float batteryCapacity;
+        private String image;
+        private String description;
+        private double price;
+        private int stockQuantity;
+        private String cameraFront;
+        private String cameraRear;
+        private String screenTechnology;
+        private String scanFrequency;
+        private int colorID;
+
 
     public ProductDetailModel() {
     }
@@ -106,14 +107,6 @@ public class ProductDetailModel {
         this.batteryCapacity = batteryCapacity;
     }
 
-    public int getColor() {
-        return colorID;
-    }
-
-    public void setColor(int colorID) {
-        this.colorID = colorID;
-    }
-
     public String getImage() {
         return image;
     }
@@ -176,5 +169,13 @@ public class ProductDetailModel {
 
     public void setScanFrequency(String scanFrequency) {
         this.scanFrequency = scanFrequency;
+    }
+
+    public int getColorID() {
+        return colorID;
+    }
+
+    public void setColorID(int colorID) {
+        this.colorID = colorID;
     }
 }

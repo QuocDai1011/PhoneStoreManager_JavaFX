@@ -42,17 +42,35 @@ public class LogInController {
         AccountService accountService = new AccountService();
         boolean result = accountService.checkAccountWhenLogIn(userName, password);
         if(result) {
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/phonestoremanager/viewsfxml/main-view.fxml"));
-            Parent root = loader.load();
+            try {
+                // Lấy Stage hiện tại thông qua event
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-            Scene scene = new Scene(root);
-            scene.getStylesheets().add(getClass().getResource("/org/phonestoremanager/assets/css/Home.css").toExternalForm());
-            scene.getStylesheets().add(getClass().getResource("/org/phonestoremanager/assets/css/ContextMenu.css").toExternalForm());
-            stage.setScene(scene);
-            stage.setTitle("Trang chủ");
-            stage.centerOnScreen();
-            stage.show();
+                // Load giao diện chính
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/phonestoremanager/viewsfxml/main-view.fxml"));
+                Parent root = loader.load();
+
+                // Tạo Scene mới và thêm CSS
+                Scene scene = new Scene(root);
+                scene.getStylesheets().add(getClass().getResource("/org/phonestoremanager/assets/css/Home.css").toExternalForm());
+                scene.getStylesheets().add(getClass().getResource("/org/phonestoremanager/assets/css/ContextMenu.css").toExternalForm());
+                scene.getStylesheets().add(getClass().getResource("/org/phonestoremanager/assets/css/menu-button.css").toExternalForm());
+
+                // Cập nhật Stage
+                stage.setScene(scene);
+                stage.setTitle("Trang chủ");
+                stage.centerOnScreen();
+                stage.show();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Lỗi");
+                alert.setHeaderText("Không thể tải giao diện Trang chủ");
+                alert.setContentText(e.getMessage());
+                alert.showAndWait();
+            }
+
         }
         else {
             showAlert("ERROR", "Tên đăng nhập hoặc mật khẩu không đúng!", Alert.AlertType.ERROR);

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<AnchorPane prefHeight="557.0" prefWidth="627.0" stylesheets="@../assets/css/add-product-detail.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.phonestoremanager.controllers.FixProductDetailController">
+
+    <children>
+        <GridPane hgap="10" vgap="10" AnchorPane.bottomAnchor="10" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10" AnchorPane.topAnchor="10">
+            <padding>
+                <Insets bottom="20" left="20" right="20" top="20" />
+            </padding>
+
+            <!-- Dòng 0 -->
+            <Label text="Product ID:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+            <TextField fx:id="txtProductID" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+            <Label text="Product Name:" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+            <TextField fx:id="txtProductName" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="0" />
+
+            <!-- Dòng 1 -->
+            <Label text="Brand:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+            <TextField fx:id="txtBrand" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+            <Label text="Color:" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <TextField fx:id="txtColor" prefWidth="150" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+
+            <!-- Dòng 2 -->
+            <Label text="RAM:" GridPane.rowIndex="3" />
+            <TextField fx:id="txtRam" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+
+            <Label text="ROM:" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+            <TextField fx:id="txtRom" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+
+            <!-- Dòng 3 -->
+            <Label text="Chip:" GridPane.rowIndex="4" />
+            <TextField fx:id="txtChip" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+
+            <Label text="Screen Size:" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+            <TextField fx:id="txtScreenSize" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+
+            <!-- Dòng 4 -->
+            <Label text="Screen Parameters:" GridPane.rowIndex="5" />
+            <TextField fx:id="txtScreenParams" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+
+            <Label text="Technology:" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+            <TextField fx:id="txtScreenTech" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+
+            <!-- Dòng 5 -->
+            <Label text="Scan Frequency:" GridPane.rowIndex="6" />
+            <TextField fx:id="txtScanFreq" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+
+            <Label text="Battery (mAh):" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+            <TextField fx:id="txtBattery" GridPane.columnIndex="3" GridPane.rowIndex="6" />
+
+            <!-- Dòng 6 -->
+            <Label text="Front Camera:" GridPane.rowIndex="7" />
+            <TextField fx:id="txtCamFront" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+
+            <Label text="Rear Camera:" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+            <TextField fx:id="txtCamRear" GridPane.columnIndex="3" GridPane.rowIndex="7" />
+
+            <!-- Dòng 7 -->
+            <Label text="Image URL:" GridPane.rowIndex="8" />
+            <TextField fx:id="txtImage" onMouseClicked="#handleChooseImage" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="8" />
+
+            <!-- Dòng 8 -->
+            <Label text="Description:" GridPane.rowIndex="9" />
+            <TextArea fx:id="txtDescription" prefRowCount="2" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="9" />
+
+            <!-- Dòng 9 -->
+            <Label text="Price:" GridPane.rowIndex="10" />
+            <TextField fx:id="txtPrice" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+
+            <Label text="Stock Quantity:" GridPane.columnIndex="2" GridPane.rowIndex="10" />
+            <TextField fx:id="txtStock" GridPane.columnIndex="3" GridPane.rowIndex="10" />
+
+            <!-- Dòng 10 -->
+            <Button fx:id="btnAddProductDetail" maxWidth="Infinity" text="Sửa sản phẩm" GridPane.columnSpan="4" GridPane.rowIndex="11" />
+
+            <columnConstraints>
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+            </rowConstraints>
+        </GridPane>
+        <TableView fx:id="listColorName" layoutX="435.0" layoutY="104.0" prefHeight="120.0" prefWidth="160.0">
+            <columns>
+                <TableColumn fx:id="colorColumn" maxWidth="150.0" minWidth="150.0" prefWidth="183.19998168945312" styleClass="column-header-background" />
+            </columns>
+        </TableView>
+    </children>
+</AnchorPane>

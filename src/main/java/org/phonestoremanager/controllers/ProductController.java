@@ -39,6 +39,7 @@ public class ProductController {
         try {
             if (productViewModel.getImage() != null) {
                 String imagePath = "/org/phonestoremanager/assets/image/" + productViewModel.getImage();
+                System.out.println(imagePath);
                 Image image = new Image(ProductController.class.getResourceAsStream(imagePath));
                 if (image.isError()) {
                     throw new Exception("Lỗi tải ảnh: " + productViewModel.getImage());

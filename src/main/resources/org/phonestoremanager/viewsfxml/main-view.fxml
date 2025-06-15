@@ -40,7 +40,7 @@
                                 </Pane>
                             </children>
                         </Pane>
-                        <Button fx:id="home" layoutX="20.0" layoutY="171.0" mnemonicParsing="false" onAction="#home" prefHeight="60.0" prefWidth="222.0" styleClass="btn_home1" text="Trang chủ" textFill="WHITE">
+                        <Button fx:id="home" layoutX="20.0" layoutY="171.0" mnemonicParsing="false" onAction="#home" prefHeight="60.0" prefWidth="222.0" styleClass="btn_home1" text="Sản phẩm" textFill="WHITE">
                             <graphic>
                                 <ImageView fitHeight="37.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                                     <image>

@@ -94,8 +94,6 @@ public class SignUpForCustomerController {
         } catch (Exception e) {
             showAlert("ERROR", e.getMessage(), Alert.AlertType.ERROR);
         }
-
-        return;
     }
 
     public void showAlert(String title, String message, Alert.AlertType type) {

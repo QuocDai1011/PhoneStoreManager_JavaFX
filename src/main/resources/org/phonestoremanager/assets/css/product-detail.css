@@ -61,7 +61,7 @@
     -fx-text-fill: #e53935;
 }
 
-.buy-button {
+.fixProduct-btn {
     -fx-background-color: linear-gradient(to right, #ff5722, #ff7043);
     -fx-text-fill: white;
     -fx-font-size: 16px;

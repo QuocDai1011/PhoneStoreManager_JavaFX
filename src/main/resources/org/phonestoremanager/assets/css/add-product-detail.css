@@ -1,0 +1,107 @@
+.root {
+    -fx-font-family: "Segoe UI", sans-serif;
+    -fx-background-color: #fffaf5;
+}
+
+/* Label */
+.label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #333;
+}
+
+/* TextField & TextArea */
+.text-field, .text-area, .combo-box {
+    -fx-background-color: white;
+    -fx-border-color: #f60;
+    -fx-border-radius: 4px;
+    -fx-background-radius: 4px;
+    -fx-padding: 6px;
+    -fx-font-size: 13px;
+}
+
+/* Hover & focus effects */
+.text-field:focused, .text-area:focused, .combo-box:focused {
+    -fx-border-color: #ff5722;
+    -fx-effect: dropshadow(gaussian, rgba(255, 87, 34, 0.3), 4, 0.3, 0, 0);
+}
+
+/* Button style */
+.button {
+    -fx-background-color: linear-gradient(to right, #ff6600, #ff3300);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 6px;
+    -fx-padding: 10px;
+    -fx-font-size: 14px;
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-background-color: linear-gradient(to right, #ff8533, #ff471a);
+}
+
+.button:pressed {
+    -fx-background-color: #e64a19;
+}
+
+/* ComboBox popup arrow */
+.combo-box .arrow-button {
+    -fx-background-color: transparent;
+}
+.combo-box .arrow {
+    -fx-background-color: #f60;
+}
+
+/* ScrollBar inside TextArea */
+.text-area .scroll-bar:vertical {
+    -fx-background-color: transparent;
+}
+
+/* Xóa header (tên cột) */
+.table-view .column-header-background {
+    -fx-max-height: 0;
+    -fx-pref-height: 0;
+    -fx-padding: 0;
+    -fx-background-color: transparent;
+}
+
+.table-view .table-column {
+    -fx-padding: 0;
+}
+
+/* Xóa thanh cuộn */
+.table-view .scroll-bar:vertical,
+.table-view .scroll-bar:horizontal {
+    -fx-opacity: 0;
+    -fx-pref-width: 0;
+    -fx-pref-height: 0;
+    -fx-max-width: 0;
+    -fx-max-height: 0;
+}
+
+/* Style tổng thể */
+.table-view {
+    -fx-background-color: #fff5e6; /* cam nhạt */
+    -fx-border-color: #ffa500;     /* cam đậm */
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-padding: 2;
+}
+
+/* Style từng dòng */
+.table-row-cell {
+    -fx-background-color: transparent;
+}
+
+/* Hover dòng */
+.table-row-cell:hover {
+    -fx-background-color: #ffe0b3; /* màu cam nhẹ khi hover */
+}
+
+/* Nội dung cell */
+.table-cell {
+    -fx-text-fill: #ff8000;  /* chữ cam đậm */
+    -fx-font-weight: bold;
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 5;
+}

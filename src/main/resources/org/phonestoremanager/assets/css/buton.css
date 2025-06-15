@@ -1,0 +1,24 @@
+.floating-add-button {
+    -fx-background-color: #FF5722;           /* Cam Shopee */
+    -fx-text-fill: white;                    /* Màu chữ trắng */
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+
+    -fx-background-radius: 50%;              /* Bo tròn */
+    -fx-min-width: 50px;
+    -fx-min-height: 50px;
+    -fx-max-width: 50px;
+    -fx-max-height: 50px;
+
+    -fx-opacity: 0.85;                       /* Mờ nhẹ */
+    -fx-cursor: hand;
+
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 6, 0, 2, 2); /* đổ bóng */
+    -fx-alignment: center;
+    -fx-padding: 0;
+}
+
+.floating-add-button:hover {
+    -fx-opacity: 1.0;                         /* Hover sáng rõ */
+    -fx-background-color: #FF7043;            /* Cam nhạt hơn */
+}

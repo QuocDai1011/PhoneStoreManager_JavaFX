@@ -2,6 +2,7 @@ package org.phonestoremanager.controllers;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.HPos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -9,8 +10,9 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.stage.Stage;
+import org.phonestoremanager.models.ProductDetailModel;
 import org.phonestoremanager.repositories.*;
-import org.phonestoremanager.models.ProductSpecificationModel;
 import org.phonestoremanager.models.ProductViewModel;
 
 import java.io.IOException;
@@ -34,7 +36,19 @@ public class ProductDetailsContentController {
     @FXML
     private FlowPane romFlowPane;
 
+    @FXML
+    public void initialize() {
+        btnDeleteDetail.setOnAction(event -> deleteProductDetail(productDetail, product));
+    }
+
+
+    Button btnFixProduct = new Button("Sửa");
+
+    Button btnDeleteDetail = new Button("Xóa");
+
     private ProductViewModel product;
+
+    private ProductDetailModel productDetail;
 
     private int selectedColorID;
     private String selectedNameColor = null;
@@ -42,7 +56,6 @@ public class ProductDetailsContentController {
 
     private List<Button> colorButtons = new ArrayList<>();
     private List<Button> romButtons = new ArrayList<>();
-
 
     public void goBack() throws IOException {
         try {
@@ -153,7 +166,7 @@ public class ProductDetailsContentController {
     }
 
     private void updateImageDisplay() {
-        // Truy xuất ColorID từ NameColor để hiển thị hình ảnh
+        // Truy xuất ColorID từ NameColor
         selectedColorID = ProductColorRepository.getInstance().getColorIDByProductIDAndNameColor(product.getProductID(), selectedNameColor);
         if (selectedNameColor != null && selectedROM != null) {
             List<String> imageList = ImageProductRepository.getInstance()
@@ -161,15 +174,8 @@ public class ProductDetailsContentController {
 
             imageVBox.getChildren().clear();
 
-//            System.out.println("ProductID: " + product.getProductID());
-//            System.out.println("ColorID: " + selectedColorID);
-//            System.out.println("ROM: " + selectedROM);
-//            System.out.println("Số ảnh tìm được: " + imageList.size());
-
             for (String imagePath : imageList) {
                 URL imageUrl = getClass().getResource("/org/phonestoremanager/assets/image/" + imagePath);
-
-//                System.out.println("selectedNameColor = " + selectedNameColor + ", selectedROM = " + selectedROM);
 
                 if (imageUrl != null) {
                     Image image = new Image(imageUrl.toExternalForm());
@@ -192,7 +198,7 @@ public class ProductDetailsContentController {
     }
 
     public void displayProductOverview(ProductViewModel product, int selectedRom) {
-        ProductSpecificationModel spec = ProductDetailRepository.getInstance().getDetailByProductIDAndROM(product.getProductID(), Integer.parseInt(selectedROM));
+        ProductDetailModel spec = ProductDetailRepository.getInstance().getDetailByProductIDAndROM(product.getProductID(), selectedRom);
 
         Label nameChip = new Label("Tên chíp:");
         Label nameROMRAM = new Label("RAM + ROM:");
@@ -200,7 +206,6 @@ public class ProductDetailsContentController {
         Label nameCamera = new Label("Camera:");
         Label namePin = new Label("Pin:");
         Label namePrice = new Label("Giá bán:");
-        Button btnBuy = new Button("Mua ngay");
 //        Thiết lập css
         nameChip.getStyleClass().add("grid-label");
         nameROMRAM.getStyleClass().add("grid-label");
@@ -215,7 +220,7 @@ public class ProductDetailsContentController {
         Label valueScreen = new Label(spec.getScreenSize()+ "inch" + " - " + spec.getScanFrequency());
         Label valueCamera = new Label("Trước: " + spec.getCameraFront() + " / Sau: " + spec.getCameraRear());
         Label valuePin = new Label(spec.getBatteryCapacity() + " mAh");
-        double price = Double.parseDouble(spec.getPrice()); // đảm bảo là kiểu double
+        double price = spec.getPrice(); // đảm bảo là kiểu double
         NumberFormat formatter = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
         String formattedPrice = formatter.format(price);
         Label valuePrice = new Label(formattedPrice);
@@ -256,17 +261,108 @@ public class ProductDetailsContentController {
         grid.add(namePrice, 0, 5);
         grid.add(valuePrice, 1, 5);
 
-//        GridPane.setColumnSpan(btnBuy, 2);
-//        GridPane.setHalignment(btnBuy, HPos.CENTER);
-//        grid.add(btnBuy, 0, 6);
-//        btnBuy.getStyleClass().add("buy-button");
+        GridPane.setColumnSpan(btnFixProduct, 2);
+        grid.add(btnFixProduct, 0, 6);
+        btnFixProduct.getStyleClass().add("fixProduct-btn");
+
+        GridPane.setColumnSpan(btnDeleteDetail, 2);
+        GridPane.setHalignment(btnDeleteDetail, HPos.RIGHT);
+        grid.add(btnDeleteDetail, 1, 6);
+        btnDeleteDetail.getStyleClass().add("fixProduct-btn");
 
         detailVBox.getChildren().clear();
         detailVBox.getChildren().add(grid);
+
+        productDetail = ProductDetailRepository.getInstance().getDetailByProductIDAndROM(product.getProductID(), selectedRom);
+        btnFixProduct.setOnAction(event -> {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/phonestoremanager/viewsfxml/fix-product-detail.fxml"));
+                Parent root = loader.load();
+
+                FixProductDetailController controller = loader.getController();
+                controller.setProductDetail(product, productDetail);
+
+                System.out.println("ProductDetailID đã truyền sang: " + productDetail.getProductDetailID());
+
+                Stage stage = new Stage();
+                stage.setScene(new Scene(root));
+                stage.show();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+
     }
 
-    public void setProduct(ProductViewModel product) {
-        this.product = product;
+    public void deleteProductDetail(ProductDetailModel pd, ProductViewModel p) {
+        if (pd == null) {
+            System.out.println("pd đang null! Không thể xóa.");
+            return;
+        }
+
+        int selected = ProductDetailRepository.getInstance().getProductDetailIDByProductIDAndColorIDAndRom(p.getProductID(), selectedColorID, Integer.parseInt(selectedROM));
+
+        if (selected == -1) {
+                // Báo lỗi hoặc hiển thị thông báo người dùng
+                System.out.println("Không tìm thấy chi tiết sản phẩm để xóa!");
+                return;
+        }
+
+        System.out.println(p.getProductID());
+        System.out.println(selected);
+        System.out.println(selectedColorID);
+        System.out.println(selectedROM);
+
+        ProductDetailRepository.getInstance().deleteProductDetailByProductDetailID(selected);
+
+        boolean isEmpty = ProductDetailRepository.getInstance().isEmptyProductDetail(p.getProductID());
+
+        if (isEmpty) {
+            System.out.println(0);
+            // Xóa luôn sản phẩm nếu không còn chi tiết nào
+            ProductRepository.getInstance().deleteProduct(p);
+
+            // Quay về trang chính (main-view.fxml)
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/phonestoremanager/viewsfxml/main-view.fxml"));
+                Parent parent = loader.load();
+
+                MenuController menuController = loader.getController();
+                menuController.home(null); // nếu bạn có hàm home() để reset lại giao diện chính
+
+                Scene scene = btn_back.getScene();
+                scene.setRoot(parent);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            // Nếu sản phẩm vẫn còn chi tiết → làm mới lại giao diện hiện tại
+            refreshCurrentView();
+        }
+    }
+
+    private void refreshCurrentView() {
+        // Gọi lại các hàm hiển thị để cập nhật giao diện
+        updateImageDisplay(); // cập nhật ảnh mới
+        setNameColorProduct(product); // cập nhật nút màu
+        setROMProduct(product); // cập nhật nút ROM
+
+        // Nếu selectedROM đã bị xóa, bạn nên kiểm tra lại selectedROM còn hợp lệ không
+        // Tạm thời gọi lại displayProductOverview với ROM đầu tiên
+        List<String> romList = ProductROMRepository.getInstance().getROMByProductID(product.getProductID());
+        if (!romList.isEmpty()) {
+            selectedROM = romList.get(0); // gán lại ROM đầu tiên
+            displayProductOverview(product, Integer.parseInt(selectedROM));
+        } else {
+            // Xử lý khi không còn ROM nào: xóa toàn bộ chi tiết
+            detailVBox.getChildren().clear();
+            imageVBox.getChildren().clear();
+        }
+    }
+
+    public void setProduct(ProductViewModel p) {
+        this.product = p;
         showProductDetails();
     }
 

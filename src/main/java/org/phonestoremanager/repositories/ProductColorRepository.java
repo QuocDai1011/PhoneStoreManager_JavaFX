@@ -14,8 +14,24 @@ public class ProductColorRepository {
         return new ProductColorRepository();
     }
 
+    public int getColorIDByNameColor(String nameColor) {
+        String sql = "SELECT ColorOfProductID FROM ColorOfProduct\n" +
+                "WHERE NameColor = ?";
+        try (Connection connection = DatabaseConnection.createConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+
+            preparedStatement.setNString(1, nameColor);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next())
+                return resultSet.getInt("ColorOfProductID");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return 0;
+    }
+
     public int getColorIDByProductIDAndNameColor (int productID, String nameColor) {
-        List<Integer> colorIDs = new ArrayList<>();
         String sql = "SELECT ColorOfProductID FROM ColorOfProduct cp\n" +
                 "JOIN ProductDetail pd ON pd.ColorID = cp.ColorOfProductID\n" +
                 "WHERE pd.ProductID = ? AND cp.NameColor = ?;";

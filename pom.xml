@@ -26,11 +26,6 @@
             <version>21</version>
         </dependency>
         <dependency>
-            <groupId>org.controlsfx</groupId>
-            <artifactId>controlsfx</artifactId>
-            <version>11.2.1</version>
-        </dependency>
-        <dependency>
             <groupId>com.dlsc.formsfx</groupId>
             <artifactId>formsfx-core</artifactId>
             <version>11.6.0</version>
@@ -69,6 +64,7 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
+
     </dependencies>
 
     <build>
@@ -91,11 +87,6 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-<<<<<<< HEAD
-                            <mainClass>org.phonestoremanager/org.phonestoremanager.Main</mainClass>
-=======
-                            <mainClass>org.phonestoremanager/org.phonestoremanager.HelloApplication</mainClass>
->>>>>>> feature/thong
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
                             <jlinkImageName>app</jlinkImageName>

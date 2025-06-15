@@ -1,10 +1,10 @@
 package org.phonestoremanager.models;
 
-public class ColorDetailModel {
+public class ColorModel {
     int colorID;
     String nameColor;
 
-    public ColorDetailModel(int colorID, String nameColor) {
+    public ColorModel(int colorID, String nameColor) {
         this.colorID = colorID;
         this.nameColor = nameColor;
     }
@@ -13,15 +13,12 @@ public class ColorDetailModel {
         return colorID;
     }
 
-    public void setColorID(int colorID) {
-        this.colorID = colorID;
-    }
-
     public String getNameColor() {
         return nameColor;
     }
 
-    public void setNameColor(String nameColor) {
-        this.nameColor = nameColor;
+    @Override
+    public String toString() {
+        return nameColor;
     }
 }
