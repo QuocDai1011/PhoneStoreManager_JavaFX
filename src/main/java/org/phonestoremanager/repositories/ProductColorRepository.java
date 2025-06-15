@@ -75,4 +75,26 @@ public class ProductColorRepository {
         }
         return nameColors;
     }
+
+    public int getColorIDByName(String name) {
+        int id = 0;
+        String sql = " SELECT TOP 1 ColorOfProductID\n" +
+                " FROM ColorOfProduct\n" +
+                " WHERE NameColor = ?;";
+
+        try(Connection conn = DatabaseConnection.createConnection()) {
+            assert conn != null;
+            PreparedStatement st = conn.prepareStatement(sql);
+            st.setString(1, name);
+            ResultSet rs = st.executeQuery();
+            if(rs.next()) {
+                id = rs.getInt("ColorOfProductID");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return id;
+    }
+
 }
