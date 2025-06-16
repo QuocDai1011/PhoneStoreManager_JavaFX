@@ -132,12 +132,19 @@ public class FixProductDetailController {
             detail.setScreenSize(Float.parseFloat(txtScreenSize.getText().trim()));
             detail.setScreenParameters(txtScreenParams.getText().trim());
             detail.setBatteryCapacity(Float.parseFloat(txtBattery.getText().trim()));
-            String imagePath = changePath(); // gọi changePath và lưu kết quả
-            if (imagePath == null) {
-                showAlert("Không thể sao chép hình ảnh. Vui lòng kiểm tra lại đường dẫn.");
-                return;
+            String oldImagePath = product.getImage();
+            String imageTextField = txtImage.getText().trim();
+            String imagePath;
+            if (!imageTextField.equals(oldImagePath)) {
+                imagePath = changePath(imageTextField); // chỉ đổi path nếu đã chọn lại
+                if (imagePath == null) {
+                    showAlert("Không thể sao chép hình ảnh. Vui lòng kiểm tra lại đường dẫn.");
+                    return;
+                }
+            } else {
+                imagePath = oldImagePath; // giữ nguyên
             }
-            detail.setImage(imagePath); // ✅ Đây là giá trị sẽ lưu vào DB: IPhone/iphoneX.jpg
+            detail.setImage(imagePath);
             txtImage.setText(imagePath);
             detail.setDescription(txtDescription.getText().trim());
             detail.setPrice(Double.parseDouble(txtPrice.getText().trim()));
@@ -246,6 +253,8 @@ public class FixProductDetailController {
         txtProductName.setText(product.getName());
         txtBrand.setText(BrandRepository.getInstance().getBrandNameByID(product.getBrandID()));
         txtColor.setText(ColorRepository.getInstance().getColorNameByColorID(detail.getColorID()));
+        System.out.println("ProductDetailID: " + detail.getProductDetailID());
+        System.out.println("ColorID: " + detail.getColorID());
         txtRam.setText(String.valueOf(detail.getRam()));
         txtRom.setText(String.valueOf(detail.getRom()));
         txtChip.setText(detail.getChip());
@@ -256,14 +265,16 @@ public class FixProductDetailController {
         txtBattery.setText(String.valueOf(detail.getBatteryCapacity()));
         txtCamFront.setText(detail.getCameraFront());
         txtCamRear.setText(detail.getCameraRear());
-        txtImage.setText(detail.getImage());
+        txtImage.setText(product.getImage());
+        System.out.println("Đường dẫn hình ảnh trả về dữ liệu: "+ product.getImage());
+        System.out.println("Đường dẫn hình ảnh trả về dữ liệu: "+ detail.getImage());
         txtDescription.setText(detail.getDescription());
-        txtPrice.setText(String.valueOf(detail.getPrice()));
+        txtPrice.setText(String.format("%.6f", detail.getPrice()));
         txtStock.setText(String.valueOf(detail.getStockQuantity()));
     }
 
-    public String changePath() {
-        String sourcePathStr = txtImage.getText().trim();
+    public String changePath(String urlImage) {
+        String sourcePathStr = urlImage.trim();
         String brand = txtBrand.getText().trim();
         String fileName = Paths.get(sourcePathStr).getFileName().toString();
 
@@ -278,7 +289,6 @@ public class FixProductDetailController {
             return null;
         }
     }
-
 
     public String nameImage() {
         String sourcePathStr = txtImage.getText().trim();

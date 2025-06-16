@@ -48,9 +48,6 @@ public class AddProductDetailController {
     public void initialize() {
         setInputValidator();
         color(); // xử lý màu sắc khi thêm sản phẩm
-        btnAddProductDetail.setOnAction(event -> {
-            insertProductDetail();
-        });
 
         btnAddProductDetail.setOnAction(event -> {
             insertProductDetail();
@@ -243,7 +240,7 @@ public class AddProductDetailController {
         }
     }
 
-    public void setProductInfo(int productID, String productName, BrandModel brandName, String productDescription) {
+    public void setProductInfo(int productID, String productName, String brandName, String productDescription) {
         txtProductID.setText(String.valueOf(productID));
         txtProductID.setFocusTraversable(false);
         txtProductName.setText(productName.trim());

@@ -28,6 +28,10 @@ public class ColorRepository implements IRepository<ColorModel> {
         return null;
     }
 
+//    public String getColorNameByColorIDAndProductDetailID(int productDetailID, int colorID) {
+//        String sql = ""
+//    }
+
 // Hàm chuẩn hóa dữ liệu trước khi truyền vào database
     public String normalizeColorName(String input) {
         if(input.isEmpty()) return "";

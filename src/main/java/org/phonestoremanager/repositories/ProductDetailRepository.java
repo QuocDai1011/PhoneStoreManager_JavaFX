@@ -258,4 +258,39 @@ public class ProductDetailRepository {
         }
         return id;
     }
+
+    public ProductDetailModel getDetailByProductIDColorIDAndROM(int productID, int colorID, int rom) {
+        ProductDetailModel detail = null;
+        String query = "SELECT * FROM ProductDetail WHERE ProductID = ? AND ColorID = ? AND ROM = ?";
+
+        try (Connection conn = DatabaseConnection.createConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setInt(1, productID);
+            stmt.setInt(2, colorID);
+            stmt.setInt(3, rom);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                detail = new ProductDetailModel();
+                // Gán dữ liệu từ rs vào detail ở đây
+                detail.setProductDetailID(rs.getInt("ProductDetailID"));
+                detail.setProductID(rs.getInt("ProductID"));
+                detail.setColorID(rs.getInt("ColorID"));
+                detail.setRom(rs.getInt("ROM"));
+                detail.setRam(rs.getInt("RAM"));
+                detail.setChip(rs.getString("Chip"));
+                detail.setScreenSize(rs.getInt("ScreenSize"));
+                detail.setScanFrequency(rs.getString("ScanFrequency"));
+                detail.setCameraFront(rs.getString("CameraFront"));
+                detail.setCameraRear(rs.getString("CameraRear"));
+                detail.setBatteryCapacity(rs.getInt("BatteryCapacity"));
+                detail.setPrice(rs.getDouble("Price"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return detail;
+    }
+
 }

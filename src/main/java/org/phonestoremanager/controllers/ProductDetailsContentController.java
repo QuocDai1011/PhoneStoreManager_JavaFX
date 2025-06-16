@@ -2,7 +2,7 @@ package org.phonestoremanager.controllers;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.HPos;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -45,6 +45,8 @@ public class ProductDetailsContentController {
     Button btnFixProduct = new Button("Sửa");
 
     Button btnDeleteDetail = new Button("Xóa");
+
+    Button btnAddDetail = new Button("Thêm");
 
     private ProductViewModel product;
 
@@ -195,6 +197,19 @@ public class ProductDetailsContentController {
                 }
             }
         }
+
+        // Gán productDetail nếu đã đủ điều kiện
+        if (selectedROM != null && selectedColorID != 0) {
+            productDetail = ProductDetailRepository.getInstance()
+                    .getDetailByProductIDColorIDAndROM(product.getProductID(), selectedColorID, Integer.parseInt(selectedROM));
+
+            if (productDetail != null) {
+                System.out.println("✅ Gán productDetail trong updateImageDisplay: " + productDetail.getProductDetailID());
+            } else {
+                System.out.println("⚠️ Không tìm thấy productDetail trong updateImageDisplay.");
+            }
+        }
+
     }
 
     public void displayProductOverview(ProductViewModel product, int selectedRom) {
@@ -261,14 +276,16 @@ public class ProductDetailsContentController {
         grid.add(namePrice, 0, 5);
         grid.add(valuePrice, 1, 5);
 
-        GridPane.setColumnSpan(btnFixProduct, 2);
-        grid.add(btnFixProduct, 0, 6);
-        btnFixProduct.getStyleClass().add("fixProduct-btn");
+        HBox buttonBox = new HBox(10); // khoảng cách giữa các nút là 10
+        buttonBox.getChildren().addAll(btnAddDetail, btnFixProduct, btnDeleteDetail);
+        buttonBox.setAlignment(Pos.CENTER_RIGHT); // hoặc Pos.CENTER nếu bạn muốn giữa
 
-        GridPane.setColumnSpan(btnDeleteDetail, 2);
-        GridPane.setHalignment(btnDeleteDetail, HPos.RIGHT);
-        grid.add(btnDeleteDetail, 1, 6);
+        btnAddDetail.getStyleClass().add("fixProduct-btn");
+        btnFixProduct.getStyleClass().add("fixProduct-btn");
         btnDeleteDetail.getStyleClass().add("fixProduct-btn");
+
+        GridPane.setColumnSpan(buttonBox, 2); // chiếm cả 2 cột
+        grid.add(buttonBox, 0, 6);
 
         detailVBox.getChildren().clear();
         detailVBox.getChildren().add(grid);
@@ -292,7 +309,22 @@ public class ProductDetailsContentController {
             }
         });
 
+        btnAddDetail.setOnAction(event -> {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/phonestoremanager/viewsfxml/add-product-detail-view.fxml"));
+                Parent root = loader.load();
 
+                System.out.println(product.getProductID());
+                AddProductDetailController controller = loader.getController();
+                controller.setProductInfo(product.getProductID(), product.getName(), BrandRepository.getInstance().getBrandNameByID(product.getBrandID()), product.getDescription());
+
+                Stage stage = new Stage();
+                stage.setScene(new Scene(root));
+                stage.show();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 
     public void deleteProductDetail(ProductDetailModel pd, ProductViewModel p) {

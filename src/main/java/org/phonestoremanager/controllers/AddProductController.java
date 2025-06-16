@@ -73,7 +73,7 @@ public class AddProductController {
                     Parent root = loader.load();
 
                     AddProductDetailController controller = loader.getController();
-                    controller.setProductInfo(productID, name, selectedBrand, description);
+                    controller.setProductInfo(productID, name, selectedBrand.getName(), description);
 
                     Stage stage = new Stage();
                     stage.setTitle("Phân Loạt Sản Phẩm");

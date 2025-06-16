@@ -58,32 +58,6 @@ public class EmployeeViewController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        if (fixedButton != null) {
-            fixedButton.toFront(); // Đưa nút lên trên cùng giao diện
-            fixedButton.setOnAction(event -> {
-                try {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/phonestoremanager/viewsfxml/AddEmployeeForm.fxml"));
-                    Parent root = loader.load();
-
-                    // Tạo một Stage mới hoặc sử dụng Stage hiện tại
-                    Stage stage = new Stage();
-                    stage.setTitle("Thêm Dòng Sản Phẩm Mới");
-                    stage.setScene(new Scene(root));
-                    stage.show();
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    // Bạn có thể dùng Alert để thông báo lỗi
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setHeaderText("Không thể mở giao diện Thêm Sản Phẩm");
-                    alert.setContentText(e.getMessage());
-                    alert.showAndWait();
-                }
-            });
-        } else {
-            System.err.println("Nút này nó bị null");
-        }
-
         columnID.setCellValueFactory(new PropertyValueFactory<>("employeeID"));
         columnFirstname.setCellValueFactory(new PropertyValueFactory<>("lastName"));
         columnLastname.setCellValueFactory(new PropertyValueFactory<>("firstName"));
@@ -173,6 +147,32 @@ public class EmployeeViewController implements Initializable {
             });
             return row;
         });
+
+        if (fixedButton != null) {
+            fixedButton.toFront(); // Đưa nút lên trên cùng giao diện
+            fixedButton.setOnAction(event -> {
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/phonestoremanager/viewsfxml/AddEmployeeForm.fxml"));
+                    Parent root = loader.load();
+
+                    // Tạo một Stage mới hoặc sử dụng Stage hiện tại
+                    Stage stage = new Stage();
+                    stage.setTitle("Thêm Dòng Sản Phẩm Mới");
+                    stage.setScene(new Scene(root));
+                    stage.show();
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    // Bạn có thể dùng Alert để thông báo lỗi
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setHeaderText("Không thể mở giao diện Thêm Sản Phẩm");
+                    alert.setContentText(e.getMessage());
+                    alert.showAndWait();
+                }
+            });
+        } else {
+            System.err.println("Nút này nó bị null");
+        }
     }
 
     public void render(List<EmployeeModel> list) {
