@@ -1,16 +1,32 @@
 package org.phonestoremanager.models;
 
 public class ManageModel {
+    private final int productID; // ✅ Thêm
     private final String name;
     private final double price;
     private final String imageUrl;
     private final int inventory;
+    private ProductViewModel productViewModel;
 
-    public ManageModel(String name, double price, String imageUrl, int iventory) {
+    // ✅ Constructor có productID
+    public ManageModel(int productID, String name, double price, String imageUrl, int inventory) {
+        this.productID = productID;
         this.name = name;
         this.price = price;
         this.imageUrl = imageUrl;
-        this.inventory = iventory;
+        this.inventory = inventory;
+    }
+
+    public int getProductID() {
+        return productID;
+    }
+
+    public ProductViewModel getProductViewModel() {
+        return productViewModel;
+    }
+
+    public void setProductViewModel(ProductViewModel productViewModel) {
+        this.productViewModel = productViewModel;
     }
 
     public String getName() {

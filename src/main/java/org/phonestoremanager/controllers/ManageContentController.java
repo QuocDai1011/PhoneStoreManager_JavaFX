@@ -1,13 +1,18 @@
 package org.phonestoremanager.controllers;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.FlowPane;
 import org.phonestoremanager.models.ManageModel;
+import org.phonestoremanager.models.ProductViewModel;
 import org.phonestoremanager.repositories.ManageRepository;
 import org.phonestoremanager.repositories.ProductViewRepository;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,14 +59,44 @@ public class ManageContentController {
         }
     }
 
-    private void loadManeger () {
+    private void openProductDetail(ProductViewModel product) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/phonestoremanager/viewsfxml/product-details-view.fxml"));
+            Parent root = loader.load();
+
+            ProductDetailsContentController controller = loader.getController();
+            controller.setProduct(product);  // vẫn dùng ProductViewModel
+
+            Scene currentScene = manageContainer.getScene(); // dùng manageContainer
+            if (currentScene != null) {
+                currentScene.getStylesheets().add(getClass().getResource("/org/phonestoremanager/assets/css/product-detail.css").toExternalForm());
+                currentScene.setRoot(root);
+            } else {
+                System.err.println("Error: Scene is null");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void loadManeger() {
         List<ManageModel> manageModels = ManageRepository.getInstance().selectAll();
 
         manageContainer.setVgap(30);
         manageContainer.setHgap(20);
 
         for (ManageModel manageModel : manageModels) {
-            manageContainer.getChildren().add(ManageController.createManagerPane(manageModel));
+            var managerPane = ManageController.createManagerPane(manageModel);
+
+            managerPane.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2) {
+                    // Lấy ProductViewModel từ ManageModel (giả sử có hàm getProductViewModel)
+                    ProductViewModel productView = manageModel.getProductViewModel();
+                    openProductDetail(productView);
+                }
+            });
+
+            manageContainer.getChildren().add(managerPane);
         }
     }
 }

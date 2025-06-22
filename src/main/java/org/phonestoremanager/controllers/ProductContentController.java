@@ -11,6 +11,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
+import org.phonestoremanager.models.AccountModel;
 import org.phonestoremanager.repositories.ProductViewRepository;
 import org.phonestoremanager.models.ProductViewModel;
 
@@ -32,6 +33,8 @@ public class ProductContentController {
 
     @FXML
     private Button fixedButton;
+
+    private AccountModel accountModel;
 
 
     @FXML
@@ -128,7 +131,6 @@ public class ProductContentController {
         }
     }
 
-
     private void openProductDetail(ProductViewModel product) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/phonestoremanager/viewsfxml/product-details-view.fxml"));
@@ -169,7 +171,6 @@ public class ProductContentController {
                     openProductDetail(productViewModel);
                 }
             });
-
             productContainer.getChildren().add(productPane);
         }
     }

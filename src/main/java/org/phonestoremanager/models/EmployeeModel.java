@@ -1,11 +1,14 @@
 package org.phonestoremanager.models;
 
+import java.sql.Date;
+import java.sql.Timestamp;
+
 public class EmployeeModel {
     private int employeeID;
     private int accountID;
     private String firstName;
     private String lastName;
-    private int gender;
+    private int gender; // Có thể dùng 0: Nam, 1: Nữ
     private String genderText;
     private String email;
     private String phoneNumber;
@@ -13,10 +16,17 @@ public class EmployeeModel {
     private String position;
     private double salary;
 
-    public EmployeeModel() {
-    }
+    private Timestamp createAt;
+    private Timestamp updateAt;
+    private String note;
+    private Date dateOfBirth;
+    private Date startDate;
 
-    public EmployeeModel(int employeeID, int accountID, String firstName, String lastName, int gender, String email, String phoneNumber, String address, String position, double salary) {
+    public EmployeeModel() {}
+
+    public EmployeeModel(int employeeID, int accountID, String firstName, String lastName, int gender, String email,
+                         String phoneNumber, String address, String position, double salary,
+                         Timestamp createAt, Timestamp updateAt, String note, Date dateOfBirth, Date startDate) {
         this.employeeID = employeeID;
         this.accountID = accountID;
         this.firstName = firstName;
@@ -27,42 +37,14 @@ public class EmployeeModel {
         this.address = address;
         this.position = position;
         this.salary = salary;
+        this.createAt = createAt;
+        this.updateAt = updateAt;
+        this.note = note;
+        this.dateOfBirth = dateOfBirth;
+        this.startDate = startDate;
     }
 
-    public EmployeeModel(String firstName, String lastName, int gender, String email, String phoneNumber, String address, String position, double salary, int employeeID) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.gender = gender;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.address = address;
-        this.position = position;
-        this.salary = salary;
-        this.employeeID = employeeID;
-    }
-
-    public EmployeeModel(int employeeID, int accountID, String firstName, String lastName, int gender, String genderText, String email, String phoneNumber, String address, String position, double salary) {
-        this.employeeID = employeeID;
-        this.accountID = accountID;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.gender = gender;
-        this.genderText = genderText;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.address = address;
-        this.position = position;
-        this.salary = salary;
-    }
-
-    public String getGenderText() {
-        return genderText;
-    }
-
-    public void setGenderText(String genderText) {
-        this.genderText = genderText;
-    }
-
+    // Getter & Setter
     public int getEmployeeID() {
         return employeeID;
     }
@@ -103,6 +85,14 @@ public class EmployeeModel {
         this.gender = gender;
     }
 
+    public String getGenderText() {
+        return genderText;
+    }
+
+    public void setGenderText(String genderText) {
+        this.genderText = genderText;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -119,14 +109,6 @@ public class EmployeeModel {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getPosition() {
-        return position;
-    }
-
-    public void setPosition(String position) {
-        this.position = position;
-    }
-
     public String getAddress() {
         return address;
     }
@@ -135,12 +117,60 @@ public class EmployeeModel {
         this.address = address;
     }
 
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
+    }
+
     public double getSalary() {
         return salary;
     }
 
     public void setSalary(double salary) {
         this.salary = salary;
+    }
+
+    public Timestamp getCreateAt() {
+        return createAt;
+    }
+
+    public void setCreateAt(Timestamp createAt) {
+        this.createAt = createAt;
+    }
+
+    public Timestamp getUpdateAt() {
+        return updateAt;
+    }
+
+    public void setUpdateAt(Timestamp updateAt) {
+        this.updateAt = updateAt;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
+    public Date getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
     }
 
     @Override
@@ -156,6 +186,11 @@ public class EmployeeModel {
                 ", address='" + address + '\'' +
                 ", position='" + position + '\'' +
                 ", salary=" + salary +
+                ", createAt=" + createAt +
+                ", updateAt=" + updateAt +
+                ", note='" + note + '\'' +
+                ", dateOfBirth=" + dateOfBirth +
+                ", startDate=" + startDate +
                 '}';
     }
 }

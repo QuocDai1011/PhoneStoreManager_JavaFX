@@ -1,5 +1,6 @@
 package org.phonestoremanager.repositories;
 
+import org.graalvm.collections.EconomicMap;
 import org.phonestoremanager.models.AccountModel;
 import org.phonestoremanager.utils.DatabaseConnection;
 import org.phonestoremanager.utils.DateUtil;
@@ -11,8 +12,36 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-
 public class AccountRepository {
+    public static AccountModel getAccountByUserNameAndPassword(String userName, String passWord) {
+        String sql = "SELECT * FROM Account\n" +
+                "WHERE Username = ?";
+
+        try (Connection connection = DatabaseConnection.createConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setString(1, userName);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            if (rs.next()) {
+                String encryptedPassword = rs.getString("Password");
+                String decryptedPassword = PasswordEncrypt.decryptAES(encryptedPassword);
+
+                if (passWord.equals(decryptedPassword)) {
+                    AccountModel account = new AccountModel();
+                    account.setAccountID(rs.getInt("AccountID"));
+                    account.setUserName(rs.getString("UserName"));
+                    account.setPassword(rs.getString("Password")); // vẫn lưu dạng mã hóa
+                    account.setRoleID(rs.getInt("RoleID"));
+                    return account;
+                }
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return null;
+    }
+
     public static int insert(AccountModel accountModel) {
         DatabaseConnection databaseConnection = new DatabaseConnection();
         int row = 0;

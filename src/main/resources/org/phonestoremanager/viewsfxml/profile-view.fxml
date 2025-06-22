@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="640.0" prefWidth="510.0" styleClass="profile-root" stylesheets="@../assets/css/profile.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.phonestoremanager.controllers.ProfileController">
+
+    <VBox alignment="TOP_CENTER" layoutX="34.0" layoutY="22.0" prefHeight="538.0" prefWidth="431.0">
+        <!-- Tiêu đề -->
+        <Label styleClass="title-label" text="HỒ SƠ NHÂN VIÊN" />
+
+        <!-- Ảnh đại diện -->
+        <ImageView fx:id="avatarImageView" fitHeight="120" fitWidth="120" styleClass="avatar" />
+
+        <!-- Lưới thông tin -->
+        <GridPane hgap="10" prefHeight="362.0" prefWidth="0.0" styleClass="info-grid" vgap="8">
+            <columnConstraints>
+                <ColumnConstraints halignment="RIGHT" minWidth="100" />
+                <ColumnConstraints minWidth="250" />
+            </columnConstraints>
+
+            <Label text="Employee ID:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+            <Label fx:id="employeeIdLabel" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+            <Label text="Account ID:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+            <Label fx:id="accountIdLabel" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+            <Label text="Họ:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+            <Label fx:id="firstNameLabel" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="firstNameField" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+            <Label text="Tên:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+            <Label fx:id="lastNameLabel" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="lastNameField" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+
+            <Label text="Giới tính:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+            <Label fx:id="genderLabel" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+
+            <Label text="Email:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+            <Label fx:id="emailLabel" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <TextField fx:id="emailField" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+
+            <Label text="Số điện thoại:" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+            <Label fx:id="phoneLabel" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <TextField fx:id="phoneField" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+
+            <Label text="Địa chỉ:" GridPane.columnIndex="0" GridPane.rowIndex="7" />
+            <Label fx:id="addressLabel" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+            <TextField fx:id="addressField" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+
+            <Label text="Chức vụ:" GridPane.columnIndex="0" GridPane.rowIndex="8" />
+            <Label fx:id="positionLabel" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+
+            <Label text="Lương:" GridPane.columnIndex="0" GridPane.rowIndex="9" />
+            <Label fx:id="salaryLabel" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+
+            <Label text="Ngày sinh:" GridPane.columnIndex="0" GridPane.rowIndex="10" />
+            <Label fx:id="dobLabel" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+
+            <Label text="Ngày bắt đầu:" GridPane.columnIndex="0" GridPane.rowIndex="11" />
+            <Label fx:id="startDateLabel" GridPane.columnIndex="1" GridPane.rowIndex="11" />
+
+            <Label text="Tạo lúc:" GridPane.columnIndex="0" GridPane.rowIndex="12" />
+            <Label fx:id="createAtLabel" GridPane.columnIndex="1" GridPane.rowIndex="12" />
+
+            <Label text="Cập nhật lúc:" GridPane.columnIndex="0" GridPane.rowIndex="13" />
+            <Label fx:id="updateAtLabel" GridPane.columnIndex="1" GridPane.rowIndex="13" />
+
+            <Label text="Ghi chú:" GridPane.columnIndex="0" GridPane.rowIndex="14" />
+            <Label fx:id="noteLabel" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="14" />
+            <TextField fx:id="noteField" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="14" />
+
+            <rowConstraints>
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+            </rowConstraints>
+            <VBox.margin>
+                <Insets left="70.0" />
+            </VBox.margin>
+        </GridPane>
+    </VBox>
+
+    <ImageView fx:id="editIcon" fitHeight="30.0" fitWidth="30.0" layoutX="237.0" layoutY="630.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;" />
+    <ImageView fx:id="tickIcon" fitHeight="30.0" fitWidth="30.0" layoutX="440.0" layoutY="630.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;" styleClass="orange-button" />
+   <ImageView fx:id="cancelIcon" fitHeight="30.0" fitWidth="30.0" layoutX="400.0" layoutY="630.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;" styleClass="orange-button" />
+
+</AnchorPane>

@@ -16,11 +16,11 @@ public class ManageRepository implements IRepository{
     }
 
     @Override
-    public ArrayList selectAll() {
+    public ArrayList<ManageModel> selectAll() {
         ArrayList<ManageModel> manageModels = new ArrayList<>();
         Set<Integer> manageIDs = new HashSet<>();
         DatabaseConnection databaseConnection = new DatabaseConnection();
-        String sql = "SELECT p.ProductID, Name, Price, StockQuantity, Image FROM Product p\n" +
+        String sql = "SELECT p.ProductID, Name, Price, StockQuantity, Image FROM Product p " +
                 "JOIN ProductDetail pd ON pd.ProductID = p.ProductID";
 
         try (Connection conn = databaseConnection.connectionData();
@@ -28,20 +28,26 @@ public class ManageRepository implements IRepository{
 
             ResultSet resultSet = statement.executeQuery(sql);
 
-            while(resultSet.next()) {
+            while (resultSet.next()) {
                 int productID = resultSet.getInt("ProductID");
 
-                if(manageIDs.contains(productID))
+                if (manageIDs.contains(productID))
                     continue;
 
                 manageIDs.add(productID);
 
                 String name = resultSet.getString("Name");
-                Double price = resultSet.getDouble("Price");
+                double price = resultSet.getDouble("Price");
                 int stock = resultSet.getInt("StockQuantity");
                 String image = resultSet.getString("Image");
 
-                ManageModel manageModel = new ManageModel(name, price, image, stock);
+                // ✅ Dùng constructor mới có productID
+                ManageModel manageModel = new ManageModel(productID, name, price, image, stock);
+
+                // ✅ Gán ProductViewModel
+                manageModel.setProductViewModel(
+                        ProductViewRepository.getInstance().selectByID(productID)
+                );
 
                 manageModels.add(manageModel);
             }
@@ -56,9 +62,9 @@ public class ManageRepository implements IRepository{
         List<ManageModel> manageModels = new ArrayList<>();
         Set<Integer> manageIDs = new HashSet<>();
 
-        String sql = "SELECT P.ProductID, Name, Price, StockQuantity, Image FROM Product p\n" +
-                "JOIN ProductDetail pd ON pd.ProductID = p.ProductID\n" +
-                "WHERE Name LIKE ?";
+        String sql = "SELECT p.ProductID, Name, Price, StockQuantity, Image FROM Product p " +
+                "JOIN ProductDetail pd ON pd.ProductID = p.ProductID " +
+                "WHERE p.Name LIKE ?";
 
         try (Connection conn = databaseConnection.connectionData();
              PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
@@ -79,8 +85,15 @@ public class ManageRepository implements IRepository{
                 String image = resultSet.getString("Image");
                 int stock = resultSet.getInt("StockQuantity");
 
-                ManageModel manageModel = new ManageModel(name, price, image, stock);
-                manageModels.add(manageModel); // thêm vào danh sách
+                // ✅ Dùng constructor có productID
+                ManageModel manageModel = new ManageModel(productID, name, price, image, stock);
+
+                // ✅ Gán ProductViewModel để tránh lỗi NullPointerException
+                manageModel.setProductViewModel(
+                        ProductViewRepository.getInstance().selectByID(productID)
+                );
+
+                manageModels.add(manageModel);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -88,7 +101,6 @@ public class ManageRepository implements IRepository{
 
         return manageModels;
     }
-
 
     @Override
     public ArrayList selectDetailById() {

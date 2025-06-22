@@ -238,4 +238,34 @@ public class ProductViewRepository implements IRepository<ProductViewModel> {
         return null;
     }
 
+    public ProductViewModel selectByID(int productID) {
+        DatabaseConnection databaseConnection = new DatabaseConnection();
+        ProductViewModel productViewModel = null;
+
+        String sql = "SELECT * FROM Product p " +
+                "JOIN ProductDetail pd ON p.ProductID = pd.ProductID " +
+                "WHERE p.ProductID = ?";
+
+        try (Connection conn = databaseConnection.connectionData()) {
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setInt(1, productID);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                int brandID = resultSet.getInt("BrandID");
+                String name = resultSet.getString("Name");
+                String description = resultSet.getString("Description");
+                String image = resultSet.getString("Image");
+                double price = resultSet.getDouble("Price");
+
+                productViewModel = new ProductViewModel(productID, brandID, name, description, image, price);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return productViewModel;
+    }
+
+
 }

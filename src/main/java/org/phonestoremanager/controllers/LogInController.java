@@ -12,6 +12,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+import org.phonestoremanager.models.AccountModel;
+import org.phonestoremanager.repositories.AccountRepository;
 import org.phonestoremanager.services.AccountService;
 
 import java.io.IOException;
@@ -22,6 +24,8 @@ public class LogInController {
     private TextField userNameTextField;
     @FXML
     private PasswordField passwordTextField;
+
+    private AccountModel accountModel;
 
     public void checkAccount(ActionEvent event) throws SQLException, IOException {
         String userName = userNameTextField.getText();
@@ -41,6 +45,7 @@ public class LogInController {
 
         AccountService accountService = new AccountService();
         boolean result = accountService.checkAccountWhenLogIn(userName, password);
+        accountModel = AccountRepository.getAccountByUserNameAndPassword(userName, password);
         if(result) {
             try {
                 // Lấy Stage hiện tại thông qua event
@@ -49,6 +54,9 @@ public class LogInController {
                 // Load giao diện chính
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/phonestoremanager/viewsfxml/main-view.fxml"));
                 Parent root = loader.load();
+
+                MenuController controller = loader.getController();
+                controller.setAcount(accountModel);
 
                 // Tạo Scene mới và thêm CSS
                 Scene scene = new Scene(root);
