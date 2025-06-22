@@ -12,6 +12,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+import org.phonestoremanager.models.AccountModel;
+import org.phonestoremanager.repositories.AccountRepository;
 import org.phonestoremanager.services.AccountService;
 
 import java.io.IOException;
@@ -22,6 +24,8 @@ public class LogInController {
     private TextField userNameTextField;
     @FXML
     private PasswordField passwordTextField;
+
+    private AccountModel accountModel;
 
     public void checkAccount(ActionEvent event) throws SQLException, IOException {
         String userName = userNameTextField.getText();
@@ -41,6 +45,7 @@ public class LogInController {
 
         AccountService accountService = new AccountService();
         boolean result = accountService.checkAccountWhenLogIn(userName, password);
+        accountModel = AccountRepository.getAccountByUserNameAndPassword(userName, password);
         if(result) {
             try {
                 // Lấy Stage hiện tại thông qua event
@@ -49,6 +54,9 @@ public class LogInController {
                 // Load giao diện chính
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/phonestoremanager/viewsfxml/main-view.fxml"));
                 Parent root = loader.load();
+
+                MenuController controller = loader.getController();
+                controller.setAcount(accountModel);
 
                 // Tạo Scene mới và thêm CSS
                 Scene scene = new Scene(root);
@@ -86,45 +94,7 @@ public class LogInController {
         alert.showAndWait();
     }
 
-    @FXML
-    public void checkAccountOnEnter(KeyEvent event) throws SQLException, IOException {
-        if(event.getCode() == KeyCode.ENTER) {
-            String userName = userNameTextField.getText();
-            String password = passwordTextField.getText();
 
-            //kiem tra username va password khong duoc de trong
-            if(userName.isEmpty() && password.isEmpty()) {
-                showAlert("ERROR", "Tên đăng nhập và mật khẩu không được để trống!", Alert.AlertType.ERROR);
-                return;
-            }else if(userName.isEmpty()) {
-                showAlert("ERROR", "Chưa nhập tên đăng nhập", Alert.AlertType.ERROR);
-                return;
-            }else if(password.isEmpty()) {
-                showAlert("ERROR", "Chưa nhập mật khẩu", Alert.AlertType.ERROR);
-                return;
-            }
-
-            AccountService accountService = new AccountService();
-            boolean result = accountService.checkAccountWhenLogIn(userName, password);
-            if(result) {
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/phonestoremanager/viewsfxml/main-view.fxml"));
-                Parent root = loader.load();
-
-                Scene scene = new Scene(root);
-                stage.setScene(scene);
-                stage.setTitle("Trang chủ");
-                scene.getStylesheets().add(getClass().getResource("/org/phonestoremanager/assets/css/Home.css").toExternalForm());
-                scene.getStylesheets().add(getClass().getResource("/org/phonestoremanager/assets/css/ContextMenu.css").toExternalForm());
-                stage.centerOnScreen();
-                stage.centerOnScreen();
-                stage.show();
-            }
-            else {
-                showAlert("ERROR", "Tên đăng nhập hoặc mật khẩu không đúng!", Alert.AlertType.ERROR);
-            }
-        }
-    }
 
     public void signUpPress (ActionEvent event) throws IOException {
         Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();

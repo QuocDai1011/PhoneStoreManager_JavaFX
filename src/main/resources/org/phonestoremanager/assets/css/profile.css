@@ -1,0 +1,76 @@
+/* ===================== GIAO DIỆN CHUNG ===================== */
+.profile-root {
+    -fx-background-color: #fff8f0;
+    -fx-border-color: #ffa726;
+    -fx-border-width: 2;
+    -fx-border-radius: 12;
+    -fx-background-radius: 12;
+    -fx-font-family: 'Segoe UI', 'Roboto', sans-serif;
+    -fx-padding: 20;
+}
+
+/* ===================== TIÊU ĐỀ ===================== */
+.title-label {
+    -fx-font-size: 26px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #e65100;
+    -fx-effect: dropshadow(one-pass-box, rgba(255, 167, 38, 0.5), 2, 0.5, 0, 1);
+    -fx-underline: true;
+}
+
+/* ===================== ẢNH ĐẠI DIỆN ===================== */
+.avatar {
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 6, 0.2, 0, 1);
+    -fx-border-color: #ffa726;
+    -fx-border-radius: 100;
+    -fx-background-radius: 100;
+    -fx-border-width: 2;
+    -fx-cursor: hand;
+}
+
+.avatar:hover {
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+
+/* ===================== LƯỚI THÔNG TIN ===================== */
+.info-grid {
+    -fx-font-size: 14px;
+}
+
+/* Label bên trái */
+.info-grid .label {
+    -fx-text-fill: #444;
+    -fx-font-weight: bold;
+}
+
+/* Label hiển thị giá trị bên phải */
+.label-value {
+    -fx-text-fill: #555;
+    -fx-font-style: italic;
+    -fx-font-size: 13.5px;
+}
+
+.orange-button {
+    -fx-background-color: #ff5722; /* Cam đậm kiểu Shopee */
+    -fx-text-fill: white;          /* Chữ trắng */
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 10 20;
+    -fx-background-radius: 6px;    /* Bo góc */
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 4, 0.2, 0, 2);
+    -fx-border-width: 0;
+    -fx-transition: 0.3s all ease-in-out;
+}
+
+/* Hover */
+.orange-button:hover {
+    -fx-background-color: #e64a19;
+}
+
+/* Nhấn chuột */
+.orange-button:pressed {
+    -fx-background-color: #d84315;
+    -fx-translate-y: 1px;
+}

@@ -1,6 +1,7 @@
 package org.phonestoremanager.repositories;
 
 import org.phonestoremanager.exeptions.PasswordValidation;
+import org.phonestoremanager.models.AccountModel;
 import org.phonestoremanager.models.EmployeeModel;
 import org.phonestoremanager.services.EmployeeService;
 import org.phonestoremanager.utils.DatabaseConnection;
@@ -159,6 +160,76 @@ public class EmployeeRepository {
         return 0;
     }
 
+    public static EmployeeModel getEmployeeProfileByAccountID(int accountID) {
+        String sql = "SELECT [EmployeeID], [AccountID], [FirstName], [LastName], [Gender], " +
+                "[Email], [PhoneNumber], [Address], [Position], [Salary], " +
+                "[CreateAt], [UpdateAt], [Note], [DateOfBirth], [StartDate] " +
+                "FROM EmployeeProfile WHERE AccountID = ?";
+
+        try (Connection connection = DatabaseConnection.createConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+
+            preparedStatement.setInt(1, accountID);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            if (rs.next()) {
+                EmployeeModel profile = new EmployeeModel();
+
+                profile.setEmployeeID(rs.getInt("EmployeeID"));
+                profile.setAccountID(rs.getInt("AccountID"));
+                profile.setFirstName(rs.getString("FirstName"));
+                profile.setLastName(rs.getString("LastName"));
+                profile.setGender(rs.getInt("Gender"));
+                profile.setEmail(rs.getString("Email"));
+                profile.setPhoneNumber(rs.getString("PhoneNumber"));
+                profile.setAddress(rs.getString("Address"));
+                profile.setPosition(rs.getString("Position"));
+                profile.setSalary(rs.getDouble("Salary"));
+                profile.setCreateAt(rs.getTimestamp("CreateAt"));
+                profile.setUpdateAt(rs.getTimestamp("UpdateAt"));
+                profile.setNote(rs.getString("Note"));
+                profile.setDateOfBirth(rs.getDate("DateOfBirth"));
+                profile.setStartDate(rs.getDate("StartDate"));
+
+                return profile;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+
+        return null; // Không tìm thấy bản ghi
+    }
+
+    public static boolean updateEmployeeProfile(int accountId, String firstName, String lastName,
+                                                String email, String phone, String address, String note) {
+        String sql = """
+        UPDATE EmployeeProfile
+        SET FirstName = ?, LastName = ?, Email = ?, PhoneNumber = ?, 
+            Address = ?, Note = ?, UpdateAt = GETDATE()
+        WHERE AccountID = ?
+        """;
+
+        try (Connection conn = DatabaseConnection.createConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, firstName);
+            stmt.setString(2, lastName);
+            stmt.setString(3, email);
+            stmt.setString(4, phone);
+            stmt.setString(5, address);
+            stmt.setString(6, note);
+            stmt.setInt(7, accountId);
+
+            int rowsUpdated = stmt.executeUpdate();
+            return rowsUpdated > 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 
 
 }

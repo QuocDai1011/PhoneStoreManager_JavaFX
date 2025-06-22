@@ -15,7 +15,8 @@ import javax.mail.internet.MimeMultipart;
 
 public class JavaMail {
 
-    public static boolean sendMail(String emailTo, int index, String customerName, double total, List<OrderUpdateModel> list) {
+    public static boolean sendMail(String emailTo, int index, String customerName,
+                                   double total, List<OrderUpdateModel> list, boolean paid) {
         String domain = emailTo.substring(emailTo.indexOf("@") + 1);
         if (!EmailDomainValidator.hasMXRecord(domain)) {
             return false;
@@ -41,7 +42,12 @@ public class JavaMail {
                 });
 
         try {
-            String pdfPath = PdfGenerator.createPdf(index, customerName, total, list); // Tạo file PDF
+            String pdfPath;
+            if(paid) {
+                pdfPath = PdfGenerator.createPdf(index, customerName, total, list); // Tạo file PDF
+            }else {
+                pdfPath = PdfGenerator.pdfCreateWithoutPayment(index, customerName, total, list);
+            }
 
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(username));
@@ -87,6 +93,8 @@ public class JavaMail {
         listTemp.add(sp1);
         listTemp.add(sp2);
         listTemp.add(sp3);
-        JavaMail.sendMail("nhan01282544104@gmail.com", 31, "Đinh Nhật Huyền Nhân", 600000000, listTemp);
+        //nhan01282544104@gmail.com
+        JavaMail.sendMail("nhan01282544104@gmail.com", 32, "Đinh Nhật Huyền Nhân", 600000000, listTemp, false);
+        JavaMail.sendMail("nhan01282544104@gmail.com", 33, "Đinh Nhật Huyền Nhân", 600000000, listTemp, true);
     }
 }

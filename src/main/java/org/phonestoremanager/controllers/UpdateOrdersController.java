@@ -52,9 +52,6 @@ public class UpdateOrdersController implements Initializable {
     private TextField address;
 
     @FXML
-    private DatePicker orderDatePicker;
-
-    @FXML
     private ComboBox<String> productComboBox;
 
     @FXML
@@ -295,6 +292,7 @@ public class UpdateOrdersController implements Initializable {
         if (statusComboBox.getValue().equals("Đã thanh toán")) {
             overlayPane.setVisible(true); // Hiện overlay
             progressIndicator.setVisible(true); // giả sử bạn có 1 ProgressIndicator ở overlay
+            mainContent.setDisable(true);
 
             // Tạo background task để gửi email
             Task<Boolean> sendEmailTask = new Task<>() {
@@ -303,7 +301,7 @@ public class UpdateOrdersController implements Initializable {
                     //TODO: Sửa random số ngẫu nhiên thành OrderID trong database (nếu được)
                     int randomValue = new Random().nextInt(10000) + 1;
                     return JavaMail.sendMail(email.getText(), randomValue,
-                            fullName.getText(), ParseVietNamCurrencyToDouble.parseVietnamCurrency(totalAmountLabel.getText()), list);
+                            fullName.getText(), ParseVietNamCurrencyToDouble.parseVietnamCurrency(totalAmountLabel.getText()), list, true);
                 }
             };
 
@@ -336,9 +334,55 @@ public class UpdateOrdersController implements Initializable {
             new Thread(sendEmailTask).start();
             return;
         }
+        // xử lí khi chưa thanh toán
+        else {
+            overlayPane.setVisible(true); // Hiện overlay
+            progressIndicator.setVisible(true); // giả sử bạn có 1 ProgressIndicator ở overlay
+            mainContent.setDisable(true);
+
+            // Tạo background task để gửi email
+            Task<Boolean> sendEmailTask = new Task<>() {
+                @Override
+                protected Boolean call() {
+                    //TODO: Sửa random số ngẫu nhiên thành OrderID trong database (nếu được)
+                    int randomValue = new Random().nextInt(10000) + 1;
+                    return JavaMail.sendMail(email.getText(), randomValue,
+                            fullName.getText(), ParseVietNamCurrencyToDouble.parseVietnamCurrency(totalAmountLabel.getText()), list, false);
+                }
+            };
+
+            // Khi task kết thúc, xử lý UI
+            sendEmailTask.setOnSucceeded(event -> {
+                boolean success = sendEmailTask.getValue();
+
+                if (success) {
+                    Alert alert1 = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert1.setHeaderText("Gửi Email cho " + email.getText() + " thành công!");
+                    alert1.showAndWait();
+                    cancel_btn.getScene().getWindow().hide();
+                } else {
+                    alertError("Lỗi khi gửi Email do Email không tồn tại!");
+                }
+
+                // Tắt overlay và progress sau khi xong
+                overlayPane.setVisible(false);
+                progressIndicator.setVisible(false);
+            });
+
+            // (tuỳ chọn) xử lý khi có lỗi
+            sendEmailTask.setOnFailed(event -> {
+                alertError("Đã xảy ra lỗi khi gửi email.");
+                overlayPane.setVisible(false);
+                progressIndicator.setVisible(false);
+            });
+
+            // Bắt đầu chạy task
+            new Thread(sendEmailTask).start();
+//            return;
+        }
 
         //tắt màn hình khi tạo đơn hàng thành coong
-        cancel_btn.getScene().getWindow().hide();
+//        cancel_btn.getScene().getWindow().hide();
 
     }
 
@@ -423,10 +467,6 @@ public class UpdateOrdersController implements Initializable {
         stage.close();
     }
 
-    private LocalDate getDateSelected() {
-        return orderDatePicker.getValue();
-    }
-
     private OrderUpdateModel getValueModel() {
         // check thông tin sản phẩm khác null
         if(!checkOrder()) {
@@ -473,11 +513,9 @@ public class UpdateOrdersController implements Initializable {
     }
 
     private boolean checkOrder() {
-        LocalDate localDate = null;
-        localDate = orderDatePicker.getValue();
-        if(localDate == null || productComboBox.getValue() == null || ramComboBox.getValue() == null
+        if(productComboBox.getValue() == null || ramComboBox.getValue() == null
             || romComboBox.getValue() == null || colorComboBox.getValue() == null
-                || quantityField.getText().isEmpty() || orderDatePicker.getValue() == null) {
+                || quantityField.getText().isEmpty()) {
             alertError("Dữ liệu sản phẩm không được để trống!");
             return false;
         }

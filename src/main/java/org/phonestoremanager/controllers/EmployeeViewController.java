@@ -11,6 +11,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.phonestoremanager.models.AccountModel;
 import org.phonestoremanager.repositories.AccountRepository;
 import org.phonestoremanager.repositories.EmployeeRepository;
 import org.phonestoremanager.models.EmployeeModel;
@@ -55,6 +56,8 @@ public class EmployeeViewController implements Initializable {
 
     @FXML
     private Button fixedButton;
+
+    private AccountModel accountModel;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -207,4 +210,7 @@ public class EmployeeViewController implements Initializable {
         }
     }
 
+    public void setAccount(AccountModel accountModel) {
+        this.accountModel = accountModel;
+    }
 }

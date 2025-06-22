@@ -17,7 +17,7 @@
       </Label>
    </top>
    <center>
-      <AnchorPane onKeyReleased="#checkAccountOnEnter" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
             <Label layoutX="136.0" layoutY="75.0" text="Tên đăng nhập:">
                <font>
