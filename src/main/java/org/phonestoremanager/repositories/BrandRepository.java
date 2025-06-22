@@ -5,6 +5,7 @@ import org.phonestoremanager.utils.DatabaseConnection;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.concurrent.locks.ReadWriteLock;
 
 public class BrandRepository implements IRepository<BrandModel>{
     public static BrandRepository getInstance() {
@@ -52,4 +53,48 @@ public class BrandRepository implements IRepository<BrandModel>{
         return null;
     }
 
+    public int insert(String brandName) {
+        String sql = "INSERT INTO [dbo].[Brand]\n" +
+                "           ([BrandID]\n" +
+                "           ,[Name])\n" +
+                "     VALUES\n" +
+                "           (?, ?);";
+
+        int row = 0;
+        ArrayList<BrandModel> list = BrandRepository.getInstance().selectAll();
+
+        try(Connection conn = DatabaseConnection.createConnection()) {
+            assert conn != null;
+            PreparedStatement st = conn.prepareStatement(sql);
+            st.setInt(1, list.size()+1);
+            st.setString(2, brandName);
+            row = st.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return row;
+    }
+
+    public boolean checkBrandNameExist(String brandName) {
+        String sql = " SELECT Name\n" +
+                "  FROM Brand\n" +
+                "  WHERE Name = ?;";
+
+        try(Connection conn = DatabaseConnection.createConnection()) {
+            assert conn != null;
+            PreparedStatement st = conn.prepareStatement(sql);
+            st.setString(1, brandName);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                if(rs.getString("Name").equals(brandName)) {
+                    return true;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
 }

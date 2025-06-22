@@ -15,6 +15,7 @@ import org.phonestoremanager.repositories.AccountRepository;
 import org.phonestoremanager.repositories.CustomerRepository;
 import org.phonestoremanager.models.AccountModel;
 import org.phonestoremanager.models.CustomerModel;
+import org.phonestoremanager.repositories.EmployeeRepository;
 import org.phonestoremanager.services.AccountService;
 import org.phonestoremanager.services.CustomerService;
 
@@ -41,6 +42,12 @@ public class SignUpForCustomerController {
         //kiem tra username da ton tai hay chưa
         if(AccountRepository.checkUsername(usernameValue)) {
             showAlert("ERROR", "Tên đăng nhập đã tồn tại!", Alert.AlertType.ERROR);
+            return;
+        }
+
+        //kiem tra email da ton tai hay chua
+        if(CustomerRepository.checkEmaiExist(emailValue)) {
+            showAlert("ERROR", "Email khách hàng này đã tồn tại!", Alert.AlertType.ERROR);
             return;
         }
 

@@ -1,0 +1,76 @@
+/* Tiêu đề lớn */
+.title-label {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #FF5722;
+    -fx-effect: dropshadow(one-pass-box, rgba(0, 0, 0, 0.2), 4, 0, 0, 2);
+}
+
+/* Label chung */
+.label1 {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #FF5722;
+    -fx-effect: dropshadow(one-pass-box, rgba(0, 0, 0, 0.1), 1, 0, 0, 1);
+}
+
+/* TextField nhập liệu */
+.text-field {
+    -fx-pref-height: 36px;
+    -fx-font-size: 14px;
+    -fx-border-color: #FF5722;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-padding: 6 10;
+    -fx-background-color: white;
+    -fx-focus-color: #FF5722;
+    -fx-faint-focus-color: transparent;
+    -fx-effect: dropshadow(one-pass-box, rgba(0, 0, 0, 0.15), 3, 0, 0, 2);
+}
+
+.text-field:focused {
+    -fx-border-color: #e64a19;
+    -fx-background-color: #fff3e0;
+}
+
+/* Nút màu cam */
+.orange-button {
+    -fx-background-color: #FF5722;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 8 20;
+    -fx-background-radius: 5;
+    -fx-cursor: hand;
+    -fx-font-size: 14px;
+    -fx-effect: dropshadow(one-pass-box, rgba(0, 0, 0, 0.2), 4, 0, 0, 2);
+}
+
+.orange-button:hover {
+    -fx-background-color: #e64a19;
+}
+
+/* Nút viền cam */
+.orange-outline {
+    -fx-background-color: transparent;
+    -fx-border-color: #FF5722;
+    -fx-text-fill: #FF5722;
+    -fx-font-weight: bold;
+    -fx-padding: 8 20;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+    -fx-cursor: hand;
+    -fx-font-size: 14px;
+    -fx-effect: dropshadow(one-pass-box, rgba(0, 0, 0, 0.1), 3, 0, 0, 1);
+}
+
+.orange-outline:hover {
+    -fx-background-color: #fff3e0;
+}
+
+/* Ảnh nền cho AnchorPane */
+.anchor-pane {
+    -fx-background-image: url("../image/background.jpg");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+}

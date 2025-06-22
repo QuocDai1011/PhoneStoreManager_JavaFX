@@ -109,4 +109,29 @@ public class CustomerRepository {
         }
         return customerModel;
     }
+
+    public static boolean checkEmaiExist(String email) {
+        String sql = "  SELECT Email\n" +
+                "  FROM CustomerProfile\n" +
+                "  WHERE Email = ?;";
+
+        boolean check = false; // chưa tồn tại email
+
+        try (Connection conn = DatabaseConnection.createConnection()) {
+            assert conn != null;
+            PreparedStatement st = conn.prepareStatement(sql);
+            st.setString(1, email);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                if(rs.getString("Email").equals(email)) {
+                    check = true; // đã tồn tại email
+                }
+                break;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return check;
+    }
 }

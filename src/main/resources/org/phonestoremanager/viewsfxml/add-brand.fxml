@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="285.0" prefWidth="508.0" styleClass="anchor-pane" stylesheets="@../assets/css/add-brand.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.phonestoremanager.controllers.AddBrandController">
+    <children>
+        <VBox alignment="CENTER" spacing="20" AnchorPane.leftAnchor="50" AnchorPane.rightAnchor="50" AnchorPane.topAnchor="50">
+            <children>
+                <Label styleClass="title-label" text="Thêm Brand mới" />
+
+                <HBox alignment="CENTER" spacing="10">
+                    <children>
+                        <Label styleClass="label1" text="Tên brand:" />
+                        <TextField fx:id="txtBrandName" prefWidth="250" styleClass="text-field" />
+                    </children>
+                </HBox>
+
+                <HBox alignment="CENTER" spacing="20">
+                    <children>
+                        <Button fx:id="btnSave" styleClass="orange-button" text="LƯU" />
+                        <Button fx:id="btnCancel" styleClass="orange-outline" text="THOÁT" />
+                    </children>
+                </HBox>
+            </children>
+            <padding>
+                <Insets bottom="30" left="20" right="20" top="30" />
+            </padding>
+        </VBox>
+    </children>
+</AnchorPane>

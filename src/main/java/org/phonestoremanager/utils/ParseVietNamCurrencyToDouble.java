@@ -1,5 +1,9 @@
 package org.phonestoremanager.utils;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.Locale;
+
 public class ParseVietNamCurrencyToDouble {
     public static double parseVietnamCurrency(String input) {
         if (input == null || input.isEmpty()) return 0;
@@ -13,5 +17,12 @@ public class ParseVietNamCurrencyToDouble {
             System.err.println("Lỗi định dạng tiền tệ: " + input);
             return 0;
         }
+    }
+
+    public static String formatToVietnamCurrency(double amount) {
+        DecimalFormatSymbols symbols = new DecimalFormatSymbols(new Locale("vi", "VN"));
+        symbols.setGroupingSeparator('.');
+        DecimalFormat formatter = new DecimalFormat("#,###", symbols);
+        return formatter.format(amount);
     }
 }

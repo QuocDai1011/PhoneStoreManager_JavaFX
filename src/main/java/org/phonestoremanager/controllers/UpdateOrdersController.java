@@ -4,26 +4,36 @@ import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.phonestoremanager.models.*;
 import org.phonestoremanager.repositories.*;
 
 import javafx.event.ActionEvent;
+import org.phonestoremanager.utils.JavaMail;
 import org.phonestoremanager.utils.ParseVietNamCurrencyToDouble;
 
+import java.awt.*;
+import java.io.IOException;
 import java.net.URL;
 import java.text.NumberFormat;
 import java.time.LocalDate;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.List;
-import java.util.Locale;
-import java.util.ResourceBundle;
 
 public class UpdateOrdersController implements Initializable {
     @FXML
@@ -95,16 +105,33 @@ public class UpdateOrdersController implements Initializable {
     @FXML
     private Button cancel_btn;
 
+    @FXML
+    private Button addCustomer_btn;
+
+    @FXML
+    private StackPane rootPane;
+
+    @FXML
+    private StackPane overlayPane;
 
     @FXML
     private ProgressIndicator loadingIndicator;
 
+    @FXML
+    private ProgressIndicator progressIndicator;
+
+    @FXML
+    private AnchorPane mainContent;
+
     private PauseTransition pause;
     private CustomerModel customerModel;
+    private List<OrderUpdateModel> list = new ArrayList<>();
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        overlayPane.setVisible(false);
+
 
         // Tạo PauseTransition với thời gian delay 700ms
         pause = new PauseTransition(Duration.millis(700));
@@ -167,7 +194,7 @@ public class UpdateOrdersController implements Initializable {
         initTableView();
 
         //render dữ liệu vào table view
-        List<OrderUpdateModel> list = new ArrayList<>();
+        list = new ArrayList<>();
         addProductButton.setOnAction(event -> {
             if(getValueModel() == null) return;
             list.add(getValueModel());
@@ -176,10 +203,58 @@ public class UpdateOrdersController implements Initializable {
         });
 
         createOrder_btn.setOnAction(event -> {
+            if(list.isEmpty()){
+                alertError("Chưa có sản phẩm nào được thêm vào đơn hàng!");
+                return;
+            }
             OrderUpdateModel orderUpdateModel = getValueModel();
             handleCreateOrder(orderUpdateModel);
         });
 
+        //setAction cho addCustomer_btn
+        addCustomer_btn.setOnAction(event -> {
+            try {
+                // Load giao diện mới
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/phonestoremanager/viewsfxml/SignUpForCustomer.fxml"));
+                Parent root = loader.load();
+
+                Scene scene = new Scene(root);
+                scene.getStylesheets().add(getClass().getResource("/org/phonestoremanager/assets/css/SignUpForCustomer.css").toExternalForm());
+
+                // Tạo Stage mới và hiển thị giao diện SignUp
+                Stage newStage = new Stage();
+                newStage.setTitle("SignUp for Customer");
+                newStage.setScene(scene);
+                newStage.show();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
+        productTable.setRowFactory(tv -> {
+            TableRow<OrderUpdateModel> row = new TableRow<>();
+
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && !row.isEmpty()) {
+                    OrderUpdateModel selectedItem = row.getItem();
+
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert.setTitle("Xác nhận xóa");
+                    alert.setHeaderText("Bạn có chắc chắn muốn xóa sản phẩm này?");
+                    alert.showAndWait();
+
+                    Optional<ButtonType> result = alert.showAndWait();
+                    if (result.isPresent() && result.get() == ButtonType.OK) {
+                        list.remove(selectedItem);
+                        renderTableView(list);
+                        updateTotalAmout(list);
+                    }
+                }
+            });
+
+            return row;
+        });
     }
 
     private void handleCreateOrder(OrderUpdateModel orderUpdateModel) {
@@ -188,38 +263,83 @@ public class UpdateOrdersController implements Initializable {
             return;
         }
 
-        System.out.println(totalAmountLabel.getText());
 
         //insert dữ liệu vào bảng Order
-        int rowOrder  = OrdersRepository.insert(customerModel, getDateSelected(),
-                statusComboBox.getValue(), ParseVietNamCurrencyToDouble.parseVietnamCurrency(totalAmountLabel.getText()));
+//        int rowOrder  = OrdersRepository.insert(customerModel, getDateSelected(),
+//                statusComboBox.getValue(), ParseVietNamCurrencyToDouble.parseVietnamCurrency(totalAmountLabel.getText()));
+//
+//        if(rowOrder == 0) {
+//            alertError("Thêm dữ liệu vào bảng Orders bị lỗi!");
+//            return;
+//        }
 
-        if(rowOrder == 0) {
-            alertError("Thêm dữ liệu vào bảng Orders bị lỗi!");
-            return;
-        }
+        // insert dữ liệu vào bảng OrderDetail
+//        int rowOrderDetail = OrderDetailRepository.insert(
+//                OrdersRepository.getOrderIDByInfomation(customerModel.getCustomerID(), getDateSelected(),
+//                        ParseVietNamCurrencyToDouble.parseVietnamCurrency(totalAmountLabel.getText())),
+//                ProductDetailRepository.getInstance().getProductDetailIDByInfomation(orderUpdateModel),
+//                Integer.parseInt(quantityField.getText()),
+//                orderUpdateModel.getUnitPriceNumber()
+//        );
+//
+//        if(rowOrderDetail == 0) {
+//            alertError("Thêm dữ liệu vào bảng Orders bị lỗi!");
+//            return;
+//        }
 
-        // TODO: insert dữ liệu vào bảng OrderDetail
-        int rowOrderDetail = OrderDetailRepository.insert(
-                OrdersRepository.getOrderIDByInfomation(customerModel.getCustomerID(), getDateSelected(),
-                        ParseVietNamCurrencyToDouble.parseVietnamCurrency(totalAmountLabel.getText())),
-                ProductDetailRepository.getInstance().getProductDetailIDByInfomation(orderUpdateModel),
-                Integer.parseInt(quantityField.getText()),
-                orderUpdateModel.getUnitPriceNumber()
-        );
 
-        if(rowOrderDetail == 0) {
-            alertError("Thêm dữ liệu vào bảng Orders bị lỗi!");
-            return;
-        }
-
-        // Alert thông báo thêm đơn hàng thành công
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setHeaderText("Thêm đơn hàng thành công!");
         alert.showAndWait();
 
+        if (statusComboBox.getValue().equals("Đã thanh toán")) {
+            overlayPane.setVisible(true); // Hiện overlay
+            progressIndicator.setVisible(true); // giả sử bạn có 1 ProgressIndicator ở overlay
+
+            // Tạo background task để gửi email
+            Task<Boolean> sendEmailTask = new Task<>() {
+                @Override
+                protected Boolean call() {
+                    //TODO: Sửa random số ngẫu nhiên thành OrderID trong database (nếu được)
+                    int randomValue = new Random().nextInt(10000) + 1;
+                    return JavaMail.sendMail(email.getText(), randomValue,
+                            fullName.getText(), ParseVietNamCurrencyToDouble.parseVietnamCurrency(totalAmountLabel.getText()), list);
+                }
+            };
+
+            // Khi task kết thúc, xử lý UI
+            sendEmailTask.setOnSucceeded(event -> {
+                boolean success = sendEmailTask.getValue();
+
+                if (success) {
+                    Alert alert1 = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert1.setHeaderText("Gửi Email cho " + email.getText() + " thành công!");
+                    alert1.showAndWait();
+                    cancel_btn.getScene().getWindow().hide();
+                } else {
+                    alertError("Lỗi khi gửi Email do Email không tồn tại!");
+                }
+
+                // Tắt overlay và progress sau khi xong
+                overlayPane.setVisible(false);
+                progressIndicator.setVisible(false);
+            });
+
+            // (tuỳ chọn) xử lý khi có lỗi
+            sendEmailTask.setOnFailed(event -> {
+                alertError("Đã xảy ra lỗi khi gửi email.");
+                overlayPane.setVisible(false);
+                progressIndicator.setVisible(false);
+            });
+
+            // Bắt đầu chạy task
+            new Thread(sendEmailTask).start();
+            return;
+        }
+
         //tắt màn hình khi tạo đơn hàng thành coong
         cancel_btn.getScene().getWindow().hide();
+
     }
 
     private void initTableView() {

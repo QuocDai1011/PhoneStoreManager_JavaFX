@@ -16,6 +16,7 @@ import org.phonestoremanager.repositories.ProductDetailRepository;
 import org.phonestoremanager.repositories.ProductRepository;
 import org.phonestoremanager.utils.InputValidator;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 
@@ -34,6 +35,9 @@ public class AddProductController {
 
     @FXML
     private TextArea txtDescription;
+
+    @FXML
+    private Button btnAddBrand;
 
     InputValidator inputValidator = new InputValidator();
 
@@ -92,6 +96,25 @@ public class AddProductController {
             });
         } else
             System.out.println("Cái nút có bị null má ơi");
+
+        btnAddBrand.setOnAction(event -> {
+            try {
+                // Load giao diện mới
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/phonestoremanager/viewsfxml/add-brand.fxml"));
+                Parent root = loader.load();
+
+                Scene scene = new Scene(root);
+
+                // Tạo Stage mới và hiển thị giao diện SignUp
+                Stage newStage = new Stage();
+                newStage.setTitle("Add Brand");
+                newStage.setScene(scene);
+                newStage.show();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     private void loadBrands() {
