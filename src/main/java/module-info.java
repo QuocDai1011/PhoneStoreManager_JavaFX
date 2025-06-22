@@ -7,7 +7,7 @@ module org.phonestoremanager {
     requires org.kordamp.ikonli.javafx;
     requires java.sql;
     requires java.desktop;
-    requires org.graalvm.collections;
+//    requires org.graalvm.collections;
 
     opens org.phonestoremanager to javafx.fxml;
     exports org.phonestoremanager;

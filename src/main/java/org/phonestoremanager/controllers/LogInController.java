@@ -94,45 +94,7 @@ public class LogInController {
         alert.showAndWait();
     }
 
-    @FXML
-    public void checkAccountOnEnter(KeyEvent event) throws SQLException, IOException {
-        if(event.getCode() == KeyCode.ENTER) {
-            String userName = userNameTextField.getText();
-            String password = passwordTextField.getText();
 
-            //kiem tra username va password khong duoc de trong
-            if(userName.isEmpty() && password.isEmpty()) {
-                showAlert("ERROR", "Tên đăng nhập và mật khẩu không được để trống!", Alert.AlertType.ERROR);
-                return;
-            }else if(userName.isEmpty()) {
-                showAlert("ERROR", "Chưa nhập tên đăng nhập", Alert.AlertType.ERROR);
-                return;
-            }else if(password.isEmpty()) {
-                showAlert("ERROR", "Chưa nhập mật khẩu", Alert.AlertType.ERROR);
-                return;
-            }
-
-            AccountService accountService = new AccountService();
-            boolean result = accountService.checkAccountWhenLogIn(userName, password);
-            if(result) {
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/phonestoremanager/viewsfxml/main-view.fxml"));
-                Parent root = loader.load();
-
-                Scene scene = new Scene(root);
-                stage.setScene(scene);
-                stage.setTitle("Trang chủ");
-                scene.getStylesheets().add(getClass().getResource("/org/phonestoremanager/assets/css/Home.css").toExternalForm());
-                scene.getStylesheets().add(getClass().getResource("/org/phonestoremanager/assets/css/ContextMenu.css").toExternalForm());
-                stage.centerOnScreen();
-                stage.centerOnScreen();
-                stage.show();
-            }
-            else {
-                showAlert("ERROR", "Tên đăng nhập hoặc mật khẩu không đúng!", Alert.AlertType.ERROR);
-            }
-        }
-    }
 
     public void signUpPress (ActionEvent event) throws IOException {
         Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
