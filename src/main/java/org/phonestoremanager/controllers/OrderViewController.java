@@ -7,10 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import org.phonestoremanager.models.OrdersModel;
@@ -84,6 +81,44 @@ public class OrderViewController implements Initializable {
         } else {
             System.err.println("Nút này nó bị null");
         }
+
+        // Bổ sung: Xóa dòng khi click chuột phải
+        tableView.setRowFactory(tv -> {
+            TableRow<OrdersModel> row = new TableRow<>();
+            ContextMenu contextMenu = new ContextMenu();
+            MenuItem deleteItem = new MenuItem("Xóa đơn hàng");
+
+            deleteItem.setOnAction(e -> {
+                OrdersModel selectedOrder = row.getItem();
+                if (selectedOrder != null) {
+                    // Xác nhận trước khi xóa
+                    Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
+                    confirmAlert.setTitle("Xác nhận xóa");
+                    confirmAlert.setHeaderText("Bạn có chắc muốn xóa đơn hàng #" + selectedOrder.getOrderID() + " không?");
+                    confirmAlert.showAndWait().ifPresent(response -> {
+                        if (response.getButtonData().isDefaultButton()) {
+                            // Xóa trong database
+                            OrdersRepository.delete(selectedOrder.getOrderID());
+
+                            // Xóa trong TableView
+                            tableView.getItems().remove(selectedOrder);
+                        }
+                    });
+                }
+            });
+
+            contextMenu.getItems().add(deleteItem);
+
+            row.setOnContextMenuRequested(event -> {
+                if (!row.isEmpty()) {
+                    contextMenu.show(row, event.getScreenX(), event.getScreenY());
+                } else {
+                    contextMenu.hide();
+                }
+            });
+
+            return row;
+        });
 
         render(OrdersRepository.getAll());
 

@@ -5,10 +5,7 @@ import org.phonestoremanager.models.OrdersModel;
 import org.phonestoremanager.services.OrdersService;
 import org.phonestoremanager.utils.DatabaseConnection;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.Ref;
-import java.sql.ResultSet;
+import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -91,6 +88,17 @@ public class OrdersRepository {
             e.printStackTrace();
         }
         return id;
+    }
+
+    public static void delete(int orderID) {
+        String sql = "DELETE FROM Orders WHERE OrderID = ?";
+        try (Connection conn = DatabaseConnection.createConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, orderID);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 }
