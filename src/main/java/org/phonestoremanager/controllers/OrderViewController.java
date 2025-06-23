@@ -11,6 +11,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import org.phonestoremanager.models.OrdersModel;
+import org.phonestoremanager.repositories.OrderDetailRepository;
 import org.phonestoremanager.repositories.OrdersRepository;
 
 import java.io.IOException;
@@ -97,6 +98,9 @@ public class OrderViewController implements Initializable {
                     confirmAlert.setHeaderText("Bạn có chắc muốn xóa đơn hàng #" + selectedOrder.getOrderID() + " không?");
                     confirmAlert.showAndWait().ifPresent(response -> {
                         if (response.getButtonData().isDefaultButton()) {
+                            // Xóa OrderDetail trước rồi mới xóa trong Orders
+                            OrderDetailRepository.delete(selectedOrder.getOrderID());
+
                             // Xóa trong database
                             OrdersRepository.delete(selectedOrder.getOrderID());
 

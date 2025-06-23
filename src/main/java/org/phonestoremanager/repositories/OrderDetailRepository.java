@@ -31,4 +31,19 @@ public class OrderDetailRepository {
 
         return row;
     }
+
+    public static void delete(int ID) {
+        String sql = "DELETE FROM [dbo].[OrderDetail]\n" +
+                "      WHERE OrderID = ?";
+
+        try(Connection conn = DatabaseConnection.createConnection()) {
+            assert conn != null;
+            PreparedStatement st = conn.prepareStatement(sql);
+            st.setInt(1, ID);
+            st.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
 }
