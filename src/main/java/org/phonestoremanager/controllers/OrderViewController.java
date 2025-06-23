@@ -3,13 +3,20 @@ package org.phonestoremanager.controllers;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import org.phonestoremanager.models.OrdersModel;
 import org.phonestoremanager.repositories.OrdersRepository;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -39,6 +46,8 @@ public class OrderViewController implements Initializable {
     @FXML
     TableColumn<OrdersModel, String> shippingAddress_cl;
 
+    @FXML private Button fixedButton;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -49,6 +58,32 @@ public class OrderViewController implements Initializable {
         status_cl.setCellValueFactory(new PropertyValueFactory<>("status"));
         totalAmout_cl.setCellValueFactory(new PropertyValueFactory<>("totalAmout"));
         shippingAddress_cl.setCellValueFactory(new PropertyValueFactory<>("shippingAddress"));
+
+        if (fixedButton != null) {
+            fixedButton.toFront(); // Đưa nút lên trên cùng giao diện
+            fixedButton.setOnAction(event -> {
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/phonestoremanager/viewsfxml/UpdateOrders.fxml"));
+                    Parent root = loader.load();
+
+                    // Tạo một Stage mới hoặc sử dụng Stage hiện tại
+                    Stage stage = new Stage();
+                    stage.setTitle("Thêm Dòng Sản Phẩm Mới");
+                    stage.setScene(new Scene(root));
+                    stage.show();
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    // Bạn có thể dùng Alert để thông báo lỗi
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setHeaderText("Không thể mở giao diện Thêm Sản Phẩm");
+                    alert.setContentText(e.getMessage());
+                    alert.showAndWait();
+                }
+            });
+        } else {
+            System.err.println("Nút này nó bị null");
+        }
 
         render(OrdersRepository.getAll());
 

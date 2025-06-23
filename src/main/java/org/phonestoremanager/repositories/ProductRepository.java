@@ -77,4 +77,21 @@ public class ProductRepository{
         }
     }
 
+    public int getProductIDByNameProduct(String nameProduct) {
+        String sql = "SELECT ProductID FROM Product\n" +
+                "WHERE Name = ?";
+        try (Connection connection = DatabaseConnection.createConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setString(1, nameProduct);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                return resultSet.getInt("ProductID");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return 0;
+    }
 }

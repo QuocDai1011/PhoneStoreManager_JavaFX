@@ -120,4 +120,21 @@ public class ColorRepository implements IRepository<ColorModel> {
     public ArrayList<ColorModel> selectDetailById() {
         return null;
     }
+
+    public int getColorIDByNameColor(String nameColor) {
+        String sql = "SELECT ColorOfProductID FROM ColorOfProduct\n" +
+                "WHERE NameColor = ?";
+        try (Connection connection = DatabaseConnection.createConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setNString(1, nameColor);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next())
+                return resultSet.getInt("ColorOfProductID");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return 0;
+    }
 }

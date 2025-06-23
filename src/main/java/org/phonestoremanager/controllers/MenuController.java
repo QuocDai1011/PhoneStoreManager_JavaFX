@@ -126,6 +126,8 @@ public class MenuController {
             }
         });
 
+        Profile.setOnAction(event -> openProfile());
+
         LogOut.setOnAction(event -> {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Xác nhận đăng xuất");

@@ -30,6 +30,7 @@ import org.phonestoremanager.utils.ParseVietNamCurrencyToDouble;
 import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLOutput;
 import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.util.*;
@@ -123,6 +124,7 @@ public class UpdateOrdersController implements Initializable {
     private PauseTransition pause;
     private CustomerModel customerModel;
     private List<OrderUpdateModel> list = new ArrayList<>();
+    private int productID, ram, rom, colorID ;
 
 
     @Override
@@ -149,13 +151,16 @@ public class UpdateOrdersController implements Initializable {
         });
 
         //Gán hành động đóng cửa sổ cho btn Hủy
-        cancel_btn.setOnAction(this::closeWindow);
+        cancel_btn.setOnAction(event -> {
+            ((Stage) cancel_btn.getScene().getWindow()).close();
+        });
 
         //SetItems cho productsCombobox
         List<String> productList = ProductViewRepository.getAllNameProducts();
         ObservableList<String> productNames = FXCollections.observableArrayList(productList);
         productComboBox.setItems(productNames);
         productComboBox.setItems(productNames);
+
 
         //Lấy giá trị của productCombobox và set các Item cho Ram Rom và Color combobox
         productComboBox.setOnAction(event -> {
@@ -175,6 +180,26 @@ public class UpdateOrdersController implements Initializable {
 
             //setItems cho colorCombobox
             colorComboBox.setItems(ProductViewRepository.getColorByProductName(selected));
+
+            // lấy productID thống qua nameProduct
+            productID = ProductRepository.getInstance().getProductIDByNameProduct(productComboBox.getValue());
+            System.out.println(productID);
+
+            ramComboBox.setOnAction(event1 -> {
+                ram = ramComboBox.getValue();
+                System.out.println("Đã chọn RAM: " + ram);
+            });
+
+            romComboBox.setOnAction(event2 -> {
+                rom = romComboBox.getValue();
+                System.out.println("Đã chọn ROM: " + rom);
+            });
+
+            colorComboBox.setOnAction(event3 -> {
+                // Lấy colorID từ colorName;
+                colorID = ColorRepository.getInstance().getColorIDByNameColor(colorComboBox.getValue());
+                System.out.println("Đã chọn Màu: " + colorID);
+            });
         });
 
         quantityField.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -193,8 +218,15 @@ public class UpdateOrdersController implements Initializable {
         //render dữ liệu vào table view
         list = new ArrayList<>();
         addProductButton.setOnAction(event -> {
-            if(getValueModel() == null) return;
-            list.add(getValueModel());
+            OrderUpdateModel model = getValueModel();
+            if (model == null) return;
+
+            if (!isStockAvailable(model)) {
+                alertError("Số lượng vượt quá tồn kho!");
+                return;
+            }
+
+            list.add(model);
             renderTableView(list);
             updateTotalAmout(list);
         });
@@ -206,6 +238,14 @@ public class UpdateOrdersController implements Initializable {
             }
             OrderUpdateModel orderUpdateModel = getValueModel();
             handleCreateOrder(orderUpdateModel);
+            for (OrderUpdateModel item : list) {
+                int pid = ProductRepository.getInstance().getProductIDByNameProduct(item.getProductName());
+                int cid = ColorRepository.getInstance().getColorIDByNameColor(item.getColor());
+
+                ProductDetailRepository.getInstance().updateStockAfterSelling(
+                        pid, item.getRam(), item.getRom(), cid, item.getQuantity()
+                );
+            }
         });
 
         //setAction cho addCustomer_btn
@@ -462,11 +502,6 @@ public class UpdateOrdersController implements Initializable {
         address.setEditable(true);
     }
 
-    private void closeWindow(ActionEvent event) {
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.close();
-    }
-
     private OrderUpdateModel getValueModel() {
         // check thông tin sản phẩm khác null
         if(!checkOrder()) {
@@ -530,4 +565,20 @@ public class UpdateOrdersController implements Initializable {
         alert.showAndWait();
     }
 
+    private boolean isStockAvailable(OrderUpdateModel newItem) {
+        int existingQuantity = 0;
+        for (OrderUpdateModel item : list) {
+            if (item.getProductName().equals(newItem.getProductName())
+                    && item.getRam() == newItem.getRam()
+                    && item.getRom() == newItem.getRom()
+                    && item.getColor().equals(newItem.getColor())) {
+                existingQuantity += item.getQuantity();
+            }
+        }
+
+        int stockInDB = ProductDetailRepository.getInstance().totalStock(
+                productID, newItem.getRam(), newItem.getRom(), colorID);
+
+        return (existingQuantity + newItem.getQuantity()) <= stockInDB;
+    }
 }

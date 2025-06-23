@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane fx:id="rootPane" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.phonestoremanager.controllers.UpdateOrdersController">
+<StackPane fx:id="rootPane" prefHeight="700.0" prefWidth="970.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.phonestoremanager.controllers.UpdateOrdersController">
     <children>
 
         <!-- AnchorPane chứa nội dung chính -->

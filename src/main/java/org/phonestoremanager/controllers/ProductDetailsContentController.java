@@ -14,9 +14,14 @@ import javafx.stage.Stage;
 import org.phonestoremanager.models.ProductDetailModel;
 import org.phonestoremanager.repositories.*;
 import org.phonestoremanager.models.ProductViewModel;
+import org.phonestoremanager.utils.DatabaseConnection;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.NumberFormat;
 import java.util.*;
 

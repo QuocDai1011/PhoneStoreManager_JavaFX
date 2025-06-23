@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -12,27 +11,16 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="838.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.phonestoremanager.controllers.OrderViewController">
     <children>
-        <TextField layoutX="344.0" layoutY="24.0" prefHeight="30.0" prefWidth="222.0" promptText="Search" style="-fx-background-color: transparent; -fx-border-radius: 50px; -fx-border-color: #AEB2C3;">
+        <TextField layoutX="277.0" layoutY="26.0" prefHeight="30.0" prefWidth="222.0" promptText="Search" style="-fx-background-color: transparent; -fx-border-radius: 50px; -fx-border-color: #AEB2C3;">
             <font>
                 <Font name="Calibri Bold" size="20.0" />
             </font>
         </TextField>
-        <ImageView fitHeight="39.0" fitWidth="31.0" layoutX="578.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;" styleClass="avatar">
+        <ImageView fitHeight="39.0" fitWidth="31.0" layoutX="511.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;" styleClass="avatar">
             <image>
                 <Image url="@../../phonestoremanager/assets/image/search_icon.png" />
             </image>
         </ImageView>
-        <MenuButton layoutX="127.0" layoutY="24.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="83.0" text="Lọc">
-            <items>
-                <MenuItem mnemonicParsing="false" text="Iphone" />
-                <MenuItem mnemonicParsing="false" text="Samsung" />
-                <MenuItem mnemonicParsing="false" text="Oppo" />
-                <MenuItem mnemonicParsing="false" text="Realme" />
-            </items>
-            <font>
-                <Font name="Calibri Bold" size="18.0" />
-            </font>
-        </MenuButton>
       <TableView fx:id="tableView" layoutX="14.0" layoutY="91.0" prefHeight="482.0" prefWidth="790.0" stylesheets="@../assets/css/employee-view.css">
         <columns>
           <TableColumn fx:id="orderID_cl" prefWidth="65.14284992218018" text="Mã đơn" />
@@ -44,6 +32,7 @@
             <TableColumn fx:id="shippingAddress_cl" prefWidth="206.8570556640625" text="Địa chỉ giao hàng" />
         </columns>
       </TableView>
+      <Button fx:id="fixedButton" layoutX="750.0" layoutY="540.0" styleClass="floating-add-button" stylesheets="@../assets/css/buton.css" text="+" />
 
     </children>
 </AnchorPane>

@@ -293,4 +293,80 @@ public class ProductDetailRepository {
         return detail;
     }
 
+    public int totalStock(int productID, int ram, int rom, int colorID) {
+        String sql = "SELECT StockQuantity FROM ProductDetail\n" +
+                "WHERE ProductID = ? AND Ram = ? AND Rom = ? AND ColorID = ?";
+        try (Connection connection = DatabaseConnection.createConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setInt(1, productID);
+            preparedStatement.setInt(2, ram);
+            preparedStatement.setInt(3, rom);
+            preparedStatement.setInt(4, colorID);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next())
+                return resultSet.getInt("StockQuantity");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return -1;
+    }
+
+    public int getStock(int productID, int ram, int rom, int colorID) {
+        String sql = "SELECT StockQuantity FROM ProductDetail\n" +
+                "WHERE ProductID = ? AND RAM = ? AND ROM = ? AND ColorID = ?";
+
+        try (Connection connection = DatabaseConnection.createConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setInt(1, productID);
+            preparedStatement.setInt(2, ram);
+            preparedStatement.setInt(3, rom);
+            preparedStatement.setInt(4, colorID);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next())
+                return resultSet.getInt("StockQuantity");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return -1;
+    }
+
+    public void updateStock(int productID, int ram, int rom, int colorID, int originalStock) {
+        String sql = "UPDATE ProductDetail\n" +
+                "SET StockQuantity = ?\n" +
+                "WHERE ProductID = ? AND Ram = ? AND Rom = ? AND ColorID = ?";
+        try (Connection connection = DatabaseConnection.createConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setInt(1, originalStock);
+            preparedStatement.setInt(2, productID);
+            preparedStatement.setInt(3, ram);
+            preparedStatement.setInt(4, rom);
+            preparedStatement.setInt(5, colorID);
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void updateStockAfterSelling(int productID, int ram, int rom, int colorID, int quantitySold) {
+        String sql = "UPDATE ProductDetail\n" +
+                "SET StockQuantity = ?\n" +
+                "WHERE ProductID = ? AND Ram = ? AND Rom = ? AND ColorID = ?";
+        try (Connection connection = DatabaseConnection.createConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setInt(1, totalStock(productID, ram, rom, colorID) - quantitySold);
+            preparedStatement.setInt(2, productID);
+            preparedStatement.setInt(3, ram);
+            preparedStatement.setInt(4, rom);
+            preparedStatement.setInt(5, colorID);
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
