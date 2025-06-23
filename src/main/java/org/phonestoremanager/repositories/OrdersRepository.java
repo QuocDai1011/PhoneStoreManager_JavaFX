@@ -40,12 +40,11 @@ public class OrdersRepository {
         return list;
     }
 
-    public static int insert(CustomerModel customerModel, LocalDate orderDate, String status, double totalAmout) {
+    public static int insert(CustomerModel customerModel, String status, double totalAmout) {
         int row = 0;
         String note = "Fragile items please handle with care";
         String sql = "INSERT INTO [dbo].[Orders]\n" +
                 "           ([CustomerID]\n" +
-                "           ,[OrderDate]\n" +
                 "           ,[TotalAmount]\n" +
                 "           ,[Status]\n" +
                 "           ,[ShippingAddress]\n" +
@@ -57,8 +56,7 @@ public class OrdersRepository {
             assert conn != null;
             PreparedStatement st = conn.prepareStatement(sql);
             st.setInt(1, customerModel.getCustomerID());
-            st.setString(2, orderDate.toString());
-            st.setDouble(3, totalAmout);
+            st.setDouble(2, totalAmout);
             if(status.equals("Chưa thanh toán")) {
                 st.setInt(4, 0);
             }else {
@@ -74,18 +72,17 @@ public class OrdersRepository {
         return row;
     }
 
-    public static int getOrderIDByInfomation(int customerID, LocalDate date, Double total) {
+    public static int getOrderIDByInfomation(int customerID, Double total) {
         int id = 0;
         String sql = "  SELECT TOP 1 [OrderID]\n" +
                 "  FROM [PHONE_STORE_MANAGER].[dbo].[Orders]\n" +
-                "  WHERE CustomerID = ? AND OrderDate = ? AND TotalAmount = ?;";
+                "  WHERE CustomerID = ? AND TotalAmount = ?;";
 
         try(Connection conn = DatabaseConnection.createConnection()) {
             assert conn != null;
             PreparedStatement st = conn.prepareStatement(sql);
             st.setInt(1, customerID);
-            st.setString(2, date.toString());
-            st.setDouble(3, total);
+            st.setDouble(2, total);
             ResultSet rs = st.executeQuery();
             if(rs.next()) {
                 id = rs.getInt("OrderID");

@@ -262,27 +262,27 @@ public class UpdateOrdersController implements Initializable {
 
 
         //insert dữ liệu vào bảng Order
-//        int rowOrder  = OrdersRepository.insert(customerModel, getDateSelected(),
-//                statusComboBox.getValue(), ParseVietNamCurrencyToDouble.parseVietnamCurrency(totalAmountLabel.getText()));
-//
-//        if(rowOrder == 0) {
-//            alertError("Thêm dữ liệu vào bảng Orders bị lỗi!");
-//            return;
-//        }
+        int rowOrder  = OrdersRepository.insert(customerModel,
+                statusComboBox.getValue(), ParseVietNamCurrencyToDouble.parseVietnamCurrency(totalAmountLabel.getText()));
+
+        if(rowOrder == 0) {
+            alertError("Thêm dữ liệu vào bảng Orders bị lỗi!");
+            return;
+        }
 
         // insert dữ liệu vào bảng OrderDetail
-//        int rowOrderDetail = OrderDetailRepository.insert(
-//                OrdersRepository.getOrderIDByInfomation(customerModel.getCustomerID(), getDateSelected(),
-//                        ParseVietNamCurrencyToDouble.parseVietnamCurrency(totalAmountLabel.getText())),
-//                ProductDetailRepository.getInstance().getProductDetailIDByInfomation(orderUpdateModel),
-//                Integer.parseInt(quantityField.getText()),
-//                orderUpdateModel.getUnitPriceNumber()
-//        );
-//
-//        if(rowOrderDetail == 0) {
-//            alertError("Thêm dữ liệu vào bảng Orders bị lỗi!");
-//            return;
-//        }
+        int rowOrderDetail = OrderDetailRepository.insert(
+                OrdersRepository.getOrderIDByInfomation(customerModel.getCustomerID(),
+                        ParseVietNamCurrencyToDouble.parseVietnamCurrency(totalAmountLabel.getText())),
+                ProductDetailRepository.getInstance().getProductDetailIDByInfomation(orderUpdateModel),
+                Integer.parseInt(quantityField.getText()),
+                orderUpdateModel.getUnitPriceNumber()
+        );
+
+        if(rowOrderDetail == 0) {
+            alertError("Thêm dữ liệu vào bảng Orders bị lỗi!");
+            return;
+        }
 
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
